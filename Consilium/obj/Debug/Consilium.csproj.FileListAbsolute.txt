@@ -75,3 +75,7 @@ C:\Users\Giova\Documents\GitHub\Consilium\Consilium\obj\Debug\Consilium.csproj.C
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\obj\Debug\Consilium.csproj.CopyComplete
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\obj\Debug\Consilium.dll
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\obj\Debug\Consilium.pdb
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\EntityFramework.dll
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\EntityFramework.SqlServer.dll
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\EntityFramework.xml
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\EntityFramework.SqlServer.xml

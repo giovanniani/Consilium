@@ -6,9 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Consilium.Models
 {
+
+    [MetadataType(typeof(UserMetadata))]
     public partial class User
     {
-
+        public string ConfirmPassword { get; set; }
     }
     public class UserMetadata
     {
@@ -23,14 +25,18 @@ namespace Consilium.Models
         [Display(Name = "Email ID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email required")]
         [DataType(DataType.EmailAddress)]
-        public string EmailId { get; set; }
+        public string EmailID { get; set; }
 
-        [Display(Name = "Date of birth")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public string DateOfBirth { get; set; }
+        [Display(Name = "Password")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password required")]
+        [DataType(DataType.Password)]
+        [MinLength(6, ErrorMessage = "minimum 6 characters required")]
+        public string Password { get; set; }
 
-
+        [Display(Name = "Confirm password")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Passwords must match")]
+        public string ConfirmPassword { get; set; }
     }
 
 }

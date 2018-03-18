@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ConsiliumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Consilium.dbo.Request' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="MemberName" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="varchar" MaxLength="50" />
+    <Property Name="Considerations" Type="varbinary" MaxLength="200" />
+    <Property Name="Results" Type="varchar" MaxLength="200" />
+    <Property Name="Agreements" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailID" Type="varchar" MaxLength="254" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="IsEmailVerified" Type="bit" />
+    <Property Name="ActivationCode" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityContainer Name="ConsiliumModelStoreContainer">
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Request" EntityType="Self.Request" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Request].[Id] AS [Id], 
+    [Request].[Date] AS [Date], 
+    [Request].[Name] AS [Name], 
+    [Request].[MemberName] AS [MemberName], 
+    [Request].[MemberId] AS [MemberId], 
+    [Request].[Considerations] AS [Considerations], 
+    [Request].[Results] AS [Results], 
+    [Request].[Agreements] AS [Agreements]
+    FROM [dbo].[Request] AS [Request]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
