@@ -26,6 +26,5 @@ namespace Consilium.Models
         }
     
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Request> Request { get; set; }
     }
 }

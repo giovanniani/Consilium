@@ -37,6 +37,10 @@ namespace Consilium.Models
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords must match")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Member type")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Member type required")]
+        public string MemberType { get; set; }
     }
 
 }

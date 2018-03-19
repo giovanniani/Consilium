@@ -11,22 +11,9 @@
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsEmailVerified" Type="Boolean" />
     <Property Name="ActivationCode" Type="Guid" />
-  </EntityType>
-  <EntityType Name="Request">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MemberId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Considerations" Type="Binary" MaxLength="200" FixedLength="false" />
-    <Property Name="Results" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Agreements" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="MemberType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="ConsiliumEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="User" EntityType="Self.User" />
-    <EntitySet Name="Request" EntityType="Self.Request" />
   </EntityContainer>
 </Schema>

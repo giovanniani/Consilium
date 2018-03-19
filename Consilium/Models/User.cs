@@ -21,5 +21,6 @@ namespace Consilium.Models
         public string Password { get; set; }
         public Nullable<bool> IsEmailVerified { get; set; }
         public Nullable<System.Guid> ActivationCode { get; set; }
+        public string MemberType { get; set; }
     }
 }

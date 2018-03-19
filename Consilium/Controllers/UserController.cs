@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
+using System.Web.Security;
 
 namespace Consilium.Controllers
 {
@@ -91,17 +92,104 @@ namespace Consilium.Controllers
             return View(user);
         }
 
-        //login
 
         //verify email
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool Status = false;
+            using (ConsiliumEntities dc = new ConsiliumEntities())
+            {
+                dc.Configuration.ValidateOnSaveEnabled = false; // this line is to avoid confirm password doesnt mastch issue on save changes
+
+                var v = dc.User.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+                if(v != null)
+                {
+                    v.IsEmailVerified = true;
+                    dc.SaveChanges();
+                    Status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
+                }
+
+            }
+            ViewBag.Status = Status;
+            return View();
+        }
 
         //verify email link
 
         //login
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         //login post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin login, string ReturnUrl="")
+        {
+            string message = "";
+
+            using (ConsiliumEntities dc = new ConsiliumEntities())
+            {
+                var v = dc.User.Where(a => a.EmailID == login.EmailID).FirstOrDefault();
+                if(v != null)
+                {
+                    if(string.Compare(Crypto.Hash(login.password),v.Password) == 0)
+                    {
+                        int timeout = login.RememberMe ? 525600 : 20; //525600 min = 1 year
+                        var ticket = new FormsAuthenticationTicket(login.EmailID, login.RememberMe, timeout);
+                        string encrypted = FormsAuthentication.Encrypt(ticket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                        cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                        cookie.HttpOnly = true;
+                        Response.Cookies.Add(cookie);
+
+                        if(Url.IsLocalUrl(ReturnUrl))
+                        {
+                            return Redirect(ReturnUrl);
+                        }
+                        else
+                        {
+                            if (v.MemberType == "Student")
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                            if (v.MemberType == "President")
+                            {
+                                return RedirectToAction("Index", "President");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        message = "Invalid credentials!";
+                    }
+                }
+                else
+                {
+                    message = "Invalid credentials!";
+                }
+            }
+            ViewBag.Message = message;
+            return View();
+        }
 
         //logout
+
+       [Authorize] 
+       [HttpPost]
+       public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
+        }
 
         [NonAction]
         public bool EmailExists(string emailID)

@@ -17,6 +17,7 @@ namespace Consilium
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                //defaults: new { controller = "President", action = "President", id = UrlParameter.Optional }
             );
         }
     }

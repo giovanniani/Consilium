@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1a30c85e37e34e3ba1d9ad4bc415b907" Name="Diagram1">
         <EntityTypeShape EntityType="ConsiliumModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsiliumModel.Request" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
