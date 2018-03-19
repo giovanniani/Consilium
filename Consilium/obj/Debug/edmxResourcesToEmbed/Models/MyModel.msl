@@ -15,5 +15,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Request">
+      <EntityTypeMapping TypeName="ConsiliumModel.Request">
+        <MappingFragment StoreEntitySet="Request">
+          <ScalarProperty Name="Agreements" ColumnName="Agreements" />
+          <ScalarProperty Name="Results" ColumnName="Results" />
+          <ScalarProperty Name="Considerations" ColumnName="Considerations" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

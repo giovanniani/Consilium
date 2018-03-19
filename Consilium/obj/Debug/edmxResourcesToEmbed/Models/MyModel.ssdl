@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ConsiliumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Consilium.dbo.Request' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="MemberName" Type="varchar" MaxLength="50" />
+    <Property Name="MemberId" Type="varchar" MaxLength="50" />
+    <Property Name="Considerations" Type="varchar" MaxLength="200" />
+    <Property Name="Results" Type="varchar" MaxLength="200" />
+    <Property Name="Agreements" Type="varchar" MaxLength="200" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="UserID" />
@@ -18,6 +27,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Request' no tiene definida nin
     <Property Name="MemberType" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityContainer Name="ConsiliumModelStoreContainer">
+    <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
