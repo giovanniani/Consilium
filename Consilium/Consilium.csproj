@@ -101,8 +101,11 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\maquetacion.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\logo.png" />
+    <Content Include="Content\logoP.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -135,6 +138,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JustificationController.cs" />
+    <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -142,8 +147,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\Justificacion.cs" />
     <Compile Include="Models\Extended\Request.cs" />
     <Compile Include="Models\Extended\User.cs" />
+    <Compile Include="Models\Justification.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Motion.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,6 +199,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\President\Index.cshtml" />
     <Content Include="Views\Request\RegistrationRequest.cshtml" />
+    <Content Include="Views\Shared\_vistaLogin.cshtml" />
+    <Content Include="Views\Shared\_estilo.cshtml" />
+    <Content Include="Views\User\ModuloMiembros.cshtml" />
+    <Content Include="Views\Shared\_encabezado.cshtml" />
+    <Content Include="Views\Shared\_menuSecretaria.cshtml" />
+    <Content Include="Views\Shared\_menuMiembros.cshtml" />
+    <Content Include="Views\Justification\JustificationRequest.cshtml" />
+    <Content Include="Views\Motion\MotionRequest.cshtml" />
+    <Content Include="Views\Secretary\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

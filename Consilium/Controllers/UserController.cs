@@ -38,7 +38,7 @@ namespace Consilium.Controllers
                 var exists = EmailExists(user.EmailID);
                 if(exists)
                 {
-                    ModelState.AddModelError("EmailExists", "Email already exists");
+                    ModelState.AddModelError("EmailExists", "Usuario ya existe");
                     return View(user);
                 }
                 #endregion
@@ -63,7 +63,7 @@ namespace Consilium.Controllers
 
                     //Send email to user
                     SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
-                    message = "Registration completed! Activation link sent ";
+                    message = "Registro completo! correo de verificación enviado! ";
 
                     Status = true;
 
@@ -75,7 +75,7 @@ namespace Consilium.Controllers
             }
             else
             {
-                message = "Invalid Request";
+                message = "Solicitud inválida";
             }
 
             ViewBag.Message = message;
@@ -111,7 +111,7 @@ namespace Consilium.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Invalid Request";
+                    ViewBag.Message = "Solicitud inválida";
                 }
 
             }
@@ -151,30 +151,34 @@ namespace Consilium.Controllers
                         cookie.HttpOnly = true;
                         Response.Cookies.Add(cookie);
 
-                        if(Url.IsLocalUrl(ReturnUrl))
+                        /*if(Url.IsLocalUrl(ReturnUrl))
                         {
                             return Redirect(ReturnUrl);
                         }
                         else
-                        {
+                        {*/
                             if (v.MemberType == "Student")
                             {
-                                return RedirectToAction("Index", "Home");
+                                return RedirectToAction("RegistrationRequest", "Request");
                             }
                             if (v.MemberType == "President")
                             {
                                 return RedirectToAction("Index", "President");
                             }
-                        }
+                            if (v.MemberType == "Secretary")
+                            {
+                                return RedirectToAction("Index", "Secretary");
+                            }
+                        //}
                     }
                     else
                     {
-                        message = "Invalid credentials!";
+                        message = "Credenciales inválidas!";
                     }
                 }
                 else
                 {
-                    message = "Invalid credentials!";
+                    message = "Credenciales inválidas!";
                 }
             }
             ViewBag.Message = message;

@@ -12,10 +12,14 @@
     <Property Name="IsEmailVerified" Type="Boolean" />
     <Property Name="ActivationCode" Type="Guid" />
     <Property Name="MemberType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Identification" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="ConsiliumEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="User" EntityType="Self.User" />
     <EntitySet Name="Request" EntityType="ConsiliumModel.Request" />
+    <EntitySet Name="Justification" EntityType="ConsiliumModel.Justification" />
+    <EntitySet Name="Motion" EntityType="ConsiliumModel.Motion" />
   </EntityContainer>
   <EntityType Name="Request">
     <Key>
@@ -26,8 +30,29 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="MemberId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Considerations" Type="String" />
+    <Property Name="Considerations" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
     <Property Name="Results" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Agreements" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Justification">
+    <Key>
+      <PropertyRef Name="idJustication" />
+    </Key>
+    <Property Name="idJustication" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idMember" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="about" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="body" Type="String" MaxLength="350" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Motion">
+    <Key>
+      <PropertyRef Name="idMotion" />
+    </Key>
+    <Property Name="idMotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="member" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Proponentes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Propuesta" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

@@ -1,39 +1,49 @@
 ﻿@model Consilium.Models.UserLogin
-
+@Html.Partial("_vistaLogin")
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
 @{
+    /**/
+
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+
+<h2 style="text-align: center;">Inicio de sesión</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>UserLogin</h4>
+    <div class="form-horizontal " align="center">
+        <h4> </h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.EmailID, "Usuario", htmlAttributes: new { @class = "control-label col-md-2  col-md-push-3" })
+            <div class="col-md-2 col-md-push-3">
                 @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.password, "Contraseña", htmlAttributes: new { @class = "control-label col-md-2 col-md-push-3" })
+            <div class="col-md-2 col-md-push-3">
                 @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.RememberMe, "Recordar usuario", htmlAttributes: new { @class = "control-label col-md-2  col-md-push-3" })
+            <div class="col-md-2 col-md-push-3">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.RememberMe)
                     @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
@@ -42,7 +52,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-4  col-md-push-2">
                 <input type="submit" value="Login" class="btn btn-default" />
             </div>
         </div>
@@ -50,7 +60,7 @@
 }
 
 <div>
-    @Html.ActionLink("Register", "Registration","User")
+    @Html.ActionLink("Registrarse", "Registration", "User")
 </div>
 
 @section Scripts{

@@ -37,7 +37,7 @@ namespace Consilium.Controllers
 
                     Status = true;
 
-                    message = "Request sent!";
+                    message = "Solicitud enviada!";
 
                 }
 
@@ -47,7 +47,7 @@ namespace Consilium.Controllers
             }
             else
             {
-                message = "Invalid Request";
+                message = "Solicitud inválida";
             }
 
             ViewBag.Message = message;

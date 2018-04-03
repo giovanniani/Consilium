@@ -1,5 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ConsiliumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Justification">
+    <Key>
+      <PropertyRef Name="idJustication" />
+    </Key>
+    <Property Name="idJustication" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idMember" Type="varchar" MaxLength="30" />
+    <Property Name="date" Type="date" />
+    <Property Name="about" Type="varchar" MaxLength="50" />
+    <Property Name="body" Type="varchar" MaxLength="350" />
+  </EntityType>
+  <EntityType Name="Motion">
+    <Key>
+      <PropertyRef Name="idMotion" />
+    </Key>
+    <Property Name="idMotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tittle" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="date" />
+    <Property Name="member" Type="varchar" MaxLength="50" />
+    <Property Name="Proponentes" Type="varchar" MaxLength="50" />
+    <Property Name="Propuesta" Type="varchar" MaxLength="350" />
+  </EntityType>
   <EntityType Name="Request">
     <Key>
       <PropertyRef Name="Id" />
@@ -25,8 +46,12 @@
     <Property Name="IsEmailVerified" Type="bit" />
     <Property Name="ActivationCode" Type="uniqueidentifier" />
     <Property Name="MemberType" Type="varchar" MaxLength="15" />
+    <Property Name="Identification" Type="varchar" MaxLength="30" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityContainer Name="ConsiliumModelStoreContainer">
+    <EntitySet Name="Justification" EntityType="Self.Justification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

@@ -35,13 +35,23 @@ section,
 summary {
   display: block;
 }
-
+ 
 audio,
 canvas,
 video {
   display: inline-block;
 }
-
+.defaultTextBox {
+    padding: 0;
+    height: 30px;
+    position: relative;
+    left: 0;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-color: rgba(0,0,0,.15);
+    background-color: white;
+    font-size: 16px;
+}
 audio:not([controls]) {
   display: none;
   height: 0;
@@ -74,7 +84,61 @@ h1 {
   margin: 0.67em 0;
   font-size: 2em;
 }
+input[type=text] {
+    padding: 0;
+    height: 30px;
+    position: relative;
+    left: 0;
+    outline: none;
+    border: 1px solid #cdcdcd;
+    border-color: rgba(0,0,0,.15);
+    background-color: white;
+    font-size: 16px;
+}
 
+body {
+    margin: 0;
+    border: 0;
+}
+
+
+.pagHeader {
+    width: 1000px;
+    height: 150px;
+    text-align: center;
+    border: 1px solid black;
+    background: #ffffff;
+}
+
+.pagLeftsidebar {
+    width: 150px;
+    height: 800px;
+    float: left;
+    text-align: center;
+    border: 1px solid black;
+    background: #ffffff;
+}
+
+.pagContent {
+    width: 838px;
+    height: 800px;
+    float: left;
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.pagFooter {
+    clear: both;
+    width: 1000px;
+    height: 140px;
+    text-align: center;
+    background: #ffdeee;
+    border: 1px solid black;
+}
+.formatoTextBox {
+    width: 526px;
+    margin-right: -4px;
+}
 abbr[title] {
   border-bottom: 1px dotted;
 }
@@ -6793,24 +6857,37 @@ td.visible-print {
 }
 
 @media print {
-  .visible-print {
-    display: block !important;
-  }
-  tr.visible-print {
-    display: table-row !important;
-  }
-  th.visible-print,
-  td.visible-print {
-    display: table-cell !important;
-  }
-  .hidden-print {
-    display: none !important;
-  }
-  tr.hidden-print {
-    display: none !important;
-  }
-  th.hidden-print,
-  td.hidden-print {
-    display: none !important;
-  }
+    .visible-print {
+        display: block !important;
+    }
+
+    tr.visible-print {
+        display: table-row !important;
+    }
+
+    th.visible-print,
+    td.visible-print {
+        display: table-cell !important;
+    }
+
+    .hidden-print {
+        display: none !important;
+    }
+
+    tr.hidden-print {
+        display: none !important;
+    }
+
+    th.hidden-print,
+    td.hidden-print {
+        display: none !important;
+    }
+
+
+
+
+
 }
+
+
+
