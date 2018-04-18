@@ -138,13 +138,13 @@ namespace Consilium.Controllers
 
             using (ConsiliumEntities dc = new ConsiliumEntities())
             {
-                var v = dc.User.Where(a => a.EmailID == login.EmailID).FirstOrDefault();
+                var v = dc.User.Where(a => a.EmailID == login.idUsuario).FirstOrDefault();
                 if(v != null)
                 {
-                    if(string.Compare(Crypto.Hash(login.password),v.Password) == 0)
+                    if(string.Compare(Crypto.Hash(login.contrasenna),v.Password) == 0)
                     {
                         int timeout = login.RememberMe ? 525600 : 20; //525600 min = 1 year
-                        var ticket = new FormsAuthenticationTicket(login.EmailID, login.RememberMe, timeout);
+                        var ticket = new FormsAuthenticationTicket(login.idUsuario, login.RememberMe, timeout);
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
