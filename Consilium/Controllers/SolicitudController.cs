@@ -23,13 +23,9 @@ namespace Consilium.Controllers
         {
 
             bool Status = false;
-            string message = "";
+            string message = "";            
             Punto punto = new Punto();
-            punto.idUsuario = solicitudNueva.idMiembro;
-            EstadoPunto estado = new EstadoPunto();
-            estado.idEstado = 1;
-            estado.nombre = "Pendiente";
-            punto.EstadoPunto = estado.idEstado;
+            punto.idUsuario = solicitudNueva.idMiembro;           
             
             punto.titulo = solicitudNueva.Nombre;
             punto.fecha = solicitudNueva.Fecha;
@@ -43,7 +39,9 @@ namespace Consilium.Controllers
                 #region Save to Data
                 using (ConsiliumEntities dc = new ConsiliumEntities())
                 {
+                    var e = dc.EstadoPunto.Where(a => a.idEstado == 1).FirstOrDefault();
                     dc.Punto.Add(punto);
+                    punto.EstadoPunto = e;
                     dc.SaveChanges();
 
                 }
@@ -78,7 +76,7 @@ namespace Consilium.Controllers
             ViewBag.Message = message;
             ViewBag.Status = Status;
 
-            return View(solicitud);
+            return View(solicitudNueva);
         }
     }
 }
