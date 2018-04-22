@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="82b79ce491bc48c09d7c2151039f76d3" Name="Diagram1">
+        <EntityTypeShape EntityType="ConsiliumModel.Agenda" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Comision" Width="1.5" PointX="3.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.ComisionXSesion" Width="1.5" PointX="6" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.EstadoPunto" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Justificacion" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Logueo" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.MiembroXComision" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.MiembroXQuorum" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Mocion" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.ProponenteXMocion" Width="1.5" PointX="8.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Punto" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.PuntoXAgenda" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Quorum" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.ResultadoPunto" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Sesion" Width="1.5" PointX="3.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Solicitud" Width="1.5" PointX="7.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.TipoSesion" Width="1.5" PointX="1.5" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsiliumModel.Usuario" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="ConsiliumModel.FK_PuntoXAgenda_Agenda" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ComisionXSesion_Comision" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ComisionXSesion_Sesion" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXComision_ComisionXSesion" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Punto_EstadoPunto" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Justificacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Logueo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXComision_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Quorum" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Mocion_Punto" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Mocion" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Punto_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_PuntoXAgenda_Punto" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Quorum" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsiliumModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
