@@ -1,87 +1,122 @@
 ﻿@model IEnumerable<Consilium.Models.Usuario>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Miembros del Consejo";
 }
 
-<h2>Index</h2>
+<head>
+    <style>
+        #formatoTabla {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidoP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidoM)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaFin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Logueo.nombreUsuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
-        </th>
-        <th></th>
-    </tr>
+            #formatoTabla td, #formatoTabla th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidoP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidoM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Logueo.nombreUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idUsuario })
-        </td>
-    </tr>
+            #formatoTabla tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #formatoTabla tr:hover {
+                background-color: #ddd;
+            }
+
+            #formatoTabla th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #000000;
+                color: white;
+            }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros del Consejo</h2>
+    <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
+
+    <p>
+        @Html.ActionLink("Crear nuevo miembro", "Create")
+    </p>
+    <table class="table" id="formatoTabla">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidoP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidoM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Logueo.nombreUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidoP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidoM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logueo.nombreUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
+                @Html.ActionLink("Ver", "Details", new { id = item.idUsuario }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario })
+            </td>
+        </tr>
 }
 
-</table>
+    </table>
+</body>
