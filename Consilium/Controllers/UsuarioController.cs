@@ -88,7 +88,7 @@ namespace Consilium.Controllers
         {
             return View();
         }
-
+        
         //login post
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -114,7 +114,7 @@ namespace Consilium.Controllers
 
                         if (u.TipoUsuario.idTipo.ToString() == "1")
                         {
-                            return RedirectToAction("RegistrationRequest", "Request");
+                            return RedirectToAction("SolicitudRequest", "Solicitud");
                         }
                         if (u.TipoUsuario.idTipo.ToString() == "2")
                         {
@@ -139,6 +139,7 @@ namespace Consilium.Controllers
             ViewBag.Message = message;
             return View();
         }
+        
 
         public bool existeId(string usuarioId)
         {

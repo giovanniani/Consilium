@@ -31,6 +31,7 @@ namespace Consilium.Controllers
                 #region Save to Data
                 using (ConsiliumEntities dc = new ConsiliumEntities())
                 {
+                    justificacion.estado = "Pendiente";
                     dc.Justificacion.Add(justificacion);
                     dc.SaveChanges();
 

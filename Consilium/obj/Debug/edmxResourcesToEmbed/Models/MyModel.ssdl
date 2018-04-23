@@ -116,7 +116,6 @@
     <Property Name="fecha" Type="date" />
     <Property Name="titulo" Type="nvarchar" MaxLength="50" />
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
-    <Property Name="idTipo" Type="int" />
   </EntityType>
   <EntityType Name="PuntoXAgenda">
     <Key>
@@ -275,7 +274,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Logueo_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Logueo" Type="Self.Logueo" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Usuario">

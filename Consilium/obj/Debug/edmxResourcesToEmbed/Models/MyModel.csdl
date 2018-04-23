@@ -266,7 +266,6 @@
     <Property Name="fecha" Type="DateTime" Precision="0" />
     <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="idUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="idTipo" Type="Int32" />
     <NavigationProperty Name="EstadoPunto" Relationship="ConsiliumModel.FK_Punto_EstadoPunto" FromRole="Punto" ToRole="EstadoPunto" />
     <NavigationProperty Name="Mocion" Relationship="ConsiliumModel.FK_Mocion_Punto" FromRole="Punto" ToRole="Mocion" />
     <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Punto" ToRole="Usuario" />

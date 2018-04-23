@@ -159,7 +159,7 @@ namespace Consilium.Controllers
                         {*/
                             if (v.MemberType == "Student")
                             {
-                                return RedirectToAction("RegistrationRequest", "Request");
+                                return RedirectToAction("SolicitudRequest", "Solicitud");
                             }
                             if (v.MemberType == "President")
                             {

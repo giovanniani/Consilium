@@ -15,6 +15,7 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    Welcome @HttpContext.Current.User.Identity.Name
 
     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
     {
@@ -129,12 +130,12 @@
         }
     }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-        <div id="footer"><p style="color:white" align="center">Sistema Consilium</p></div>
-    </body>
+    <div id="footer"><p style="color:white" align="center">Sistema Consilium</p></div>
+</body>
 @section Scripts{
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
