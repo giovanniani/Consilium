@@ -272,6 +272,10 @@
     <NavigationProperty Name="PuntoXAgenda" Relationship="ConsiliumModel.FK_PuntoXAgenda_Punto" FromRole="Punto" ToRole="PuntoXAgenda" />
     <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="Punto" ToRole="ResultadoPunto" />
     <NavigationProperty Name="Solicitud" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Punto" ToRole="Solicitud" />
+    <Property Name="considerandos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="resultandos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="acuerdos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="adjunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PuntoXAgenda">
     <Key>

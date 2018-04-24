@@ -292,11 +292,6 @@
     <Content Include="Views\Justificaciones\Edit.cshtml" />
     <Content Include="Views\Justificaciones\Index.cshtml" />
     <Content Include="Views\Shared\_menuPresidente.cshtml" />
-    <Content Include="Views\Puntos\Create.cshtml" />
-    <Content Include="Views\Puntos\Delete.cshtml" />
-    <Content Include="Views\Puntos\Details.cshtml" />
-    <Content Include="Views\Puntos\Edit.cshtml" />
-    <Content Include="Views\Puntos\Index.cshtml" />
     <Content Include="Views\Agenda\Create.cshtml" />
     <Content Include="Views\Agenda\Delete.cshtml" />
     <Content Include="Views\Agenda\Details.cshtml" />
@@ -307,6 +302,11 @@
     <Content Include="Views\PuntoXAgenda\Details.cshtml" />
     <Content Include="Views\PuntoXAgenda\Edit.cshtml" />
     <Content Include="Views\PuntoXAgenda\Index.cshtml" />
+    <Content Include="Views\Puntos\Create.cshtml" />
+    <Content Include="Views\Puntos\Delete.cshtml" />
+    <Content Include="Views\Puntos\Details.cshtml" />
+    <Content Include="Views\Puntos\Edit.cshtml" />
+    <Content Include="Views\Puntos\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

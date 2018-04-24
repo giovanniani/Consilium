@@ -116,6 +116,10 @@
     <Property Name="fecha" Type="date" />
     <Property Name="titulo" Type="nvarchar" MaxLength="50" />
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
+    <Property Name="considerandos" Type="nvarchar" MaxLength="500" />
+    <Property Name="resultandos" Type="nvarchar" MaxLength="500" />
+    <Property Name="acuerdos" Type="nvarchar" MaxLength="500" />
+    <Property Name="adjunto" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PuntoXAgenda">
     <Key>

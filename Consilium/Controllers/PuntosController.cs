@@ -18,9 +18,6 @@ namespace Consilium.Controllers
         public ActionResult Index()
         {
             var punto = db.Punto.Include(p => p.EstadoPunto).Include(p => p.Usuario);
-            var solicitud = db.Solicitud.Include(s => s.idPunto).Include(s => s.Punto);
-            var puntoNuevo = new PuntoNuevo();
-            
             return View(punto.ToList());
         }
 
@@ -52,10 +49,11 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario")] Punto punto, string reusltando)
+        public ActionResult Create([Bind(Include = "idPunto,fecha,titulo,idUsuario,considerandos,resultandos,acuerdos,adjunto")] Punto punto)
         {
             if (ModelState.IsValid)
             {
+                punto.idEstado = 1;
                 db.Punto.Add(punto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,7 +86,7 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario")] Punto punto)
+        public ActionResult Edit([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario,considerandos,resultandos,acuerdos,adjunto")] Punto punto)
         {
             if (ModelState.IsValid)
             {

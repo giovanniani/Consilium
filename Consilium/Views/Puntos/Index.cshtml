@@ -18,6 +18,18 @@
             @Html.DisplayNameFor(model => model.titulo)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.considerandos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resultandos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.acuerdos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adjunto)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.EstadoPunto.nombre)
         </th>
         <th>
@@ -33,6 +45,18 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.considerandos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resultandos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.acuerdos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adjunto)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
