@@ -1,1 +1,48 @@
-﻿
+﻿<html>
+<head>
+    <title>Consilium</title>
+</head>
+<body>
+
+    <table bgcolor="#222222" background="~/Content/imgBannerFondo.jpg" height=200 style="width:100%">
+        <tr height="10px" width="100%" bgcolor="#222222">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th width="50px">
+            </th>
+            <th>
+                <img width="350" id="img_logo" alt="Logo" src="@Url.Content("~/Content/logo_consilium.png")" />
+            </th>
+            <th>
+                <h1 style="color:white; text-align:right;  font-weight: 700; font-size: 40px">Nombre</h1>
+                <div>
+                    <h4 style="color:white; text-align:right;">
+                        @Html.ActionLink("Cerrar Sesión 🔒", "Login", "Usuario")
+                    </h4>
+                </div>
+
+            </th>
+            <th width="50px">
+                <h1> </h1>
+            </th>
+        </tr>
+
+        <tr height="10px" width="100%" bgcolor="#222222">
+
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+</body>
+</html>
+
+
+
+

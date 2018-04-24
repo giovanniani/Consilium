@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Consilium.Models.Extended
+namespace Consilium.Models
 {
-    public partial class SolicitudNueva
+    public partial class PuntoNuevo
     {
-        public int idSolicitud { get; set; }
+        public int idPunto;
 
         [Display(Name = "Fecha de la sesión")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesita la fecha")]

@@ -1,0 +1,34 @@
+﻿@model Consilium.Models.PuntoXAgenda
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PuntoXAgenda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Agenda.idAgenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agenda.idAgenda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punto.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punto.titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idPuntoXAgenda }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

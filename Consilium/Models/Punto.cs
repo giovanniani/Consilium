@@ -28,6 +28,10 @@ namespace Consilium.Models
         public Nullable<System.DateTime> fecha { get; set; }
         public string titulo { get; set; }
         public string idUsuario { get; set; }
+        public string considerandos { get; set; }
+        public string resultandos { get; set; }
+        public string acuerdos { get; set; }
+        public string adjunto { get; set; }
     
         public virtual EstadoPunto EstadoPunto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

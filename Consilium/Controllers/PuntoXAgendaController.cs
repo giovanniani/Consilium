@@ -10,119 +10,116 @@ using Consilium.Models;
 
 namespace Consilium.Controllers
 {
-    public class PuntosController : Controller
+    public class PuntoXAgendaController : Controller
     {
         private ConsiliumEntities db = new ConsiliumEntities();
 
-        // GET: Puntos
+        // GET: PuntoXAgenda
         public ActionResult Index()
         {
-            var punto = db.Punto.Include(p => p.EstadoPunto).Include(p => p.Usuario);
-            var solicitud = db.Solicitud.Include(s => s.idPunto).Include(s => s.Punto);
-            var puntoNuevo = new PuntoNuevo();
-            
-            return View(punto.ToList());
+            var puntoXAgenda = db.PuntoXAgenda.Include(p => p.Agenda).Include(p => p.Punto);
+            return View(puntoXAgenda.ToList());
         }
 
-        // GET: Puntos/Details/5
+        // GET: PuntoXAgenda/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Punto punto = db.Punto.Find(id);
-            if (punto == null)
+            PuntoXAgenda puntoXAgenda = db.PuntoXAgenda.Find(id);
+            if (puntoXAgenda == null)
             {
                 return HttpNotFound();
             }
-            return View(punto);
+            return View(puntoXAgenda);
         }
 
-        // GET: Puntos/Create
+        // GET: PuntoXAgenda/Create
         public ActionResult Create()
         {
-            ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre");
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "nombre");
+            ViewBag.idAgenda = new SelectList(db.Agenda, "idAgenda", "idAgenda");
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
             return View();
         }
 
-        // POST: Puntos/Create
+        // POST: PuntoXAgenda/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario")] Punto punto, string reusltando)
+        public ActionResult Create([Bind(Include = "idPuntoXAgenda,idAgenda,idPunto")] PuntoXAgenda puntoXAgenda)
         {
             if (ModelState.IsValid)
             {
-                db.Punto.Add(punto);
+                db.PuntoXAgenda.Add(puntoXAgenda);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre", punto.idEstado);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "nombre", punto.idUsuario);
-            return View(punto);
+            ViewBag.idAgenda = new SelectList(db.Agenda, "idAgenda", "idAgenda", puntoXAgenda.idAgenda);
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", puntoXAgenda.idPunto);
+            return View(puntoXAgenda);
         }
 
-        // GET: Puntos/Edit/5
+        // GET: PuntoXAgenda/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Punto punto = db.Punto.Find(id);
-            if (punto == null)
+            PuntoXAgenda puntoXAgenda = db.PuntoXAgenda.Find(id);
+            if (puntoXAgenda == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre", punto.idEstado);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "nombre", punto.idUsuario);
-            return View(punto);
+            ViewBag.idAgenda = new SelectList(db.Agenda, "idAgenda", "idAgenda", puntoXAgenda.idAgenda);
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", puntoXAgenda.idPunto);
+            return View(puntoXAgenda);
         }
 
-        // POST: Puntos/Edit/5
+        // POST: PuntoXAgenda/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario")] Punto punto)
+        public ActionResult Edit([Bind(Include = "idPuntoXAgenda,idAgenda,idPunto")] PuntoXAgenda puntoXAgenda)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(punto).State = EntityState.Modified;
+                db.Entry(puntoXAgenda).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre", punto.idEstado);
-            ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "nombre", punto.idUsuario);
-            return View(punto);
+            ViewBag.idAgenda = new SelectList(db.Agenda, "idAgenda", "idAgenda", puntoXAgenda.idAgenda);
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", puntoXAgenda.idPunto);
+            return View(puntoXAgenda);
         }
 
-        // GET: Puntos/Delete/5
+        // GET: PuntoXAgenda/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Punto punto = db.Punto.Find(id);
-            if (punto == null)
+            PuntoXAgenda puntoXAgenda = db.PuntoXAgenda.Find(id);
+            if (puntoXAgenda == null)
             {
                 return HttpNotFound();
             }
-            return View(punto);
+            return View(puntoXAgenda);
         }
 
-        // POST: Puntos/Delete/5
+        // POST: PuntoXAgenda/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Punto punto = db.Punto.Find(id);
-            db.Punto.Remove(punto);
+            PuntoXAgenda puntoXAgenda = db.PuntoXAgenda.Find(id);
+            db.PuntoXAgenda.Remove(puntoXAgenda);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

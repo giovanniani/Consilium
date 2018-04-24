@@ -137,12 +137,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
+    <Compile Include="Controllers\PuntoXAgendaController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -164,6 +166,7 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Extended\Justificacion.cs" />
+    <Compile Include="Models\Extended\PuntoNuevo.cs" />
     <Compile Include="Models\Extended\Request.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
@@ -283,16 +286,27 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Puntos\Create.cshtml" />
-    <Content Include="Views\Puntos\Delete.cshtml" />
-    <Content Include="Views\Puntos\Details.cshtml" />
-    <Content Include="Views\Puntos\Edit.cshtml" />
-    <Content Include="Views\Puntos\Index.cshtml" />
     <Content Include="Views\Justificaciones\Create.cshtml" />
     <Content Include="Views\Justificaciones\Delete.cshtml" />
     <Content Include="Views\Justificaciones\Details.cshtml" />
     <Content Include="Views\Justificaciones\Edit.cshtml" />
     <Content Include="Views\Justificaciones\Index.cshtml" />
+    <Content Include="Views\Shared\_menuPresidente.cshtml" />
+    <Content Include="Views\Puntos\Create.cshtml" />
+    <Content Include="Views\Puntos\Delete.cshtml" />
+    <Content Include="Views\Puntos\Details.cshtml" />
+    <Content Include="Views\Puntos\Edit.cshtml" />
+    <Content Include="Views\Puntos\Index.cshtml" />
+    <Content Include="Views\Agenda\Create.cshtml" />
+    <Content Include="Views\Agenda\Delete.cshtml" />
+    <Content Include="Views\Agenda\Details.cshtml" />
+    <Content Include="Views\Agenda\Edit.cshtml" />
+    <Content Include="Views\Agenda\Index.cshtml" />
+    <Content Include="Views\PuntoXAgenda\Create.cshtml" />
+    <Content Include="Views\PuntoXAgenda\Delete.cshtml" />
+    <Content Include="Views\PuntoXAgenda\Details.cshtml" />
+    <Content Include="Views\PuntoXAgenda\Edit.cshtml" />
+    <Content Include="Views\PuntoXAgenda\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
