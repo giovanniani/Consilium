@@ -1,0 +1,42 @@
+﻿@model Consilium.Models.MiembroXComision
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MiembroXComision</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoMiembro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoMiembro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComisionXSesion.idComisionXSesion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComisionXSesion.idComisionXSesion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMiembroXComision }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

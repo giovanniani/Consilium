@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
 
 namespace Consilium.Controllers
 {
@@ -51,6 +62,32 @@ namespace Consilium.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPunto,fecha,titulo,idUsuario,considerandos,resultandos,acuerdos,adjunto")] Punto punto)
         {
+            string fileName = Guid.NewGuid() + ".pdf";
+            string filePath = Path.Combine(Server.MapPath("~/archivosPDF"), fileName);
+
+            Document doc = new Document(PageSize.A4, 2, 2, 2, 2);
+            Paragraph p = new Paragraph("Export Database data to PDF file in ASP.NET");
+
+           // p.SetAlignment("center");
+
+            try
+            {
+                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+
+
+                doc.Open();
+                doc.Add(p);
+                doc.Close();/*
+
+                HttpContext context = HttpContext.Current;
+
+                Context.Response.BinaryWrite(Content);*/
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+
             if (ModelState.IsValid)
             {
                 punto.idEstado = 1;

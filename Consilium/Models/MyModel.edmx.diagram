@@ -49,6 +49,7 @@
         <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Quorum" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" />
         <AssociationConnector Association="ConsiliumModel.FK_Usuario_TipoUsuario" />
+        <AssociationConnector Association="ConsiliumModel.FK_Sesion_Agenda" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

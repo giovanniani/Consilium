@@ -18,6 +18,7 @@ namespace Consilium.Models
         public Agenda()
         {
             this.PuntoXAgenda = new HashSet<PuntoXAgenda>();
+            this.Sesion = new HashSet<Sesion>();
         }
     
         public int idAgenda { get; set; }
@@ -25,5 +26,7 @@ namespace Consilium.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sesion> Sesion { get; set; }
     }
 }

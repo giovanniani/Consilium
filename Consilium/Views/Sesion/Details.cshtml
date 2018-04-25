@@ -1,0 +1,50 @@
+﻿@model Consilium.Models.Sesion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sesion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idAgenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idAgenda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.documento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.documento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoSesion.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoSesion.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idSesion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

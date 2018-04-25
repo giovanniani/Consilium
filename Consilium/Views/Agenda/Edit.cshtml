@@ -1,37 +1,99 @@
 ﻿@model Consilium.Models.Agenda
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
-<h2>Edit</h2>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consilium - Registrar nuevo usuario</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/encabezado.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/w3.css">
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Agenda</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idAgenda)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<body>
+    <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
+    <div id="content-container1">
+        <div id="content-container2">
+            <div id="content">
+                <div style="position: absolute; left: 70%; top: 50%; ">
+                    <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
+                </div>
+                <br /> <br />
+                <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Editar Agenda</h2>
+                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+                {
+                    <div class="alert alert-success col-md-6">
+                        <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
+                            <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.idAgenda)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-10">
+                                    <input type="submit" value="Actualizar" class="w3-button w3-block w3-black" style="width:17% " />
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Regresar", "Index")
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-danger col-md-6">
+                                <strong>¡Error!  </strong>@ViewBag.Message
+                            </div>
+                        }
+                    }
+
+                }
+                <br /> <br /><br />
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div id="navigation-container">
+        <div id="navigation">
+            @Html.Partial("_menuSecretaria")
+        </div>
+    </div>
+
+
+
+
+
+</body>

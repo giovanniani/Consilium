@@ -50,6 +50,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Downloads\itextsharp-all-5.5.10\itextsharp-dll-core\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -138,13 +141,17 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
+    <Compile Include="Controllers\ComisionesController.cs" />
+    <Compile Include="Controllers\ComisionXSesionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
+    <Compile Include="Controllers\MiembroXComisionController.cs" />
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
     <Compile Include="Controllers\PuntoXAgendaController.cs" />
+    <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -307,6 +314,26 @@
     <Content Include="Views\Puntos\Details.cshtml" />
     <Content Include="Views\Puntos\Edit.cshtml" />
     <Content Include="Views\Puntos\Index.cshtml" />
+    <Content Include="Views\Sesion\Create.cshtml" />
+    <Content Include="Views\Sesion\Delete.cshtml" />
+    <Content Include="Views\Sesion\Details.cshtml" />
+    <Content Include="Views\Sesion\Edit.cshtml" />
+    <Content Include="Views\Sesion\Index.cshtml" />
+    <Content Include="Views\ComisionXSesion\Create.cshtml" />
+    <Content Include="Views\ComisionXSesion\Delete.cshtml" />
+    <Content Include="Views\ComisionXSesion\Details.cshtml" />
+    <Content Include="Views\ComisionXSesion\Edit.cshtml" />
+    <Content Include="Views\ComisionXSesion\Index.cshtml" />
+    <Content Include="Views\Comisiones\Create.cshtml" />
+    <Content Include="Views\Comisiones\Delete.cshtml" />
+    <Content Include="Views\Comisiones\Details.cshtml" />
+    <Content Include="Views\Comisiones\Edit.cshtml" />
+    <Content Include="Views\Comisiones\Index.cshtml" />
+    <Content Include="Views\MiembroXComision\Create.cshtml" />
+    <Content Include="Views\MiembroXComision\Delete.cshtml" />
+    <Content Include="Views\MiembroXComision\Details.cshtml" />
+    <Content Include="Views\MiembroXComision\Edit.cshtml" />
+    <Content Include="Views\MiembroXComision\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -314,7 +341,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\archivosPDF\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

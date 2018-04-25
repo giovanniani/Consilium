@@ -29,5 +29,6 @@ namespace Consilium.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComisionXSesion> ComisionXSesion { get; set; }
         public virtual TipoSesion TipoSesion { get; set; }
+        public virtual Agenda Agenda { get; set; }
     }
 }

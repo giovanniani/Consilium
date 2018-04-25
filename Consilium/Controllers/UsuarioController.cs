@@ -122,7 +122,7 @@ namespace Consilium.Controllers
                         }
                         if (u.TipoUsuario.idTipo.ToString() == "3")
                         {
-                            return RedirectToAction("Index", "Secretary");
+                            return RedirectToAction("Index", "Usuarios");
                         }
                         
                     }

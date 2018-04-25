@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Consilium.Models.ComisionXSesion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Comision.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sesion.documento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comision.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sesion.documento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idComisionXSesion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idComisionXSesion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idComisionXSesion })
+        </td>
+    </tr>
+}
+
+</table>

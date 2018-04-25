@@ -447,6 +447,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Sesion_Agenda">
+    <End Role="Agenda" Type="Self.Agenda" Multiplicity="0..1" />
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agenda">
+        <PropertyRef Name="idAgenda" />
+      </Principal>
+      <Dependent Role="Sesion">
+        <PropertyRef Name="idAgenda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Sesion_TipoSesion">
     <End Role="TipoSesion" Type="Self.TipoSesion" Multiplicity="0..1" />
     <End Role="Sesion" Type="Self.Sesion" Multiplicity="*" />
@@ -575,6 +587,10 @@
     <AssociationSet Name="FK_ResultadoPunto_Quorum" Association="Self.FK_ResultadoPunto_Quorum">
       <End Role="Quorum" EntitySet="Quorum" />
       <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sesion_Agenda" Association="Self.FK_Sesion_Agenda">
+      <End Role="Agenda" EntitySet="Agenda" />
+      <End Role="Sesion" EntitySet="Sesion" />
     </AssociationSet>
     <AssociationSet Name="FK_Sesion_TipoSesion" Association="Self.FK_Sesion_TipoSesion">
       <End Role="TipoSesion" EntitySet="TipoSesion" />

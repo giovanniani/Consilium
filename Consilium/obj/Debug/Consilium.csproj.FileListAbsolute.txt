@@ -241,3 +241,5 @@ C:\Users\Giova\Documents\Consilium-Stefi\Consilium\obj\Debug\Consilium.csproj.Co
 C:\Users\Giova\Documents\Consilium-Stefi\Consilium\obj\Debug\Consilium.csproj.CopyComplete
 C:\Users\Giova\Documents\Consilium-Stefi\Consilium\obj\Debug\Consilium.dll
 C:\Users\Giova\Documents\Consilium-Stefi\Consilium\obj\Debug\Consilium.pdb
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\itextsharp.dll
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\itextsharp.xml
