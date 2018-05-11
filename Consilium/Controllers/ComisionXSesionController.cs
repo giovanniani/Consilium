@@ -77,7 +77,7 @@ namespace Consilium.Controllers
             }
             ViewBag.idComision = new SelectList(db.Comision, "idComision", "nombre", comisionXSesion.idComision);
             ViewBag.idSesion = new SelectList(db.Sesion, "idSesion", "documento", comisionXSesion.idSesion);
-            return View(comisionXSesion);
+            return RedirectToAction("Create", "MiembroXComision");
         }
 
         // POST: ComisionXSesion/Edit/5

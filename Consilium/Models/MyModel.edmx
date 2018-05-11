@@ -309,7 +309,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MiembroXComision_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MiembroXComision" Type="Self.MiembroXComision" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
