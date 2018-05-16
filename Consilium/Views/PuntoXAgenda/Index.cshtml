@@ -58,7 +58,6 @@
                 <br /> <br />
                 <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Puntos por agenda</h2>
 
-
                 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                 {
                     <div class="alert alert-success col-md-6">
@@ -73,7 +72,6 @@
                         <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
                         <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
 
-
                             <table class="table">
                                 <tr>
                                     <th>
@@ -84,7 +82,6 @@
                                     </th>
                                     <th></th>
                                 </tr>
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
@@ -101,24 +98,15 @@
                                         </td>
                                     </tr>
                                 }
-
                             </table>
 
 
 
-
-
-
-
                             <div class="form-group">
-
                                 <div>
                                     @Html.ActionLink(">>>Crear nuevo punto<<<", "Create")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -134,14 +122,18 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
-
 
 
 

@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium - Registrar nuevo usuario</title>
+    <title>Consilium - Registrar justificación</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
@@ -43,7 +43,6 @@
                         <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
                             <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
 
-
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -52,7 +51,6 @@
                                     @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.idUsuario, "idUsuario", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -60,7 +58,6 @@
                                     @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.asunto, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -68,7 +65,6 @@
                                     @Html.ValidationMessageFor(model => model.asunto, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.texto, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -76,7 +72,6 @@
                                     @Html.ValidationMessageFor(model => model.texto, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -84,7 +79,6 @@
                                     @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
                                     <input type="submit" value="INSERTAR" class="w3-button w3-block w3-black" style="width:17% " />
@@ -92,10 +86,7 @@
                                 <div>
                                     @Html.ActionLink("Regresar", "Index")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -111,15 +102,18 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
-
-
 
 
 </body>

@@ -90,7 +90,13 @@
 
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+             {
+                @Html.Partial("_menuSecretaria")
+             }
+             else if(ViewBag.param==1) {
+                @Html.Partial("_menuPresidente") 
+             }
         </div>
     </div>
 

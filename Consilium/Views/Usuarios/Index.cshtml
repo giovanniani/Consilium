@@ -60,7 +60,6 @@
                 <br /> <br />
                 <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros del Consejo</h2>
 
-
                 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                 {
                     <div class="alert alert-success col-md-6">
@@ -74,7 +73,6 @@
                         @Html.AntiForgeryToken()
                         <hr style="height:2px;width: 50% ;border:none;color:#333;background-color:#333;" />
                         <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
-
                             <table class="table" id="formatoTabla">
                                 <tr>
                                     <th>
@@ -109,7 +107,6 @@
                                     </th>
                                     <th></th>
                                 </tr>
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
@@ -150,7 +147,6 @@
                                         </td>
                                     </tr>
                                 }
-
                             </table>
 
 
@@ -159,22 +155,11 @@
 
 
 
-
-
-
-
-
-
-
                             <div class="form-group">
-
                                 <div>
                                     @Html.ActionLink(">>>Crear nuevo miembro<<<", "Create")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -190,15 +175,20 @@
             </div>
         </div>
     </div>
-
+    @HttpContext.Current.User.Identity.Name
+    @{ string[] data = HttpContext.Current.User.Identity.Name.Split('&'); }
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (data[2] == "0")
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (data[2] == "1")
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
-
-
 
 
 </body>

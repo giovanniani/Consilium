@@ -1,4 +1,4 @@
-@model Consilium.Models.Comision
+﻿@model Consilium.Models.Comision
 
 @{
     ViewBag.Title = "Eliminar";
@@ -53,7 +53,6 @@
                 <br /> <br />
                 <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Eliminar comisión</h2>
 
-
                 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                 {
                     <div class="alert alert-success col-md-6">
@@ -71,50 +70,38 @@
                                 <strong>¿Está seguro de que desea eliminar la comisión del sistema?</strong><br />
                             </div>
                             <br />
-
-						    <dl class="dl-horizontal">
-						        <dt>
-						            @Html.DisplayNameFor(model => model.nombre)
-						        </dt>
-
-						        <dd>
-						            @Html.DisplayFor(model => model.nombre)
-						        </dd>
-
-						        <dt>
-						            @Html.DisplayNameFor(model => model.objetivo)
-						        </dt>
-
-						        <dd>
-						            @Html.DisplayFor(model => model.objetivo)
-						        </dd>
-
-						        <dt>
-						            @Html.DisplayNameFor(model => model.fechaFin)
-						        </dt>
-
-						        <dd>
-						            @Html.DisplayFor(model => model.fechaFin)
-						        </dd>
-
-						        <dt>
-						            @Html.DisplayNameFor(model => model.fechaIni)
-						        </dt>
-
-						        <dd>
-						            @Html.DisplayFor(model => model.fechaIni)
-						        </dd>
-
-						        <dt>
-						            @Html.DisplayNameFor(model => model.estado)
-						        </dt>
-
-						        <dd>
-						            @Html.DisplayFor(model => model.estado)
-						        </dd>
-
-						</dl>
-
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.nombre)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.objetivo)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.objetivo)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.fechaFin)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.fechaFin)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.fechaIni)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.fechaIni)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.estado)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.estado)
+                                </dd>
+                            </dl>
 
                             <div class="form-group">
                                 <div class="col-md-offset-1 col-md-10">
@@ -123,10 +110,7 @@
                                 <div>
                                     @Html.ActionLink("Regresar", "Index")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -142,10 +126,17 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
-</div>
+    </div>
+
 </body>

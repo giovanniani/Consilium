@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
     using System;
@@ -21,12 +23,18 @@ namespace Consilium.Models
         }
     
         public int idComisionXSesion { get; set; }
+
+        [Display(Name = "ID Comisión")]
+
         public Nullable<int> idComision { get; set; }
+        [Display(Name = "ID Sesión")]
         public Nullable<int> idSesion { get; set; }
-    
+        [Display(Name = "Comisión")]
         public virtual Comision Comision { get; set; }
+        [Display(Name = "Sesión")]
         public virtual Sesion Sesion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Miembros por Comisión")]
         public virtual ICollection<MiembroXComision> MiembroXComision { get; set; }
     }
 }

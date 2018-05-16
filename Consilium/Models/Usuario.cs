@@ -76,5 +76,9 @@ namespace Consilium.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Punto> Punto { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
+
+        
     }
+
+
 }

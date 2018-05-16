@@ -58,7 +58,6 @@
                 <br /> <br />
                 <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros en comisión</h2>
 
-
                 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                 {
                     <div class="alert alert-success col-md-6">
@@ -74,38 +73,37 @@
                         <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
                             <table class="table" id="formatoTabla">
                                 <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tipoMiembro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ComisionXSesion.idComisionXSesion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.nombre)
-        </th>
-        <th></th>
-    </tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.tipoMiembro)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ComisionXSesion.idComisionXSesion)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usuario.nombre)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tipoMiembro)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ComisionXSesion.idComisionXSesion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.idMiembroXComision }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.idMiembroXComision }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.idMiembroXComision })
+                                        </td>
+                                    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoMiembro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ComisionXSesion.idComisionXSesion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idMiembroXComision }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idMiembroXComision }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idMiembroXComision })
-        </td>
-    </tr>
-                                
                                 }
-
                             </table>
 
 
@@ -114,22 +112,11 @@
 
 
 
-
-
-
-
-
-
-
                             <div class="form-group">
-
                                 <div>
                                     @Html.ActionLink(">>>Crear miembro en comisión<<<", "Create")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -145,15 +132,16 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
-
-
-
-
 </body>

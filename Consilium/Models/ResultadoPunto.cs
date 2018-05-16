@@ -11,21 +11,34 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class ResultadoPunto
     {
+        [Display(Name = "ID Resultando")]
         public int idResultado { get; set; }
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
         public System.DateTime fecha { get; set; }
+        [Display(Name = "Votos a favor")]
         public int votosFavor { get; set; }
+        [Display(Name = "Votos en contra")]
         public int votosContra { get; set; }
+        [Display(Name = "Votos nulos")]
         public int votosNulo { get; set; }
+        [Display(Name = "Abstenciones")]
         public int votosAbstencion { get; set; }
+        [Display(Name = "Resultado")]
         public string resultado { get; set; }
+        [Display(Name = "ID Agenda")]
         public int idAgenda { get; set; }
+        [Display(Name = "ID Punto")]
         public int idPunto { get; set; }
+        [Display(Name = "ID Quórum")]
         public int idQuorum { get; set; }
-    
+
+        [Display(Name = "Punto")]
         public virtual Punto Punto { get; set; }
+        [Display(Name = "Quórum")]
         public virtual Quorum Quorum { get; set; }
     }
 }

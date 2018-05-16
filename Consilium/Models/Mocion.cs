@@ -11,7 +11,7 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Mocion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,14 +19,19 @@ namespace Consilium.Models
         {
             this.ProponenteXMocion = new HashSet<ProponenteXMocion>();
         }
-    
+        [Display(Name = "ID Moción")]
+
         public int idMocion { get; set; }
+        [Display(Name = "ID Punto")]
         public Nullable<int> idPunto { get; set; }
         public string punto { get; set; }
+        [Display(Name = "Propuesta")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de ingresar la propuesta")]
         public string propuesta { get; set; }
-    
+        
         public virtual Punto Punto1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Proponente por moción")]
         public virtual ICollection<ProponenteXMocion> ProponenteXMocion { get; set; }
     }
 }

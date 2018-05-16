@@ -11,16 +11,23 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Solicitud
     {
+        [Display(Name = "ID Solicitud")]
         public int idSolicitud { get; set; }
+        [Display(Name = "ID Punto")]
         public Nullable<int> idPunto { get; set; }
+        [Display(Name = "Considerandos")]
         public string considerandos { get; set; }
+        [Display(Name = "Resultandos")]
         public string resultandos { get; set; }
+        [Display(Name = "Acuerdos")]
         public string acuerdos { get; set; }
+        [Display(Name = "Adjunto")]
         public string adjunto { get; set; }
-    
+        [Display(Name = "Punto")]
+
         public virtual Punto Punto { get; set; }
     }
 }

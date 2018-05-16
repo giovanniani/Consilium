@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
     using System;
@@ -19,11 +19,14 @@ namespace Consilium.Models
         {
             this.Punto = new HashSet<Punto>();
         }
-    
+
+        [Display(Name = "ID Estado")]
         public int idEstado { get; set; }
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Punto")]
         public virtual ICollection<Punto> Punto { get; set; }
     }
 }

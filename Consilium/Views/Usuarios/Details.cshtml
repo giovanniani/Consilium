@@ -71,7 +71,6 @@
                         <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
                         <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:20%">
 
-
                             <dl class="dl-horizontal">
                                 <dt>
                                     @Html.DisplayNameFor(model => model.nombre)
@@ -136,23 +135,17 @@
                             </dl>
 
 
-
-
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
                                     @Html.ActionLink("Editar", "Edit", new { id = Model.idUsuario }) |
                                     @Html.ActionLink("Regresar", "Index")
-
 
                                 </div>
                                 <div>
                                     <p>
                                     </p>
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -168,15 +161,17 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
-
-
-
 
 </body>

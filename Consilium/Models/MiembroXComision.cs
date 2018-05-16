@@ -11,15 +11,21 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class MiembroXComision
     {
+        [Display(Name = "ID Miembro por comisión")]
         public int idMiembroXComision { get; set; }
+        [Display(Name = "ID Usuario")]
         public string idUsuario { get; set; }
+        [Display(Name = "ID Comisión por Sesión")]
         public int idComisionXSesion { get; set; }
+        [Display(Name = "Tipo Miembro")]
         public string tipoMiembro { get; set; }
-    
+
+        [Display(Name = "Comisión por sesión")]
         public virtual ComisionXSesion ComisionXSesion { get; set; }
+        [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
     }
 }

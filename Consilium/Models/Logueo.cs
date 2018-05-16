@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+using System.ComponentModel.DataAnnotations;
+
 namespace Consilium.Models
 {
     using System;
@@ -14,8 +17,15 @@ namespace Consilium.Models
     
     public partial class Logueo
     {
+        [Display(Name = "ID Usuario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de ingresar el ID de usuario")]
         public string idUsuario { get; set; }
+        [Display(Name = "Nombre de Usuario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nombre de usuario requerido")]
         public string nombreUsuario { get; set; }
+
+        [Display(Name = "Contraseña")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Ingrese su contraseña")]
         public string contrasenna { get; set; }
     
         public virtual Usuario Usuario { get; set; }

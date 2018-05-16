@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
     using System;
@@ -14,13 +14,25 @@ namespace Consilium.Models
     
     public partial class Justificacion
     {
+        [Display(Name = "ID Justificación")]
         public int idJustificacion { get; set; }
+
+        [Display(Name = "Fecha")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> fecha { get; set; }
+
+        [Display(Name = "ID Usuario")]
         public string idUsuario { get; set; }
+        [Display(Name = "Asunto")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de colocar un asunto")]
         public string asunto { get; set; }
+        [Display(Name = "Texto")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe de colocar el texto.")]
         public string texto { get; set; }
+        [Display(Name = "Estado")]
         public string estado { get; set; }
-    
+        [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
     }
 }

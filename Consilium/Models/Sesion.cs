@@ -11,7 +11,7 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Sesion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,16 +19,25 @@ namespace Consilium.Models
         {
             this.ComisionXSesion = new HashSet<ComisionXSesion>();
         }
-    
+
+        [Display(Name = "Identificación")]
         public int idSesion { get; set; }
+        [Display(Name = "Identificación")]
         public Nullable<int> idTipo { get; set; }
+        [Display(Name = "Fecha")]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> fecha { get; set; }
+        [Display(Name = "ID Agenda")]
         public Nullable<int> idAgenda { get; set; }
+        [Display(Name = "Documento")]
         public string documento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<ComisionXSesion> ComisionXSesion { get; set; }
+        [Display(Name = "Tipo Sesión")]
         public virtual TipoSesion TipoSesion { get; set; }
+        [Display(Name = "Agenda")]
         public virtual Agenda Agenda { get; set; }
     }
 }

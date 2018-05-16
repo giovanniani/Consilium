@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
     using System;
@@ -14,11 +14,15 @@ namespace Consilium.Models
     
     public partial class PuntoXAgenda
     {
+        [Display(Name = "ID Puntos por agenda")]
         public int idPuntoXAgenda { get; set; }
+        [Display(Name = "ID Agenda")]
         public Nullable<int> idAgenda { get; set; }
+        [Display(Name = "ID Punto")]
         public Nullable<int> idPunto { get; set; }
-    
+        [Display(Name = "Agenda")]
         public virtual Agenda Agenda { get; set; }
+        [Display(Name = "Punto")]
         public virtual Punto Punto { get; set; }
     }
 }

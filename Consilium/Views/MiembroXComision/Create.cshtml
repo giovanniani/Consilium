@@ -1,8 +1,10 @@
 ﻿@model Consilium.Models.MiembroXComision
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registro";
 }
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,14 +93,17 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+             {
+                @Html.Partial("_menuSecretaria")
+             }
+             else if(ViewBag.param==1) {
+                @Html.Partial("_menuPresidente") 
+             }
         </div>
     </div>
-
-
 
 
 

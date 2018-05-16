@@ -40,10 +40,7 @@
                             <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-
                             @Html.HiddenFor(model => model.idPunto)
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.idEstado, "idEstado", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -51,7 +48,6 @@
                                     @Html.ValidationMessageFor(model => model.idEstado, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -59,7 +55,6 @@
                                     @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -67,7 +62,6 @@
                                     @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.idUsuario, "idUsuario", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -75,7 +69,6 @@
                                     @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.considerandos, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -83,7 +76,6 @@
                                     @Html.ValidationMessageFor(model => model.considerandos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.resultandos, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -91,7 +83,6 @@
                                     @Html.ValidationMessageFor(model => model.resultandos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.acuerdos, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -99,7 +90,6 @@
                                     @Html.ValidationMessageFor(model => model.acuerdos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 @Html.LabelFor(model => model.adjunto, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
@@ -110,10 +100,6 @@
 
 
 
-
-
-
-
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
                                     <input type="submit" value="Actualizar" class="w3-button w3-block w3-black" style="width:17% " />
@@ -121,10 +107,7 @@
                                 <div>
                                     @Html.ActionLink("Regresar", "Index")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -140,10 +123,16 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
 </body>

@@ -1,4 +1,4 @@
-@model Consilium.Models.ComisionXSesion
+﻿@model Consilium.Models.ComisionXSesion
 
 @{
     ViewBag.Title = "Editar";
@@ -40,24 +40,21 @@
                         <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
                             <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-				        @Html.HiddenFor(model => model.idComisionXSesion)
-
-				        <div class="form-group">
-				            @Html.LabelFor(model => model.idComision, "idComision", htmlAttributes: new { @class = "control-label col-md-2" })
-				            <div class="col-md-10">
-				                @Html.DropDownList("idComision", null, htmlAttributes: new { @class = "form-control" })
-				                @Html.ValidationMessageFor(model => model.idComision, "", new { @class = "text-danger" })
-				            </div>
-				        </div>
-
-				        <div class="form-group">
-				            @Html.LabelFor(model => model.idSesion, "idSesion", htmlAttributes: new { @class = "control-label col-md-2" })
-				            <div class="col-md-10">
-				                @Html.DropDownList("idSesion", null, htmlAttributes: new { @class = "form-control" })
-				                @Html.ValidationMessageFor(model => model.idSesion, "", new { @class = "text-danger" })
-				            </div>
-				        </div>
-
+                            @Html.HiddenFor(model => model.idComisionXSesion)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.idComision, "idComision", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("idComision", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.idComision, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.idSesion, "idSesion", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("idSesion", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.idSesion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
@@ -81,10 +78,17 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
+
 </body>

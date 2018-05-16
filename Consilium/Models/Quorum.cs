@@ -6,7 +6,7 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
     using System;
@@ -20,15 +20,17 @@ namespace Consilium.Models
             this.MiembroXQuorum = new HashSet<MiembroXQuorum>();
             this.ResultadoPunto = new HashSet<ResultadoPunto>();
         }
-    
+        [Display(Name = "Quórum")]
         public int idQuorum { get; set; }
         public int idSesion { get; set; }
         public int numQuorum { get; set; }
         public System.DateTime fecha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Miembros por Quórum")]
         public virtual ICollection<MiembroXQuorum> MiembroXQuorum { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Resultado del punto")]
         public virtual ICollection<ResultadoPunto> ResultadoPunto { get; set; }
     }
 }

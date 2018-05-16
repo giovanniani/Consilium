@@ -54,7 +54,6 @@
                 <br /> <br />
                 <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Eliminar del sistema</h2>
 
-
                 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                 {
                     <div class="alert alert-success col-md-6">
@@ -75,75 +74,56 @@
                             <br />
                             <br />
 
-
                             <dl class="dl-horizontal">
                                 <dt>
                                     @Html.DisplayNameFor(model => model.fecha)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.fecha)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.titulo)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.titulo)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.considerandos)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.considerandos)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.resultandos)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.resultandos)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.acuerdos)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.acuerdos)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.adjunto)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.adjunto)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.EstadoPunto.nombre)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.EstadoPunto.nombre)
                                 </dd>
-
                                 <dt>
                                     @Html.DisplayNameFor(model => model.Usuario.nombre)
                                 </dt>
-
                                 <dd>
                                     @Html.DisplayFor(model => model.Usuario.nombre)
                                 </dd>
-
                             </dl>
-
-
 
                             <div class="form-group">
                                 <div class="col-md-offset-1 col-md-10">
@@ -152,10 +132,7 @@
                                 <div>
                                     @Html.ActionLink("Regresar", "Index")
                                 </div>
-
                             </div>
-
-
 
                         </div>
                         if (ViewBag.Message != null)
@@ -171,11 +148,16 @@
             </div>
         </div>
     </div>
-
     <div id="navigation-container">
         <div id="navigation">
-            @Html.Partial("_menuSecretaria")
+            @if (ViewBag.param == 0)
+            {
+                @Html.Partial("_menuSecretaria")
+            }
+            else if (ViewBag.param == 1)
+            {
+                @Html.Partial("_menuPresidente")
+            }
         </div>
     </div>
-
 </body>

@@ -8,16 +8,16 @@ namespace Consilium.Models
 {
     public class UserLogin
     {
-        [Display(Name = "Identificación del usuario")]
+        [Display(Name = "ID Usuario")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Identificación requerida")]
         public string idUsuario { get; set; }
 
-
+        [Display(Name = "Contraseña")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Contraseña requerida")]
         [DataType(DataType.Password)]
         public string contrasenna { get; set; }
 
-        [Display(Name = "Remember Me")]
+        [Display(Name = "Recordar usuario")]
         public bool RememberMe { get; set; }
     }
 }

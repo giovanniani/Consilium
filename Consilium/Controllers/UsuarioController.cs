@@ -100,29 +100,33 @@ namespace Consilium.Controllers
             {
                 var v = dc.Logueo.Where(a => a.idUsuario == login.idUsuario).FirstOrDefault();
                 var u = dc.Usuario.Where(a => a.idUsuario == login.idUsuario).FirstOrDefault();
+                string texto = u.nombre + "&" + login.idUsuario + "&" + u.tipo;
+
                 if (v != null)
                 {
                     if (string.Compare(Crypto.Hash(login.contrasenna), v.contrasenna) == 0)
-                    {
+                    {   
                         int timeout = login.RememberMe ? 525600 : 20; //525600 min = 1 year
-                        var ticket = new FormsAuthenticationTicket(login.idUsuario, login.RememberMe, timeout);
+                        var ticket = new FormsAuthenticationTicket(texto, login.RememberMe, timeout);
+                        //var ticket = new FormsAuthenticationTicket(1, login.idUsuario, DateTime.Now, DateTime.Now, login.RememberMe, "Stefi");
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
                         cookie.HttpOnly = true;
                         Response.Cookies.Add(cookie);
-
+                        ViewBag.param = u.tipo;
+                        ViewBag.Nombre = u.nombre;
+                        if (u.tipo.ToString() == "2" || u.tipo.ToString() == "3")
+                        {                          
+                            return RedirectToAction("SolicitudRequest", "Solicitud", routeValues: new { id = u.tipo });
+                        }
                         if (u.TipoUsuario.idTipo.ToString() == "1")
                         {
-                            return RedirectToAction("SolicitudRequest", "Solicitud");
+                            return RedirectToAction("Index", "President", new { id = u.tipo });
                         }
-                        if (u.TipoUsuario.idTipo.ToString() == "2")
+                        if (u.TipoUsuario.idTipo.ToString() == "0")
                         {
-                            return RedirectToAction("Index", "President");
-                        }
-                        if (u.TipoUsuario.idTipo.ToString() == "3")
-                        {
-                            return RedirectToAction("Index", "Usuarios");
+                            return RedirectToAction("Index", "Usuarios", new { id = u.tipo });
                         }
                         
                     }

@@ -11,14 +11,19 @@ namespace Consilium.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class ProponenteXMocion
     {
+        [Display(Name = "ID Proponente")]
         public int idProponente { get; set; }
+        [Display(Name = "ID Moción")]
         public int idMocion { get; set; }
+        [Display(Name = "Identificación")]
         public string idUsuario { get; set; }
-    
+        [Display(Name = "Moción")]
+
         public virtual Mocion Mocion { get; set; }
+        [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
     }
 }
