@@ -15,10 +15,8 @@ namespace Consilium.Controllers
         private ConsiliumEntities db = new ConsiliumEntities();
 
         // GET: Usuarios
-        public ActionResult Index(int id, string nombre)
+        public ActionResult Index()
         {
-            ViewBag.param = id;
-            ViewBag.pNombre = nombre;
             var usuario = db.Usuario.Include(u => u.Logueo).Include(u => u.TipoUsuario);
             return View(usuario.ToList());
         }

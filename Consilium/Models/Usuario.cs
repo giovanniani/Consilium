@@ -77,7 +77,12 @@ namespace Consilium.Models
         public virtual ICollection<Punto> Punto { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
 
-        
+        public bool isSelected { get; set; }
+    }
+
+    public class UsuariosModelo
+    {
+        public List<Usuario> Usuarios { get; set; }
     }
 
 

@@ -118,15 +118,15 @@ namespace Consilium.Controllers
                         ViewBag.Nombre = u.nombre;
                         if (u.tipo.ToString() == "2" || u.tipo.ToString() == "3")
                         {                          
-                            return RedirectToAction("SolicitudRequest", "Solicitud", routeValues: new { id = u.tipo });
+                            return RedirectToAction("SolicitudRequest", "Solicitud");
                         }
                         if (u.TipoUsuario.idTipo.ToString() == "1")
                         {
-                            return RedirectToAction("Index", "President", new { id = u.tipo });
+                            return RedirectToAction("Index", "President");
                         }
                         if (u.TipoUsuario.idTipo.ToString() == "0")
                         {
-                            return RedirectToAction("Index", "Usuarios", new { id = u.tipo });
+                            return RedirectToAction("Index", "Usuarios");
                         }
                         
                     }

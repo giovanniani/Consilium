@@ -51,144 +51,154 @@
 
 <body>
     <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
-    <div id="content-container1">
-        <div id="content-container2">
-            <div id="content">
-                <div style="position: absolute; left: 70%; top: 50%; ">
-                    <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
-                </div>
-                <br /> <br />
-                <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros del Consejo</h2>
-
-                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-                {
-                    <div class="alert alert-success col-md-6">
-                        <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+    @if (HttpContext.Current.User.Identity.Name != "")
+    {
+        <div id="content-container1">
+            <div id="content-container2">
+                <div id="content">
+                    <div style="position: absolute; left: 70%; top: 50%; ">
+                        <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
-                }
-                else
-                {
-                    using (Html.BeginForm())
+                    <br /> <br />
+                    <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros del Consejo</h2>
+
+                    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
-                        @Html.AntiForgeryToken()
-                        <hr style="height:2px;width: 50% ;border:none;color:#333;background-color:#333;" />
-                        <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
-                            <table class="table" id="formatoTabla">
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.nombre)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.apellidoP)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.apellidoM)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.estado)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.correo)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.telefono)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.fechaInicio)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.fechaFin)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Logueo.nombreUsuario)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
-                                    </th>
-                                    <th></th>
-                                </tr>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.nombre)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.apellidoP)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.apellidoM)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.estado)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.correo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.telefono)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.fechaInicio)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.fechaFin)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Logueo.nombreUsuario)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
-                                            @Html.ActionLink("Ver", "Details", new { id = item.idUsuario }) |
-                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario })
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-
-
-
-
-
-
-
-                            <div class="form-group">
-                                <div>
-                                    @Html.ActionLink(">>>Crear nuevo miembro<<<", "Create")
-                                </div>
-                            </div>
-
+                        <div class="alert alert-success col-md-6">
+                            <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
                         </div>
-                        if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-danger col-md-6">
-                                <strong>¡Error!  </strong>@ViewBag.Message
-                            </div>
-                        }
                     }
+                    else
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <hr style="height:2px;width: 50% ;border:none;color:#333;background-color:#333;" />
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
+                                <table class="table" id="formatoTabla">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.apellidoP)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.apellidoM)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.estado)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.correo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.telefono)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.fechaInicio)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.fechaFin)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Logueo.nombreUsuario)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.apellidoP)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.apellidoM)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.estado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.correo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.telefono)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.fechaInicio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.fechaFin)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Logueo.nombreUsuario)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
+                                                @Html.ActionLink("Ver", "Details", new { id = item.idUsuario }) |
+                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario })
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
 
-                }
-                <br /> <br /><br />
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <div>
+                                        @Html.ActionLink(">>>Crear nuevo miembro<<<", "Create")
+                                    </div>
+                                </div>
+
+                            </div>
+                            if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger col-md-6">
+                                    <strong>¡Error!  </strong>@ViewBag.Message
+                                </div>
+                            }
+                        }
+
+                    }
+                    <br /> <br /><br />
+                </div>
             </div>
         </div>
-    </div>
-    @HttpContext.Current.User.Identity.Name
-    @{ string[] data = HttpContext.Current.User.Identity.Name.Split('&'); }
-    <div id="navigation-container">
-        <div id="navigation">
-            @if (data[2] == "0")
-            {
-                @Html.Partial("_menuSecretaria")
-            }
-            else if (data[2] == "1")
-            {
-                @Html.Partial("_menuPresidente")
-            }
+        string[] data = HttpContext.Current.User.Identity.Name.Split('&');
+        <div id="navigation-container">
+            <div id="navigation">
+                @if (data[2] == "0")
+                {
+                    @Html.Partial("_menuSecretaria")
+                }
+                else if (data[2] == "1")
+                {
+                    @Html.Partial("_menuPresidente")
+                }
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="alert alert-danger col-md-6">
+            <strong> ¡No tiene permiso de acceder a esta sección!</strong>@ViewBag.Message
+        </div>
+    }
+
+
 
 
 </body>

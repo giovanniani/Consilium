@@ -146,6 +146,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
+    <Compile Include="Controllers\ListaController.cs" />
     <Compile Include="Controllers\MiembroXComisionController.cs" />
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
@@ -334,6 +335,7 @@
     <Content Include="Views\MiembroXComision\Details.cshtml" />
     <Content Include="Views\MiembroXComision\Edit.cshtml" />
     <Content Include="Views\MiembroXComision\Index.cshtml" />
+    <Content Include="Views\Lista\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
