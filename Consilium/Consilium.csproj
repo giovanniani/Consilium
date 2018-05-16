@@ -336,6 +336,7 @@
     <Content Include="Views\MiembroXComision\Edit.cshtml" />
     <Content Include="Views\MiembroXComision\Index.cshtml" />
     <Content Include="Views\Lista\Index.cshtml" />
+    <Content Include="Views\Shared\_noAutorizado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

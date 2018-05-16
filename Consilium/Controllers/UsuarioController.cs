@@ -108,14 +108,11 @@ namespace Consilium.Controllers
                     {   
                         int timeout = login.RememberMe ? 525600 : 20; //525600 min = 1 year
                         var ticket = new FormsAuthenticationTicket(texto, login.RememberMe, timeout);
-                        //var ticket = new FormsAuthenticationTicket(1, login.idUsuario, DateTime.Now, DateTime.Now, login.RememberMe, "Stefi");
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
                         cookie.HttpOnly = true;
                         Response.Cookies.Add(cookie);
-                        ViewBag.param = u.tipo;
-                        ViewBag.Nombre = u.nombre;
                         if (u.tipo.ToString() == "2" || u.tipo.ToString() == "3")
                         {                          
                             return RedirectToAction("SolicitudRequest", "Solicitud");
@@ -152,6 +149,14 @@ namespace Consilium.Controllers
                 var v = dc.Usuario.Where(a => a.idUsuario == usuarioId).FirstOrDefault();
                 return v != null;
             }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Usuario");
         }
     }
 }

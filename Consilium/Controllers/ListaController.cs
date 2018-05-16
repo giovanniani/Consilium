@@ -15,10 +15,16 @@ namespace Consilium.Controllers
             UsuariosModelo usuario = new UsuariosModelo();
             using (ConsiliumEntities db = new ConsiliumEntities())
             {
-                usuario.Usuarios = db.Usuario.ToList<Usuario>();
+                usuario.Usuarios = db.Usuario.Where(e => e.estado == "1" && (e.tipo == 2 || e.tipo == 3)).ToList();
             }
 
             return View(usuario);
+        }
+        [HttpPost]
+        public ActionResult Index(UsuariosModelo usuario)
+        {
+            var usuariosSeleccionados = usuario.Usuarios.Where(x => x.isSelected == true).ToList<Usuario>();
+            return Content(String.Join("-", usuariosSeleccionados.Select(x => x.nombre)));
         }
     }
 }
