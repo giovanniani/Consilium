@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Consilium.Models.ResultadoPunto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.votosFavor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.votosContra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.votosNulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.votosAbstencion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resultado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idAgenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quorum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Punto.titulo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.votosFavor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.votosContra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.votosNulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.votosAbstencion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resultado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idAgenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quorum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Punto.titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idResultado }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idResultado }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idResultado })
+        </td>
+    </tr>
+}
+
+</table>

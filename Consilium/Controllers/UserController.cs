@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
 using System.Web.Security;
-
+/*
 namespace Consilium.Controllers
 {
     public class UserController : Controller
@@ -52,7 +52,7 @@ namespace Consilium.Controllers
                 user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword); //
                 #endregion
 
-                user.IsEmailVerified = false;
+                //user.IsEmailVerified = false;
 
                 #region Save to Data
                 using (ConsiliumEntities dc = new ConsiliumEntities())
@@ -157,7 +157,7 @@ namespace Consilium.Controllers
                             return Redirect(ReturnUrl);
                         }
                         else
-                        {*/
+                        {
                             if (v.MemberType == "Student")
                             {
                                 return RedirectToAction("SolicitudRequest", "Solicitud");
@@ -243,4 +243,4 @@ namespace Consilium.Controllers
     }
 
     
-}
+}*/

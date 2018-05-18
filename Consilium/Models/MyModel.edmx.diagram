@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a30c85e37e34e3ba1d9ad4bc415b907" Name="Diagram1" ZoomLevel="65">
-        <EntityTypeShape EntityType="ConsiliumModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="1a30c85e37e34e3ba1d9ad4bc415b907" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="ConsiliumModel.Request" Width="1.5" PointX="3.25" PointY="0.875" />
         <EntityTypeShape EntityType="ConsiliumModel.Justification" Width="1.5" PointX="5.625" PointY="1" />
         <EntityTypeShape EntityType="ConsiliumModel.Motion" Width="1.5" PointX="7.375" PointY="1" />
@@ -16,13 +15,10 @@
         <EntityTypeShape EntityType="ConsiliumModel.Justificacion" Width="1.5" PointX="9" PointY="33.875" />
         <EntityTypeShape EntityType="ConsiliumModel.Logueo" Width="1.5" PointX="9" PointY="31.25" />
         <EntityTypeShape EntityType="ConsiliumModel.MiembroXComision" Width="1.5" PointX="9" PointY="15.25" />
-        <EntityTypeShape EntityType="ConsiliumModel.MiembroXQuorum" Width="1.5" PointX="9" PointY="21.375" />
         <EntityTypeShape EntityType="ConsiliumModel.Mocion" Width="1.5" PointX="14.25" PointY="20.75" />
         <EntityTypeShape EntityType="ConsiliumModel.ProponenteXMocion" Width="1.5" PointX="9" PointY="18.375" />
         <EntityTypeShape EntityType="ConsiliumModel.Punto" Width="1.5" PointX="12" PointY="17.625" />
         <EntityTypeShape EntityType="ConsiliumModel.PuntoXAgenda" Width="1.5" PointX="17.25" PointY="18.375" />
-        <EntityTypeShape EntityType="ConsiliumModel.Quorum" Width="1.5" PointX="12" PointY="14.25" />
-        <EntityTypeShape EntityType="ConsiliumModel.ResultadoPunto" Width="1.5" PointX="14.25" PointY="16.625" />
         <EntityTypeShape EntityType="ConsiliumModel.Sesion" Width="1.5" PointX="4.5" PointY="13.75" />
         <EntityTypeShape EntityType="ConsiliumModel.Solicitud" Width="1.5" PointX="14.25" PointY="26.375" />
         <EntityTypeShape EntityType="ConsiliumModel.sysdiagrams" Width="1.5" PointX="12.25" PointY="0.875" />
@@ -37,19 +33,20 @@
         <AssociationConnector Association="ConsiliumModel.FK_Justificacion_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_Logueo_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXComision_Usuario" />
-        <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Quorum" />
-        <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_Mocion_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Mocion" />
         <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_Punto_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_PuntoXAgenda_Punto" />
-        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" />
-        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Quorum" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" />
         <AssociationConnector Association="ConsiliumModel.FK_Usuario_TipoUsuario" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_Agenda" />
+        <EntityTypeShape EntityType="ConsiliumModel.MiembroXSesion" Width="1.5" PointX="12" PointY="10.625" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Usuario1" />
+        <AssociationConnector Association="ConsiliumModel.FK_MiembroXSesion_Sesion" />
+        <EntityTypeShape EntityType="ConsiliumModel.ResultadoPunto" Width="1.5" PointX="14.25" PointY="9" />
+        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

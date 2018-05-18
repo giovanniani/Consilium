@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
+using Consilium.Models.Extended;
 
 namespace Consilium.Controllers
 {
@@ -127,6 +128,40 @@ namespace Consilium.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Active(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Sesion sesion = db.Sesion.Find(id);
+            
+            if (sesion == null)
+            {
+                return HttpNotFound();
+            }
+            SesionActiva sesionActiva = new SesionActiva();
+            sesionActiva.idSesion = sesion.idSesion;
+            
+            var u = db.PuntoXAgenda.Where(a => a.idAgenda == sesion.idAgenda);
+            sesionActiva.Puntos = u.ToList();
+            sesionActiva.quorum = 0;
+                
+            var p = db.getPunto(sesionActiva.Puntos[0].idPunto);
+                /*for (int i = 0; i < sesionActiva.Puntos.Count; i++)
+                {
+                    var o = dc.getPunto(sesionActiva.Puntos[i].idPunto);
+                }*/
+            
+
+            
+            
+
+            
+
+            return View(sesionActiva);
         }
     }
 }

@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -152,6 +155,9 @@
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
     <Compile Include="Controllers\PuntoXAgendaController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\ResultadoPuntoesController.cs" />
+    <Compile Include="Controllers\SesionActivaController.cs" />
     <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -176,9 +182,16 @@
     <Compile Include="Models\Extended\Justificacion.cs" />
     <Compile Include="Models\Extended\PuntoNuevo.cs" />
     <Compile Include="Models\Extended\Request.cs" />
+    <Compile Include="Models\Extended\SesionActiva.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario.cs" />
+    <Compile Include="Models\getPuntosSesion_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getPunto_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Justificacion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -191,7 +204,7 @@
     <Compile Include="Models\MiembroXComision.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MiembroXQuorum.cs">
+    <Compile Include="Models\MiembroXSesion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mocion.cs">
@@ -224,9 +237,6 @@
     <Compile Include="Models\PuntoXAgenda.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Quorum.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Request.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -248,14 +258,17 @@
     <Compile Include="Models\TipoUsuario.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CrystalReports\Reporte2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reporte2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -337,6 +350,13 @@
     <Content Include="Views\MiembroXComision\Index.cshtml" />
     <Content Include="Views\Lista\Index.cshtml" />
     <Content Include="Views\Shared\_noAutorizado.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
+    <Content Include="Views\Sesion\Active.cshtml" />
+    <Content Include="Views\ResultadoPuntoes\Create.cshtml" />
+    <Content Include="Views\ResultadoPuntoes\Delete.cshtml" />
+    <Content Include="Views\ResultadoPuntoes\Details.cshtml" />
+    <Content Include="Views\ResultadoPuntoes\Edit.cshtml" />
+    <Content Include="Views\ResultadoPuntoes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -346,9 +366,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\archivosPDF\" />
+    <Folder Include="Views\SesionActiva\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CrystalReports\Reporte2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reporte2.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

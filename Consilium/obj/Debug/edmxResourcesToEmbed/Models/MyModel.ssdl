@@ -71,13 +71,14 @@
     <Property Name="idComisionXSesion" Type="int" Nullable="false" />
     <Property Name="tipoMiembro" Type="nvarchar" MaxLength="30" Nullable="false" />
   </EntityType>
-  <EntityType Name="MiembroXQuorum">
+  <EntityType Name="MiembroXSesion">
     <Key>
       <PropertyRef Name="idMiembroXQuorum" />
     </Key>
     <Property Name="idMiembroXQuorum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
-    <Property Name="idQuorum" Type="int" />
+    <Property Name="idSesion" Type="int" />
+    <Property Name="presente" Type="bit" />
   </EntityType>
   <EntityType Name="Mocion">
     <Key>
@@ -129,15 +130,6 @@
     <Property Name="idAgenda" Type="int" />
     <Property Name="idPunto" Type="int" />
   </EntityType>
-  <EntityType Name="Quorum">
-    <Key>
-      <PropertyRef Name="idQuorum" />
-    </Key>
-    <Property Name="idQuorum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idSesion" Type="int" Nullable="false" />
-    <Property Name="numQuorum" Type="int" Nullable="false" />
-    <Property Name="fecha" Type="datetime" Nullable="false" />
-  </EntityType>
   <EntityType Name="Request">
     <Key>
       <PropertyRef Name="Id" />
@@ -160,11 +152,11 @@
     <Property Name="votosFavor" Type="int" Nullable="false" />
     <Property Name="votosContra" Type="int" Nullable="false" />
     <Property Name="votosNulo" Type="int" Nullable="false" />
-    <Property Name="votosAbstencion" Type="int" Nullable="false" />
+    <Property Name="votosAbstencion" Type="int" />
     <Property Name="resultado" Type="nvarchar" MaxLength="25" Nullable="false" />
     <Property Name="idAgenda" Type="int" Nullable="false" />
     <Property Name="idPunto" Type="int" Nullable="false" />
-    <Property Name="idQuorum" Type="int" Nullable="false" />
+    <Property Name="quorum" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Sesion">
     <Key>
@@ -211,21 +203,6 @@
     <Property Name="idTipo" Type="int" Nullable="false" />
     <Property Name="nombre" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="UserID" />
-    </Key>
-    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-    <Property Name="EmailID" Type="varchar" MaxLength="254" />
-    <Property Name="Password" Type="nvarchar(max)" />
-    <Property Name="IsEmailVerified" Type="bit" />
-    <Property Name="ActivationCode" Type="uniqueidentifier" />
-    <Property Name="MemberType" Type="varchar" MaxLength="15" />
-    <Property Name="Identification" Type="varchar" MaxLength="30" />
-    <Property Name="Phone" Type="varchar" MaxLength="15" />
-  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="idUsuario" />
@@ -266,7 +243,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Justificacion_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Justificacion" Type="Self.Justificacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
@@ -317,27 +296,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MiembroXQuorum_Quorum">
-    <End Role="Quorum" Type="Self.Quorum" Multiplicity="0..1" />
-    <End Role="MiembroXQuorum" Type="Self.MiembroXQuorum" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Quorum">
-        <PropertyRef Name="idQuorum" />
-      </Principal>
-      <Dependent Role="MiembroXQuorum">
-        <PropertyRef Name="idQuorum" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_MiembroXQuorum_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="MiembroXQuorum" Type="Self.MiembroXQuorum" Multiplicity="*" />
+    <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
         <PropertyRef Name="idUsuario" />
       </Principal>
-      <Dependent Role="MiembroXQuorum">
+      <Dependent Role="MiembroXSesion">
         <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MiembroXSesion_Sesion">
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="0..1" />
+    <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sesion">
+        <PropertyRef Name="idSesion" />
+      </Principal>
+      <Dependent Role="MiembroXSesion">
+        <PropertyRef Name="idSesion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -390,7 +369,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Punto_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Punto" Type="Self.Punto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
@@ -414,7 +395,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PuntoXAgenda_Punto">
-    <End Role="Punto" Type="Self.Punto" Multiplicity="0..1" />
+    <End Role="Punto" Type="Self.Punto" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="PuntoXAgenda" Type="Self.PuntoXAgenda" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Punto">
@@ -434,18 +417,6 @@
       </Principal>
       <Dependent Role="ResultadoPunto">
         <PropertyRef Name="idPunto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ResultadoPunto_Quorum">
-    <End Role="Quorum" Type="Self.Quorum" Multiplicity="1" />
-    <End Role="ResultadoPunto" Type="Self.ResultadoPunto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Quorum">
-        <PropertyRef Name="idQuorum" />
-      </Principal>
-      <Dependent Role="ResultadoPunto">
-        <PropertyRef Name="idQuorum" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -474,7 +445,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Solicitud_Punto">
-    <End Role="Punto" Type="Self.Punto" Multiplicity="0..1" />
+    <End Role="Punto" Type="Self.Punto" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Punto">
@@ -497,6 +470,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getMiembrosXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPunto" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPuntosSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="updateMiembroXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+    <Parameter Name="isSelected" Type="bit" Mode="In" />
+  </Function>
   <EntityContainer Name="ConsiliumModelStoreContainer">
     <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
@@ -506,13 +494,12 @@
     <EntitySet Name="Justification" EntityType="Self.Justification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Logueo" EntityType="Self.Logueo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiembroXComision" EntityType="Self.MiembroXComision" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="MiembroXQuorum" EntityType="Self.MiembroXQuorum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MiembroXSesion" EntityType="Self.MiembroXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mocion" EntityType="Self.Mocion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProponenteXMocion" EntityType="Self.ProponenteXMocion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Punto" EntityType="Self.Punto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PuntoXAgenda" EntityType="Self.PuntoXAgenda" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Quorum" EntityType="Self.Quorum" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResultadoPunto" EntityType="Self.ResultadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
@@ -520,7 +507,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
       <End Role="Comision" EntitySet="Comision" />
@@ -546,13 +532,13 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="MiembroXComision" EntitySet="MiembroXComision" />
     </AssociationSet>
-    <AssociationSet Name="FK_MiembroXQuorum_Quorum" Association="Self.FK_MiembroXQuorum_Quorum">
-      <End Role="Quorum" EntitySet="Quorum" />
-      <End Role="MiembroXQuorum" EntitySet="MiembroXQuorum" />
-    </AssociationSet>
     <AssociationSet Name="FK_MiembroXQuorum_Usuario" Association="Self.FK_MiembroXQuorum_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="MiembroXQuorum" EntitySet="MiembroXQuorum" />
+      <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="Self.FK_MiembroXSesion_Sesion">
+      <End Role="Sesion" EntitySet="Sesion" />
+      <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
     </AssociationSet>
     <AssociationSet Name="FK_Mocion_Punto" Association="Self.FK_Mocion_Punto">
       <End Role="Punto" EntitySet="Punto" />
@@ -584,10 +570,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_ResultadoPunto_Punto" Association="Self.FK_ResultadoPunto_Punto">
       <End Role="Punto" EntitySet="Punto" />
-      <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ResultadoPunto_Quorum" Association="Self.FK_ResultadoPunto_Quorum">
-      <End Role="Quorum" EntitySet="Quorum" />
       <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
     </AssociationSet>
     <AssociationSet Name="FK_Sesion_Agenda" Association="Self.FK_Sesion_Agenda">
