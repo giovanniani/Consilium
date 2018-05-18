@@ -108,6 +108,8 @@ namespace Consilium.Models
     public class UsuariosModelo
     {
         public List<Usuario> Usuarios { get; set; }
+
+        public int? sesion { get; set; }
     }
 
 }

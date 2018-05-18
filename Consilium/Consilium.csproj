@@ -357,6 +357,8 @@
     <Content Include="Views\ResultadoPuntoes\Details.cshtml" />
     <Content Include="Views\ResultadoPuntoes\Edit.cshtml" />
     <Content Include="Views\ResultadoPuntoes\Index.cshtml" />
+    <Content Include="Views\Sesion\Vote.cshtml" />
+    <Content Include="Views\Sesion\Lista.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

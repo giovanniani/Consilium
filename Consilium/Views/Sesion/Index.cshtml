@@ -1,46 +1,46 @@
 ﻿@model IEnumerable<Consilium.Models.Sesion>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Consilium - Miembros del Consejo</title>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
-	<link href="~/Content/encabezado.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="~/Content/w3.css">
-	<script src="~/Scripts/modernizr-2.6.2.js"></script>
-	<style>
-		#formatoTabla {
-			font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			border-collapse: collapse;
-			width: 100%;
-		}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consilium - Miembros del Consejo</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/encabezado.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/w3.css">
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <style>
+        #formatoTabla {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-			#formatoTabla td, #formatoTabla th {
-				border: 1px solid #ddd;
-				padding: 8px;
-			}
+            #formatoTabla td, #formatoTabla th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
 
-			#formatoTabla tr:nth-child(even) {
-				background-color: #f2f2f2;
-			}
+            #formatoTabla tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
 
-			#formatoTabla tr:hover {
-				background-color: #ddd;
-			}
+            #formatoTabla tr:hover {
+                background-color: #ddd;
+            }
 
-			#formatoTabla th {
-				padding-top: 12px;
-				padding-bottom: 12px;
-				text-align: left;
-				background-color: #000000;
-				color: white;
-			}
-	</style>
+            #formatoTabla th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #000000;
+                color: white;
+            }
+    </style>
 
 
 </head>
@@ -50,102 +50,97 @@
 
 
 <body>
-	<div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
-	<div id="content-container1">
-		<div id="content-container2">
-			<div id="content">
-				<div style="position: absolute; left: 70%; top: 50%; ">
-					<img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
-				</div>
-				<br /> <br />
-				<h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sesiones</h2>
+    <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
+    <div id="content-container1">
+        <div id="content-container2">
+            <div id="content">
+                <div style="position: absolute; left: 70%; top: 50%; ">
+                    <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
+                </div>
+                <br /> <br />
+                <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Sesiones</h2>
 
 
-				@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-				{
-					<div class="alert alert-success col-md-6">
-						<strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
-					</div>
-				}
-				else
-				{
-					using (Html.BeginForm())
-					{
-						@Html.AntiForgeryToken()
-						<hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
-						<div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
-							<table class="table" id="formatoTabla">
-							<tr>
-								<th>
-									@Html.DisplayNameFor(model => model.fecha)
-								</th>
-								<th>
-									@Html.DisplayNameFor(model => model.idAgenda)
-								</th>
-								<th>
-									@Html.DisplayNameFor(model => model.documento)
-								</th>
-								<th>
-									@Html.DisplayNameFor(model => model.TipoSesion.nombre)
-								</th>
-								<th></th>
-							</tr>
+                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+                {
+                    <div class="alert alert-success col-md-6">
+                        <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
+                        <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
+                            <table class="table" id="formatoTabla">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.fecha)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.idAgenda)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.documento)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TipoSesion.nombre)
+                                    </th>
+                                    <th></th>
+                                </tr>
 
-						@foreach (var item in Model) {
-							<tr>
-								<td>
-									@Html.DisplayFor(modelItem => item.fecha)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.idAgenda)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.documento)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.TipoSesion.nombre)
-								</td>
-								<td>
-									@Html.ActionLink("Editar", "Edit", new { id = item.idSesion }) |
-									@Html.ActionLink("Detalles", "Details", new { id = item.idSesion }) |
-									@Html.ActionLink("Eliminar", "Delete", new { id = item.idSesion }) |
-									@Html.ActionLink("Iniciar", "Active", new { id = item.idSesion })
-								</td>
-							</tr>
-						}
-							</table>
-							<div class="form-group">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fecha)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.idAgenda)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.documento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TipoSesion.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "Edit", new { id = item.idSesion }) |
+                                            @Html.ActionLink("Detalles", "Details", new { id = item.idSesion }) |
+                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idSesion }) |
+                                            @Html.ActionLink("Iniciar", "Active", new { id = item.idSesion })
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <div class="form-group">
 
-								<div>
-									@Html.ActionLink(">>>Crear Sesión<<<", "Create")
-								</div>
+                                <div>
+                                    @Html.ActionLink(">>>Crear Sesión<<<", "Create")
+                                </div>
 
-							</div>
-						</div>
-						if (ViewBag.Message != null)
-						{
-							<div class="alert alert-danger col-md-6">
-								<strong>¡Error!  </strong>@ViewBag.Message
-							</div>
-						}
-					}
+                            </div>
+                        </div>
+                        if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-danger col-md-6">
+                                <strong>¡Error!  </strong>@ViewBag.Message
+                            </div>
+                        }
+                    }
 
-				}
-				<br /> <br /><br />
-			</div>
-		</div>
-	</div>
+                }
+                <br /> <br /><br />
+            </div>
+        </div>
+    </div>
 
-	<div id="navigation-container">
-		<div id="navigation">
-			@if (ViewBag.param == 0)
-			 {
-				@Html.Partial("_menuSecretaria")
-			 }
-			 else if(ViewBag.param==1) {
-				@Html.Partial("_menuPresidente") 
-			 }
-		</div>
-	</div>
+    <div id="navigation-container">
+        <div id="navigation">
+            @Html.Partial("_menuSecretaria")
+        </div>
+    </div>
 
 </body>

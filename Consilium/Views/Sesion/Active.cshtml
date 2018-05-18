@@ -51,23 +51,24 @@
                                     <th></th>
                                 </tr>
                                 @foreach (var item in Model.Puntos)
-                                {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.idPunto)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Punto.titulo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Punto.EstadoPunto.nombre)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Votar", "Vote", new { id = item.idPunto }) |
-                                    </td>
-                                </tr>
-                                }
+        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idPunto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Punto.titulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Punto.EstadoPunto.nombre)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Votar", "Vote", new { id = item.Punto.idPunto })
+                            </td>
+                        </tr>
+}
                             </table>
+                            @Html.ActionLink("Lista", "Lista", new { id = Model.idSesion })
                         </div>
                         if (ViewBag.Message != null)
                         {
@@ -84,14 +85,7 @@
     </div>
     <div id="navigation-container">
         <div id="navigation">
-            @if (ViewBag.param == 0)
-            {
-                @Html.Partial("_menuSecretaria")
-            }
-            else if (ViewBag.param == 1)
-            {
-                @Html.Partial("_menuPresidente")
-            }
+            @Html.Partial("_menuSecretaria")
         </div>
     </div>
 </body>

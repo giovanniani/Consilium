@@ -21,13 +21,6 @@ namespace Consilium.Controllers
 
             return View(usuario);
         }
-        /*
-        [HttpPost]
-        public ActionResult Index(UsuariosModelo usuario)
-        {
-            var usuariosSeleccionados = usuario.Usuarios.Where(x => x.isSelected == true).ToList<Usuario>();
-            return Content(String.Join("-", usuariosSeleccionados.Select(x => x.nombre)));
-        }*/
 
         [HttpPost]
         public ActionResult Index(UsuariosModelo usuario)
@@ -60,12 +53,9 @@ namespace Consilium.Controllers
                     }
                 
 
-                //miembro.Add(new MiembroXSesion(usuario.Usuarios[i].idUsuario, '1', usuario.Usuarios[i].isSelected));
             }
             
 
-            //ViewBag.idUsuario = new SelectList(db.Logueo, "idUsuario", "nombreUsuario", usuario.idUsuario);
-            //ViewBag.tipo = new SelectList(db.TipoUsuario, "idTipo", "nombre", usuario.tipo);
             return View(usuario);
         }
     }
