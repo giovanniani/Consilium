@@ -1,0 +1,127 @@
+﻿@model Consilium.Models.Justification
+@{
+    ViewBag.Title = "JustificationRequest";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <div id="header">@Html.Partial("_vistaLogin")</div>
+
+    <div id="content-container1">
+        <div id="content-container2">
+            <div id="content">
+                <br /> <br />
+
+
+                <h2>Ingresar justificación de sesión</h2>
+                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+                {
+                    <div class="alert alert-success">
+                        <strong> Éxito!   </strong>@ViewBag.Message
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.idMember,"Cédula", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.idMember, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.idMember, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.date,"Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.about,"Asunto", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.about, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.about, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.body,"Justificación", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.body, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Enviar" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+
+
+
+
+                <br /> <br /><br />
+            </div>
+        </div>
+    </div>
+
+    <div id="navigation-container">
+        <div id="navigation">
+            @Html.Partial("_menuMiembros")
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div>
+        @Html.ActionLink("Volver", "Index")
+    </div>
+
+
+
+    <div id="footer"><p style="color:white" align="center">Sistema Consilium</p></div>
+
+
+</body>
+
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
