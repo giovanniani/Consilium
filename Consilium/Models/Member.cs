@@ -15,18 +15,20 @@ namespace Consilium.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Justification
+public partial class Member
 {
 
-    public int idJustication { get; set; }
+    public string Identification { get; set; }
 
-    public string idMember { get; set; }
+    public string Name { get; set; }
 
-    public Nullable<System.DateTime> date { get; set; }
+    public string Lastname { get; set; }
 
-    public string about { get; set; }
+    public byte[] Phone { get; set; }
 
-    public string body { get; set; }
+    public string Email { get; set; }
+
+    public string Type { get; set; }
 
 }
 

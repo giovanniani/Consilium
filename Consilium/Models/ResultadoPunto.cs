@@ -28,11 +28,11 @@ public partial class ResultadoPunto
 
     public int votosNulo { get; set; }
 
-    public Nullable<int> votosAbstencion { get; set; }
+    public int votosAbstencion { get; set; }
 
     public string resultado { get; set; }
 
-    public int idAgenda { get; set; }
+    public int idSesion { get; set; }
 
     public int idPunto { get; set; }
 

@@ -19,7 +19,7 @@ namespace Consilium.Controllers
         // GET: Sesion
         public ActionResult Index()
         {
-            var sesion = db.Sesion.Include(s => s.TipoSesion);
+            var sesion = db.Sesion.Include(s => s.TipoSesion);            
             return View(sesion.ToList());
         }
 
@@ -148,28 +148,45 @@ namespace Consilium.Controllers
 
             var u = db.PuntoXAgenda.Where(a => a.idAgenda == sesion.idAgenda);
             sesionActiva.Puntos = u.ToList();
-            sesionActiva.quorum = 0;
+            sesionActiva.quorum = 1;
 
             return View(sesionActiva);
         }
 
-        public ActionResult Vote(int? id)
+        public ActionResult Vote(int? id, int quorum)
         {
             ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
-            return View();
+            var p = db.PuntoXAgenda.Where(a => a.idPunto == id).FirstOrDefault();
+            var q = db.Sesion.Where(c => c.idAgenda == p.idAgenda).FirstOrDefault();         
+            var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
+            rs.quorum = quorum;
+            rs.idSesion = q.idSesion;
+            return View(rs);
         }
 
         // POST: ResultadoPuntoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Vote([Bind(Include = "idResultado,fecha,votosFavor,votosContra,votosNulo,votosAbstencion,resultado,idAgenda,idPunto,idQuorum")] ResultadoPunto resultadoPunto)
+        public ActionResult Vote([Bind(Include = "idResultado,fecha,votosFavor,votosContra,votosNulo,votosAbstencion,resultado,idSesion,idPunto,quorum")] ResultadoPunto resultadoPunto)
         {
             if (ModelState.IsValid)
             {
-                db.ResultadoPunto.Add(resultadoPunto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var m = db.Punto.Where(r => r.idPunto == resultadoPunto.idPunto).FirstOrDefault();
+                resultadoPunto.quorum = resultadoPunto.votosContra + resultadoPunto.votosFavor + resultadoPunto.votosNulo + resultadoPunto.votosAbstencion;
+                if (m.idEstado == 2)
+                {
+                    db.updateResultadoPunto(resultadoPunto.idPunto, resultadoPunto.votosFavor,
+                        resultadoPunto.votosContra, resultadoPunto.votosAbstencion, resultadoPunto.votosNulo,
+                        resultadoPunto.quorum, resultadoPunto.resultado);                
+                }
+                else
+                {
+                    db.ResultadoPunto.Add(resultadoPunto);
+                    db.SaveChanges();
+                    db.votePunto(resultadoPunto.idPunto, 2);
+                }
+                return RedirectToAction("ACTIVE", new { id = resultadoPunto.idSesion });
             }
 
             ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", resultadoPunto.idPunto);
@@ -183,7 +200,18 @@ namespace Consilium.Controllers
             using (ConsiliumEntities db = new ConsiliumEntities())
             {
                 usuario.Usuarios = db.Usuario.Where(e => e.estado == "1" && (e.tipo == 2 || e.tipo == 3)).ToList();
-                usuario.sesion = id;
+                usuario.sesion = id.GetValueOrDefault();
+            }
+            var u = db.MiembroXSesion.Where(a => a.idSesion == id).ToList();
+            for(int i = 0; i < u.Count; i++)
+            {
+                for(int j = 0; j < usuario.Usuarios.Count; j++)
+                {
+                    if(u[i].idUsuario == usuario.Usuarios[j].idUsuario)
+                    {
+                        usuario.Usuarios[j].isSelected = u[i].presente;
+                    }
+                }
             }
             ViewBag.idSesion = id;
             sesionId = id.HasValue ? id : 1;
@@ -198,10 +226,6 @@ namespace Consilium.Controllers
 
             for (int i = 0; i < usuario.Usuarios.Count; i++)
             {
-                //var m = db.Logueo.Where(a => a.idUsuario == login.idUsuario).FirstOrDefault();
-
-                /*var m = db.MiembroXSesion.Where(a => a.idUsuario == usuario.Usuarios[i].idUsuario &&
-                a.idSesion == 1).FirstOrDefault();**/
                 var m = db.getMiembrosXSesion(usuario.Usuarios[i].idUsuario, 1);
 
                 if (m.Count() == 0)

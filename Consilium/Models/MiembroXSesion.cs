@@ -22,9 +22,9 @@ public partial class MiembroXSesion
 
     public string idUsuario { get; set; }
 
-    public Nullable<int> idSesion { get; set; }
+    public int idSesion { get; set; }
 
-    public Nullable<bool> presente { get; set; }
+    public bool presente { get; set; }
 
 
 

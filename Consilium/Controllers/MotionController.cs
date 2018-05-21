@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
 
-
+/*
 namespace Consilium.Controllers
 {
     public class MotionController : Controller
@@ -55,4 +55,4 @@ namespace Consilium.Controllers
             return View(motion);
         }
     }
-}
+}*/

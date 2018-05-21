@@ -30,7 +30,7 @@
     <Key>
       <PropertyRef Name="idEstado" />
     </Key>
-    <Property Name="idEstado" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
     <Property Name="nombre" Type="nvarchar" MaxLength="25" />
   </EntityType>
   <EntityType Name="Justificacion">
@@ -44,16 +44,6 @@
     <Property Name="texto" Type="nvarchar" MaxLength="500" />
     <Property Name="estado" Type="nvarchar" MaxLength="25" />
   </EntityType>
-  <EntityType Name="Justification">
-    <Key>
-      <PropertyRef Name="idJustication" />
-    </Key>
-    <Property Name="idJustication" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idMember" Type="varchar" MaxLength="30" />
-    <Property Name="date" Type="date" />
-    <Property Name="about" Type="varchar" MaxLength="50" />
-    <Property Name="body" Type="varchar" MaxLength="350" />
-  </EntityType>
   <EntityType Name="Logueo">
     <Key>
       <PropertyRef Name="idUsuario" />
@@ -61,6 +51,21 @@
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="nombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="contrasenna" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="Identification" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Lastname" />
+    </Key>
+    <Property Name="Identification" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varbinary" MaxLength="20" />
+    <Property Name="Email" Type="nchar" MaxLength="10" />
+    <Property Name="Type" Type="nvarchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="MiembroXComision">
     <Key>
@@ -76,9 +81,9 @@
       <PropertyRef Name="idMiembroXQuorum" />
     </Key>
     <Property Name="idMiembroXQuorum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
-    <Property Name="idSesion" Type="int" />
-    <Property Name="presente" Type="bit" />
+    <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="idSesion" Type="int" Nullable="false" />
+    <Property Name="presente" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Mocion">
     <Key>
@@ -88,17 +93,6 @@
     <Property Name="idPunto" Type="int" />
     <Property Name="punto" Type="nvarchar(max)" />
     <Property Name="propuesta" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="Motion">
-    <Key>
-      <PropertyRef Name="idMotion" />
-    </Key>
-    <Property Name="idMotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Tittle" Type="varchar" MaxLength="50" />
-    <Property Name="Date" Type="date" />
-    <Property Name="member" Type="varchar" MaxLength="50" />
-    <Property Name="Proponentes" Type="varchar" MaxLength="50" />
-    <Property Name="Propuesta" Type="varchar" MaxLength="350" />
   </EntityType>
   <EntityType Name="ProponenteXMocion">
     <Key>
@@ -130,19 +124,6 @@
     <Property Name="idAgenda" Type="int" />
     <Property Name="idPunto" Type="int" />
   </EntityType>
-  <EntityType Name="Request">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="date" />
-    <Property Name="Name" Type="varchar" MaxLength="50" />
-    <Property Name="MemberName" Type="varchar" MaxLength="50" />
-    <Property Name="MemberId" Type="varchar" MaxLength="50" />
-    <Property Name="Considerations" Type="varchar" MaxLength="200" />
-    <Property Name="Results" Type="varchar" MaxLength="200" />
-    <Property Name="Agreements" Type="varchar" MaxLength="200" />
-  </EntityType>
   <EntityType Name="ResultadoPunto">
     <Key>
       <PropertyRef Name="idResultado" />
@@ -152,9 +133,9 @@
     <Property Name="votosFavor" Type="int" Nullable="false" />
     <Property Name="votosContra" Type="int" Nullable="false" />
     <Property Name="votosNulo" Type="int" Nullable="false" />
-    <Property Name="votosAbstencion" Type="int" />
+    <Property Name="votosAbstencion" Type="int" Nullable="false" />
     <Property Name="resultado" Type="nvarchar" MaxLength="25" Nullable="false" />
-    <Property Name="idAgenda" Type="int" Nullable="false" />
+    <Property Name="idSesion" Type="int" Nullable="false" />
     <Property Name="idPunto" Type="int" Nullable="false" />
     <Property Name="quorum" Type="int" Nullable="false" />
   </EntityType>
@@ -297,7 +278,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_MiembroXQuorum_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
@@ -309,7 +290,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_MiembroXSesion_Sesion">
-    <End Role="Sesion" Type="Self.Sesion" Multiplicity="0..1" />
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
     <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sesion">
@@ -485,22 +466,32 @@
     <Parameter Name="idSesion" Type="int" Mode="In" />
     <Parameter Name="isSelected" Type="bit" Mode="In" />
   </Function>
+  <Function Name="updateResultadoPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPunto" Type="int" Mode="In" />
+    <Parameter Name="votosFavor" Type="int" Mode="In" />
+    <Parameter Name="votosContra" Type="int" Mode="In" />
+    <Parameter Name="votosAbstencion" Type="int" Mode="In" />
+    <Parameter Name="votosNulo" Type="int" Mode="In" />
+    <Parameter Name="quorum" Type="int" Mode="In" />
+    <Parameter Name="resultado" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="votePunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPunto" Type="int" Mode="In" />
+    <Parameter Name="estadoPunto" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="ConsiliumModelStoreContainer">
     <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComisionXSesion" EntityType="Self.ComisionXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoPunto" EntityType="Self.EstadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Justificacion" EntityType="Self.Justificacion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Justification" EntityType="Self.Justification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Logueo" EntityType="Self.Logueo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiembroXComision" EntityType="Self.MiembroXComision" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiembroXSesion" EntityType="Self.MiembroXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mocion" EntityType="Self.Mocion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProponenteXMocion" EntityType="Self.ProponenteXMocion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Punto" EntityType="Self.Punto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PuntoXAgenda" EntityType="Self.PuntoXAgenda" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResultadoPunto" EntityType="Self.ResultadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
@@ -508,6 +499,16 @@
     <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Member].[Identification] AS [Identification], 
+    [Member].[Name] AS [Name], 
+    [Member].[Lastname] AS [Lastname], 
+    [Member].[Phone] AS [Phone], 
+    [Member].[Email] AS [Email], 
+    [Member].[Type] AS [Type]
+    FROM [dbo].[Member] AS [Member]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
       <End Role="Comision" EntitySet="Comision" />
       <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />

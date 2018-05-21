@@ -35,12 +35,6 @@ public partial class ConsiliumEntities : DbContext
     }
 
 
-    public virtual DbSet<Request> Request { get; set; }
-
-    public virtual DbSet<Justification> Justification { get; set; }
-
-    public virtual DbSet<Motion> Motion { get; set; }
-
     public virtual DbSet<Agenda> Agenda { get; set; }
 
     public virtual DbSet<Comision> Comision { get; set; }
@@ -55,6 +49,8 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<MiembroXComision> MiembroXComision { get; set; }
 
+    public virtual DbSet<MiembroXSesion> MiembroXSesion { get; set; }
+
     public virtual DbSet<Mocion> Mocion { get; set; }
 
     public virtual DbSet<ProponenteXMocion> ProponenteXMocion { get; set; }
@@ -62,6 +58,8 @@ public partial class ConsiliumEntities : DbContext
     public virtual DbSet<Punto> Punto { get; set; }
 
     public virtual DbSet<PuntoXAgenda> PuntoXAgenda { get; set; }
+
+    public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
 
     public virtual DbSet<Sesion> Sesion { get; set; }
 
@@ -75,9 +73,7 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-    public virtual DbSet<MiembroXSesion> MiembroXSesion { get; set; }
-
-    public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
+    public virtual DbSet<Member> Member { get; set; }
 
 
     public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)
@@ -140,6 +136,65 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPunto_Result>("getPunto", idPuntoParameter);
+    }
+
+
+    public virtual int votePunto(Nullable<int> idPunto, Nullable<int> estadoPunto)
+    {
+
+        var idPuntoParameter = idPunto.HasValue ?
+            new ObjectParameter("idPunto", idPunto) :
+            new ObjectParameter("idPunto", typeof(int));
+
+
+        var estadoPuntoParameter = estadoPunto.HasValue ?
+            new ObjectParameter("estadoPunto", estadoPunto) :
+            new ObjectParameter("estadoPunto", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("votePunto", idPuntoParameter, estadoPuntoParameter);
+    }
+
+
+    public virtual int updateResultadoPunto(Nullable<int> idPunto, Nullable<int> votosFavor, Nullable<int> votosContra, Nullable<int> votosAbstencion, Nullable<int> votosNulo, Nullable<int> quorum, string resultado)
+    {
+
+        var idPuntoParameter = idPunto.HasValue ?
+            new ObjectParameter("idPunto", idPunto) :
+            new ObjectParameter("idPunto", typeof(int));
+
+
+        var votosFavorParameter = votosFavor.HasValue ?
+            new ObjectParameter("votosFavor", votosFavor) :
+            new ObjectParameter("votosFavor", typeof(int));
+
+
+        var votosContraParameter = votosContra.HasValue ?
+            new ObjectParameter("votosContra", votosContra) :
+            new ObjectParameter("votosContra", typeof(int));
+
+
+        var votosAbstencionParameter = votosAbstencion.HasValue ?
+            new ObjectParameter("votosAbstencion", votosAbstencion) :
+            new ObjectParameter("votosAbstencion", typeof(int));
+
+
+        var votosNuloParameter = votosNulo.HasValue ?
+            new ObjectParameter("votosNulo", votosNulo) :
+            new ObjectParameter("votosNulo", typeof(int));
+
+
+        var quorumParameter = quorum.HasValue ?
+            new ObjectParameter("quorum", quorum) :
+            new ObjectParameter("quorum", typeof(int));
+
+
+        var resultadoParameter = resultado != null ?
+            new ObjectParameter("resultado", resultado) :
+            new ObjectParameter("resultado", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateResultadoPunto", idPuntoParameter, votosFavorParameter, votosContraParameter, votosAbstencionParameter, votosNuloParameter, quorumParameter, resultadoParameter);
     }
 
 }
