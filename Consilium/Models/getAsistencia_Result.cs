@@ -13,22 +13,21 @@ namespace Consilium.Models
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Member
+public partial class getAsistencia_Result
 {
 
-    public string Identification { get; set; }
+    public int idSesion { get; set; }
 
-    public string Name { get; set; }
+    public string idUsuario { get; set; }
 
-    public string Lastname { get; set; }
+    public string nombre { get; set; }
 
-    public byte[] Phone { get; set; }
+    public string apellidoP { get; set; }
 
-    public string Email { get; set; }
+    public string apellidoM { get; set; }
 
-    public string Type { get; set; }
+    public bool presente { get; set; }
 
 }
 

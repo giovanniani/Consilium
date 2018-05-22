@@ -140,6 +140,17 @@
     <Content Include="App_Data\DataSet2.xss">
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </Content>
+    <Content Include="App_Data\DataSetLista.xsc">
+      <DependentUpon>DataSetLista.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Data\DataSetLista.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetLista.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="App_Data\DataSetLista.xss">
+      <DependentUpon>DataSetLista.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -163,6 +174,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\DataSetLista.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetLista.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
@@ -172,7 +188,6 @@
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
     <Compile Include="Controllers\PuntoXAgendaController.cs" />
-    <Compile Include="Controllers\ReporteController2.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\ResultadoPuntoesController.cs" />
     <Compile Include="Controllers\SesionActivaController.cs" />
@@ -182,28 +197,16 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Crypto.cs" />
-    <Compile Include="CrystalReports\reporte8.cs">
+    <Compile Include="CrystalReports\CrystalReportLista.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>reporte8.rpt</DependentUpon>
+      <DependentUpon>CrystalReportLista.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CrystalReports\PruebaS.cs">
+    <Compile Include="CrystalReports\CrystalReportPoints.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PruebaS.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CrystalReports\pruebaS2.cs">
-      <DependentUpon>pruebaS2.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="CrystalReports\reporte7.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>reporte7.rpt</DependentUpon>
+      <DependentUpon>CrystalReportPoints.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CrystalReports\SesionReporte.cs">
@@ -235,13 +238,28 @@
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario.cs" />
+    <Compile Include="Models\getAsistencia_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getPuntosdeUsuario_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\getPuntosSesion_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getPuntosXUsuaio_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getPuntosXUsuario_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getPunto_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getReporteSesion_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getReporteXSesion_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getSesionReporte_Result.cs">
@@ -251,9 +269,6 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Logueo.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Member.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MiembroXComision.cs">
@@ -298,9 +313,6 @@
     <Compile Include="Models\Solicitud.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoSesion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -311,13 +323,10 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CrystalReports\Reporte2.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reporte2.rpt</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="Models\usuarioYPuntos_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -408,7 +417,8 @@
     <Content Include="Views\ResultadoPuntoes\Index.cshtml" />
     <Content Include="Views\Sesion\Vote.cshtml" />
     <Content Include="Views\Sesion\Lista.cshtml" />
-    <Content Include="Views\Reporte\Index2.cshtml" />
+    <Content Include="Views\Reporte\ExportList.cshtml" />
+    <Content Include="Views\Reporte\ExportPoints.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -425,25 +435,13 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CrystalReports\reporte8.rpt">
+    <EmbeddedResource Include="CrystalReports\CrystalReportLista.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>reporte8.cs</LastGenOutput>
+      <LastGenOutput>CrystalReportLista.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReports\PruebaS.rpt">
+    <EmbeddedResource Include="CrystalReports\CrystalReportPoints.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PruebaS.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReports\pruebaS2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>pruebaS2.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReports\Reporte2.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Reporte2.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReports\reporte7.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>reporte7.cs</LastGenOutput>
+      <LastGenOutput>CrystalReportPoints.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReports\SesionReporte.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

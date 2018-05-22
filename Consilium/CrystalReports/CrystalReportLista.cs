@@ -16,14 +16,14 @@ namespace Consilium.CrystalReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class reporte7 : ReportClass {
+    public class CrystalReportLista : ReportClass {
         
-        public reporte7() {
+        public CrystalReportLista() {
         }
         
         public override string ResourceName {
             get {
-                return "reporte7.rpt";
+                return "CrystalReportLista.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Consilium.CrystalReports {
         
         public override string FullResourceName {
             get {
-                return "Consilium.CrystalReports.reporte7.rpt";
+                return "Consilium.CrystalReports.CrystalReportLista.rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +87,20 @@ namespace Consilium.CrystalReports {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_idSesion {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class Cachedreporte7 : Component, ICachedReport {
+    public class CachedCrystalReportLista : Component, ICachedReport {
         
-        public Cachedreporte7() {
+        public CachedCrystalReportLista() {
         }
         
         [Browsable(false)]
@@ -129,7 +137,7 @@ namespace Consilium.CrystalReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            reporte7 rpt = new reporte7();
+            CrystalReportLista rpt = new CrystalReportLista();
             rpt.Site = this.Site;
             return rpt;
         }

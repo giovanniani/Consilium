@@ -35,9 +35,9 @@ public partial class Punto
 
     public int idPunto { get; set; }
 
-    public Nullable<int> idEstado { get; set; }
+    public int idEstado { get; set; }
 
-    public Nullable<System.DateTime> fecha { get; set; }
+    public System.DateTime fecha { get; set; }
 
     public string titulo { get; set; }
 
@@ -59,6 +59,8 @@ public partial class Punto
 
     public virtual ICollection<Mocion> Mocion { get; set; }
 
+    public virtual Usuario Usuario { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
@@ -70,8 +72,6 @@ public partial class Punto
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Solicitud> Solicitud { get; set; }
-
-    public virtual Usuario Usuario { get; set; }
 
 }
 

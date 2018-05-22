@@ -52,21 +52,6 @@
     <Property Name="nombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="contrasenna" Type="nvarchar(max)" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="Member">
-    <Key>
-      <PropertyRef Name="Identification" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Lastname" />
-    </Key>
-    <Property Name="Identification" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Phone" Type="varbinary" MaxLength="20" />
-    <Property Name="Email" Type="nchar" MaxLength="10" />
-    <Property Name="Type" Type="nvarchar" MaxLength="15" />
-  </EntityType>
   <EntityType Name="MiembroXComision">
     <Key>
       <PropertyRef Name="idMiembroXComision" />
@@ -107,14 +92,14 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
       <PropertyRef Name="idPunto" />
     </Key>
     <Property Name="idPunto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idEstado" Type="int" />
-    <Property Name="fecha" Type="date" />
-    <Property Name="titulo" Type="nvarchar" MaxLength="50" />
-    <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
-    <Property Name="considerandos" Type="nvarchar" MaxLength="500" />
-    <Property Name="resultandos" Type="nvarchar" MaxLength="500" />
-    <Property Name="acuerdos" Type="nvarchar" MaxLength="500" />
-    <Property Name="adjunto" Type="nvarchar(max)" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="considerandos" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="resultandos" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PuntoXAgenda">
     <Key>
@@ -158,16 +143,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     <Property Name="resultandos" Type="nvarchar" MaxLength="350" />
     <Property Name="acuerdos" Type="nvarchar" MaxLength="350" />
     <Property Name="adjunto" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TipoSesion">
     <Key>
@@ -337,7 +312,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Punto_EstadoPunto">
-    <End Role="EstadoPunto" Type="Self.EstadoPunto" Multiplicity="0..1" />
+    <End Role="EstadoPunto" Type="Self.EstadoPunto" Multiplicity="1" />
     <End Role="Punto" Type="Self.Punto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EstadoPunto">
@@ -349,7 +324,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Punto_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
     <End Role="Punto" Type="Self.Punto" Multiplicity="*" />
@@ -450,6 +425,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="getAsistencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
   <Function Name="getMiembrosXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
     <Parameter Name="idSesion" Type="int" Mode="In" />
@@ -457,10 +435,22 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
   <Function Name="getPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPunto" Type="int" Mode="In" />
   </Function>
+  <Function Name="getPuntosdeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="getPuntosSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idSesion" Type="int" Mode="In" />
   </Function>
+  <Function Name="getPuntosXUsuaio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="getPuntosXUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="getReporteSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getReporteXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idSesion" Type="int" Mode="In" />
   </Function>
   <Function Name="getSesionReporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -479,6 +469,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     <Parameter Name="votosNulo" Type="int" Mode="In" />
     <Parameter Name="quorum" Type="int" Mode="In" />
     <Parameter Name="resultado" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usuarioYPuntos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="votePunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPunto" Type="int" Mode="In" />
@@ -500,20 +493,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     <EntitySet Name="ResultadoPunto" EntityType="Self.ResultadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Member" EntityType="Self.Member" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Member].[Identification] AS [Identification], 
-    [Member].[Name] AS [Name], 
-    [Member].[Lastname] AS [Lastname], 
-    [Member].[Phone] AS [Phone], 
-    [Member].[Email] AS [Email], 
-    [Member].[Type] AS [Type]
-    FROM [dbo].[Member] AS [Member]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
       <End Role="Comision" EntitySet="Comision" />
       <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />

@@ -13,20 +13,31 @@ namespace Consilium.Models
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class sysdiagrams
+public partial class getReporteXSesion_Result
 {
 
-    public string name { get; set; }
+    public int idSesion { get; set; }
 
-    public int principal_id { get; set; }
+    public System.DateTime fecha { get; set; }
 
-    public int diagram_id { get; set; }
+    public int idPunto { get; set; }
 
-    public Nullable<int> version { get; set; }
+    public int votosFavor { get; set; }
 
-    public byte[] definition { get; set; }
+    public int votosContra { get; set; }
+
+    public int votosNulo { get; set; }
+
+    public int votosAbstencion { get; set; }
+
+    public string acuerdos { get; set; }
+
+    public string considerandos { get; set; }
+
+    public string resultandos { get; set; }
+
+    public string titulo { get; set; }
 
 }
 

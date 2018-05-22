@@ -61,17 +61,13 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
 
-    public virtual DbSet<Solicitud> Solicitud { get; set; }
+    public virtual DbSet<Sesion> Sesion { get; set; }
 
-    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+    public virtual DbSet<Solicitud> Solicitud { get; set; }
 
     public virtual DbSet<TipoSesion> TipoSesion { get; set; }
 
     public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
-
-    public virtual DbSet<Member> Member { get; set; }
-
-    public virtual DbSet<Sesion> Sesion { get; set; }
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
@@ -219,6 +215,78 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSesionReporte_Result>("getSesionReporte", idSesionParameter);
+    }
+
+
+    public virtual ObjectResult<getReporteXSesion_Result> getReporteXSesion(Nullable<int> idSesion)
+    {
+
+        var idSesionParameter = idSesion.HasValue ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getReporteXSesion_Result>("getReporteXSesion", idSesionParameter);
+    }
+
+
+    public virtual ObjectResult<getAsistencia_Result> getAsistencia(Nullable<int> idSesion)
+    {
+
+        var idSesionParameter = idSesion.HasValue ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAsistencia_Result>("getAsistencia", idSesionParameter);
+    }
+
+
+    public virtual ObjectResult<getPuntosXUsuaio_Result> getPuntosXUsuaio(string idUsuario)
+    {
+
+        var idUsuarioParameter = idUsuario != null ?
+            new ObjectParameter("idUsuario", idUsuario) :
+            new ObjectParameter("idUsuario", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPuntosXUsuaio_Result>("getPuntosXUsuaio", idUsuarioParameter);
+    }
+
+
+    public virtual ObjectResult<getPuntosXUsuario_Result> getPuntosXUsuario(string idUsuario)
+    {
+
+        var idUsuarioParameter = idUsuario != null ?
+            new ObjectParameter("idUsuario", idUsuario) :
+            new ObjectParameter("idUsuario", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPuntosXUsuario_Result>("getPuntosXUsuario", idUsuarioParameter);
+    }
+
+
+    public virtual ObjectResult<getPuntosdeUsuario_Result> getPuntosdeUsuario(string idUsuario)
+    {
+
+        var idUsuarioParameter = idUsuario != null ?
+            new ObjectParameter("idUsuario", idUsuario) :
+            new ObjectParameter("idUsuario", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPuntosdeUsuario_Result>("getPuntosdeUsuario", idUsuarioParameter);
+    }
+
+
+    public virtual ObjectResult<usuarioYPuntos_Result> usuarioYPuntos(string idUsuario)
+    {
+
+        var idUsuarioParameter = idUsuario != null ?
+            new ObjectParameter("idUsuario", idUsuario) :
+            new ObjectParameter("idUsuario", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usuarioYPuntos_Result>("usuarioYPuntos", idUsuarioParameter);
     }
 
 }

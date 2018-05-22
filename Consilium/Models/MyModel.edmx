@@ -57,21 +57,6 @@
           <Property Name="nombreUsuario" Type="nvarchar" MaxLength="50" />
           <Property Name="contrasenna" Type="nvarchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="Identification" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Lastname" />
-          </Key>
-          <Property Name="Identification" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="varbinary" MaxLength="20" />
-          <Property Name="Email" Type="nchar" MaxLength="10" />
-          <Property Name="Type" Type="nvarchar" MaxLength="15" />
-        </EntityType>
         <EntityType Name="MiembroXComision">
           <Key>
             <PropertyRef Name="idMiembroXComision" />
@@ -112,14 +97,14 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <PropertyRef Name="idPunto" />
           </Key>
           <Property Name="idPunto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idEstado" Type="int" />
-          <Property Name="fecha" Type="date" />
-          <Property Name="titulo" Type="nvarchar" MaxLength="50" />
-          <Property Name="idUsuario" Type="nvarchar" MaxLength="30" />
-          <Property Name="considerandos" Type="nvarchar" MaxLength="500" />
-          <Property Name="resultandos" Type="nvarchar" MaxLength="500" />
-          <Property Name="acuerdos" Type="nvarchar" MaxLength="500" />
-          <Property Name="adjunto" Type="nvarchar(max)" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="considerandos" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="resultandos" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PuntoXAgenda">
           <Key>
@@ -163,16 +148,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="resultandos" Type="nvarchar" MaxLength="350" />
           <Property Name="acuerdos" Type="nvarchar" MaxLength="350" />
           <Property Name="adjunto" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoSesion">
           <Key>
@@ -342,7 +317,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Punto_EstadoPunto">
-          <End Role="EstadoPunto" Type="Self.EstadoPunto" Multiplicity="0..1" />
+          <End Role="EstadoPunto" Type="Self.EstadoPunto" Multiplicity="1" />
           <End Role="Punto" Type="Self.Punto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EstadoPunto">
@@ -354,7 +329,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Punto_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Punto" Type="Self.Punto" Multiplicity="*" />
@@ -455,6 +430,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="getAsistencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSesion" Type="int" Mode="In" />
+        </Function>
         <Function Name="getMiembrosXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
           <Parameter Name="idSesion" Type="int" Mode="In" />
@@ -462,10 +440,22 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
         <Function Name="getPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPunto" Type="int" Mode="In" />
         </Function>
+        <Function Name="getPuntosdeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="getPuntosSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idSesion" Type="int" Mode="In" />
         </Function>
+        <Function Name="getPuntosXUsuaio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getPuntosXUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="getReporteSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSesion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getReporteXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idSesion" Type="int" Mode="In" />
         </Function>
         <Function Name="getSesionReporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -484,6 +474,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Parameter Name="votosNulo" Type="int" Mode="In" />
           <Parameter Name="quorum" Type="int" Mode="In" />
           <Parameter Name="resultado" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usuarioYPuntos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="votePunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPunto" Type="int" Mode="In" />
@@ -505,20 +498,9 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <EntitySet Name="ResultadoPunto" EntityType="Self.ResultadoPunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Member" EntityType="Self.Member" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Member].[Identification] AS [Identification], 
-    [Member].[Name] AS [Name], 
-    [Member].[Lastname] AS [Lastname], 
-    [Member].[Phone] AS [Phone], 
-    [Member].[Email] AS [Email], 
-    [Member].[Type] AS [Type]
-    FROM [dbo].[Member] AS [Member]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
             <End Role="Comision" EntitySet="Comision" />
             <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
@@ -633,6 +615,27 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <Parameter Name="quorum" Mode="In" Type="Int32" />
             <Parameter Name="resultado" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getReporteSesion" ReturnType="Collection(ConsiliumModel.getReporteSesion_Result)">
+          <Parameter Name="idSesion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getSesionReporte" ReturnType="Collection(ConsiliumModel.getSesionReporte_Result)">
+          <Parameter Name="idSesion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getReporteXSesion" ReturnType="Collection(ConsiliumModel.getReporteXSesion_Result)">
+          <Parameter Name="idSesion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAsistencia" ReturnType="Collection(ConsiliumModel.getAsistencia_Result)">
+          <Parameter Name="idSesion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPuntosXUsuaio" ReturnType="Collection(ConsiliumModel.getPuntosXUsuaio_Result)">
+          <Parameter Name="idUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getPuntosXUsuario" ReturnType="Collection(ConsiliumModel.getPuntosXUsuario_Result)">
+          <Parameter Name="idUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getPuntosdeUsuario" ReturnType="Collection(ConsiliumModel.getPuntosdeUsuario_Result)">
+          <Parameter Name="idUsuario" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="Agenda" EntityType="ConsiliumModel.Agenda" />
           <EntitySet Name="Comision" EntityType="ConsiliumModel.Comision" />
           <EntitySet Name="ComisionXSesion" EntityType="ConsiliumModel.ComisionXSesion" />
@@ -646,17 +649,25 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <EntitySet Name="Punto" EntityType="ConsiliumModel.Punto" />
           <EntitySet Name="PuntoXAgenda" EntityType="ConsiliumModel.PuntoXAgenda" />
           <EntitySet Name="ResultadoPunto" EntityType="ConsiliumModel.ResultadoPunto" />
+          <EntitySet Name="Sesion" EntityType="ConsiliumModel.Sesion" />
           <EntitySet Name="Solicitud" EntityType="ConsiliumModel.Solicitud" />
-          <EntitySet Name="sysdiagrams" EntityType="ConsiliumModel.sysdiagrams" />
           <EntitySet Name="TipoSesion" EntityType="ConsiliumModel.TipoSesion" />
           <EntitySet Name="TipoUsuario" EntityType="ConsiliumModel.TipoUsuario" />
-          <EntitySet Name="Member" EntityType="ConsiliumModel.Member" />
+          <EntitySet Name="Usuario" EntityType="ConsiliumModel.Usuario" />
           <AssociationSet Name="FK_PuntoXAgenda_Agenda" Association="ConsiliumModel.FK_PuntoXAgenda_Agenda">
             <End Role="Agenda" EntitySet="Agenda" />
             <End Role="PuntoXAgenda" EntitySet="PuntoXAgenda" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sesion_Agenda" Association="ConsiliumModel.FK_Sesion_Agenda">
+            <End Role="Agenda" EntitySet="Agenda" />
+            <End Role="Sesion" EntitySet="Sesion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ComisionXSesion_Comision" Association="ConsiliumModel.FK_ComisionXSesion_Comision">
             <End Role="Comision" EntitySet="Comision" />
+            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComisionXSesion_Sesion" Association="ConsiliumModel.FK_ComisionXSesion_Sesion">
+            <End Role="Sesion" EntitySet="Sesion" />
             <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
           </AssociationSet>
           <AssociationSet Name="FK_MiembroXComision_ComisionXSesion" Association="ConsiliumModel.FK_MiembroXComision_ComisionXSesion">
@@ -667,44 +678,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <End Role="EstadoPunto" EntitySet="EstadoPunto" />
             <End Role="Punto" EntitySet="Punto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Mocion_Punto" Association="ConsiliumModel.FK_Mocion_Punto">
-            <End Role="Punto" EntitySet="Punto" />
-            <End Role="Mocion" EntitySet="Mocion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProponenteXMocion_Mocion" Association="ConsiliumModel.FK_ProponenteXMocion_Mocion">
-            <End Role="Mocion" EntitySet="Mocion" />
-            <End Role="ProponenteXMocion" EntitySet="ProponenteXMocion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PuntoXAgenda_Punto" Association="ConsiliumModel.FK_PuntoXAgenda_Punto">
-            <End Role="Punto" EntitySet="Punto" />
-            <End Role="PuntoXAgenda" EntitySet="PuntoXAgenda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultadoPunto_Punto" Association="ConsiliumModel.FK_ResultadoPunto_Punto">
-            <End Role="Punto" EntitySet="Punto" />
-            <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitud_Punto" Association="ConsiliumModel.FK_Solicitud_Punto">
-            <End Role="Punto" EntitySet="Punto" />
-            <End Role="Solicitud" EntitySet="Solicitud" />
-          </AssociationSet>
-          <EntitySet Name="Sesion" EntityType="ConsiliumModel.Sesion" />
-          <AssociationSet Name="FK_Sesion_Agenda" Association="ConsiliumModel.FK_Sesion_Agenda">
-            <End Role="Agenda" EntitySet="Agenda" />
-            <End Role="Sesion" EntitySet="Sesion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ComisionXSesion_Sesion" Association="ConsiliumModel.FK_ComisionXSesion_Sesion">
-            <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="ConsiliumModel.FK_MiembroXSesion_Sesion">
-            <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sesion_TipoSesion" Association="ConsiliumModel.FK_Sesion_TipoSesion">
-            <End Role="TipoSesion" EntitySet="TipoSesion" />
-            <End Role="Sesion" EntitySet="Sesion" />
-          </AssociationSet>
-          <EntitySet Name="Usuario" EntityType="ConsiliumModel.Usuario" />
           <AssociationSet Name="FK_Justificacion_Usuario" Association="ConsiliumModel.FK_Justificacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Justificacion" EntitySet="Justificacion" />
@@ -721,6 +694,18 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
           </AssociationSet>
+          <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="ConsiliumModel.FK_MiembroXSesion_Sesion">
+            <End Role="Sesion" EntitySet="Sesion" />
+            <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mocion_Punto" Association="ConsiliumModel.FK_Mocion_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="Mocion" EntitySet="Mocion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProponenteXMocion_Mocion" Association="ConsiliumModel.FK_ProponenteXMocion_Mocion">
+            <End Role="Mocion" EntitySet="Mocion" />
+            <End Role="ProponenteXMocion" EntitySet="ProponenteXMocion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProponenteXMocion_Usuario" Association="ConsiliumModel.FK_ProponenteXMocion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ProponenteXMocion" EntitySet="ProponenteXMocion" />
@@ -729,15 +714,28 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Punto" EntitySet="Punto" />
           </AssociationSet>
+          <AssociationSet Name="FK_PuntoXAgenda_Punto" Association="ConsiliumModel.FK_PuntoXAgenda_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="PuntoXAgenda" EntitySet="PuntoXAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultadoPunto_Punto" Association="ConsiliumModel.FK_ResultadoPunto_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Punto" Association="ConsiliumModel.FK_Solicitud_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sesion_TipoSesion" Association="ConsiliumModel.FK_Sesion_TipoSesion">
+            <End Role="TipoSesion" EntitySet="TipoSesion" />
+            <End Role="Sesion" EntitySet="Sesion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_TipoUsuario" Association="ConsiliumModel.FK_Usuario_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <FunctionImport Name="getReporteSesion" ReturnType="Collection(ConsiliumModel.getReporteSesion_Result)">
-          <Parameter Name="idSesion" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="getSesionReporte" ReturnType="Collection(ConsiliumModel.getSesionReporte_Result)">
-            <Parameter Name="idSesion" Mode="In" Type="Int32" />
+          <FunctionImport Name="usuarioYPuntos" ReturnType="Collection(ConsiliumModel.usuarioYPuntos_Result)">
+            <Parameter Name="idUsuario" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="getPuntosSesion_Result">
@@ -770,6 +768,61 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Type="String" Name="acuerdos" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="adjunto" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="getReporteSesion_Result">
+          <Property Type="Int32" Name="idSesion" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getSesionReporte_Result">
+          <Property Type="Int32" Name="idSesion" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <Property Type="Int32" Name="idPunto" Nullable="false" />
+          <Property Type="Int32" Name="votosFavor" Nullable="false" />
+          <Property Type="Int32" Name="votosContra" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getReporteXSesion_Result">
+          <Property Type="Int32" Name="idSesion" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <Property Type="Int32" Name="idPunto" Nullable="false" />
+          <Property Type="Int32" Name="votosFavor" Nullable="false" />
+          <Property Type="Int32" Name="votosContra" Nullable="false" />
+          <Property Type="Int32" Name="votosNulo" Nullable="false" />
+          <Property Type="Int32" Name="votosAbstencion" Nullable="false" />
+          <Property Type="String" Name="acuerdos" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="considerandos" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="resultandos" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="titulo" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getAsistencia_Result">
+          <Property Type="Int32" Name="idSesion" Nullable="false" />
+          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoP" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
+          <Property Type="Boolean" Name="presente" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getPuntosXUsuaio_Result">
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoP" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="titulo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getPuntosXUsuario_Result">
+          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoP" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="titulo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getPuntosdeUsuario_Result">
+          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoP" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="titulo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+        </ComplexType>
         <EntityType Name="Agenda">
           <Key>
             <PropertyRef Name="idAgenda" />
@@ -799,8 +852,8 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="idComision" Type="Int32" />
           <Property Name="idSesion" Type="Int32" />
           <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_ComisionXSesion_Comision" FromRole="ComisionXSesion" ToRole="Comision" />
-          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_ComisionXSesion" FromRole="ComisionXSesion" ToRole="MiembroXComision" />
           <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Sesion" FromRole="ComisionXSesion" ToRole="Sesion" />
+          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_ComisionXSesion" FromRole="ComisionXSesion" ToRole="MiembroXComision" />
         </EntityType>
         <EntityType Name="EstadoPunto">
           <Key>
@@ -850,8 +903,8 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="idSesion" Type="Int32" Nullable="false" />
           <Property Name="presente" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="MiembroXSesion" ToRole="Sesion" />
           <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_MiembroXQuorum_Usuario" FromRole="MiembroXSesion" ToRole="Usuario" />
+          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="MiembroXSesion" ToRole="Sesion" />
         </EntityType>
         <EntityType Name="Mocion">
           <Key>
@@ -879,20 +932,20 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             <PropertyRef Name="idPunto" />
           </Key>
           <Property Name="idPunto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idEstado" Type="Int32" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="idUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="considerandos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="resultandos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="acuerdos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="adjunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="considerandos" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="resultandos" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="acuerdos" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="adjunto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EstadoPunto" Relationship="ConsiliumModel.FK_Punto_EstadoPunto" FromRole="Punto" ToRole="EstadoPunto" />
           <NavigationProperty Name="Mocion" Relationship="ConsiliumModel.FK_Mocion_Punto" FromRole="Punto" ToRole="Mocion" />
+          <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Punto" ToRole="Usuario" />
           <NavigationProperty Name="PuntoXAgenda" Relationship="ConsiliumModel.FK_PuntoXAgenda_Punto" FromRole="Punto" ToRole="PuntoXAgenda" />
           <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="Punto" ToRole="ResultadoPunto" />
           <NavigationProperty Name="Solicitud" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Punto" ToRole="Solicitud" />
-          <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Punto" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="PuntoXAgenda">
           <Key>
@@ -920,6 +973,19 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="quorum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="ResultadoPunto" ToRole="Punto" />
         </EntityType>
+        <EntityType Name="Sesion">
+          <Key>
+            <PropertyRef Name="idSesion" />
+          </Key>
+          <Property Name="idSesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idAgenda" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agenda" Relationship="ConsiliumModel.FK_Sesion_Agenda" FromRole="Sesion" ToRole="Agenda" />
+          <NavigationProperty Name="ComisionXSesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Sesion" FromRole="Sesion" ToRole="ComisionXSesion" />
+          <NavigationProperty Name="MiembroXSesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="Sesion" ToRole="MiembroXSesion" />
+          <NavigationProperty Name="TipoSesion" Relationship="ConsiliumModel.FK_Sesion_TipoSesion" FromRole="Sesion" ToRole="TipoSesion" />
+        </EntityType>
         <EntityType Name="Solicitud">
           <Key>
             <PropertyRef Name="idSolicitud" />
@@ -931,16 +997,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="acuerdos" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="adjunto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Solicitud" ToRole="Punto" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoSesion">
           <Key>
@@ -958,192 +1014,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="Identification" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Lastname" />
-          </Key>
-          <Property Name="Identification" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="Binary" MaxLength="20" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_PuntoXAgenda_Agenda">
-          <End Type="ConsiliumModel.Agenda" Role="Agenda" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.PuntoXAgenda" Role="PuntoXAgenda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Agenda">
-              <PropertyRef Name="idAgenda" />
-            </Principal>
-            <Dependent Role="PuntoXAgenda">
-              <PropertyRef Name="idAgenda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComisionXSesion_Comision">
-          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comision">
-              <PropertyRef Name="idComision" />
-            </Principal>
-            <Dependent Role="ComisionXSesion">
-              <PropertyRef Name="idComision" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MiembroXComision_ComisionXSesion">
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComisionXSesion">
-              <PropertyRef Name="idComisionXSesion" />
-            </Principal>
-            <Dependent Role="MiembroXComision">
-              <PropertyRef Name="idComisionXSesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Punto_EstadoPunto">
-          <End Type="ConsiliumModel.EstadoPunto" Role="EstadoPunto" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoPunto">
-              <PropertyRef Name="idEstado" />
-            </Principal>
-            <Dependent Role="Punto">
-              <PropertyRef Name="idEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Mocion_Punto">
-          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.Mocion" Role="Mocion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Punto">
-              <PropertyRef Name="idPunto" />
-            </Principal>
-            <Dependent Role="Mocion">
-              <PropertyRef Name="idPunto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProponenteXMocion_Mocion">
-          <End Type="ConsiliumModel.Mocion" Role="Mocion" Multiplicity="1" />
-          <End Type="ConsiliumModel.ProponenteXMocion" Role="ProponenteXMocion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Mocion">
-              <PropertyRef Name="idMocion" />
-            </Principal>
-            <Dependent Role="ProponenteXMocion">
-              <PropertyRef Name="idMocion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PuntoXAgenda_Punto">
-          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ConsiliumModel.PuntoXAgenda" Role="PuntoXAgenda" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Punto">
-              <PropertyRef Name="idPunto" />
-            </Principal>
-            <Dependent Role="PuntoXAgenda">
-              <PropertyRef Name="idPunto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultadoPunto_Punto">
-          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
-          <End Type="ConsiliumModel.ResultadoPunto" Role="ResultadoPunto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Punto">
-              <PropertyRef Name="idPunto" />
-            </Principal>
-            <Dependent Role="ResultadoPunto">
-              <PropertyRef Name="idPunto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitud_Punto">
-          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ConsiliumModel.Solicitud" Role="Solicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Punto">
-              <PropertyRef Name="idPunto" />
-            </Principal>
-            <Dependent Role="Solicitud">
-              <PropertyRef Name="idPunto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Sesion">
-          <Key>
-            <PropertyRef Name="idSesion" />
-          </Key>
-          <Property Name="idSesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTipo" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="idAgenda" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="ConsiliumModel.FK_Sesion_Agenda" FromRole="Sesion" ToRole="Agenda" />
-          <NavigationProperty Name="ComisionXSesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Sesion" FromRole="Sesion" ToRole="ComisionXSesion" />
-          <NavigationProperty Name="MiembroXSesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="Sesion" ToRole="MiembroXSesion" />
-          <NavigationProperty Name="TipoSesion" Relationship="ConsiliumModel.FK_Sesion_TipoSesion" FromRole="Sesion" ToRole="TipoSesion" />
-        </EntityType>
-        <Association Name="FK_Sesion_Agenda">
-          <End Type="ConsiliumModel.Agenda" Role="Agenda" Multiplicity="1" />
-          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Agenda">
-              <PropertyRef Name="idAgenda" />
-            </Principal>
-            <Dependent Role="Sesion">
-              <PropertyRef Name="idAgenda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ComisionXSesion_Sesion">
-          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sesion">
-              <PropertyRef Name="idSesion" />
-            </Principal>
-            <Dependent Role="ComisionXSesion">
-              <PropertyRef Name="idSesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MiembroXSesion_Sesion">
-          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.MiembroXSesion" Role="MiembroXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sesion">
-              <PropertyRef Name="idSesion" />
-            </Principal>
-            <Dependent Role="MiembroXSesion">
-              <PropertyRef Name="idSesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sesion_TipoSesion">
-          <End Type="ConsiliumModel.TipoSesion" Role="TipoSesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoSesion">
-              <PropertyRef Name="idTipo" />
-            </Principal>
-            <Dependent Role="Sesion">
-              <PropertyRef Name="idTipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -1166,6 +1036,78 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Usuario" ToRole="Punto" />
           <NavigationProperty Name="TipoUsuario" Relationship="ConsiliumModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
+        <Association Name="FK_PuntoXAgenda_Agenda">
+          <End Type="ConsiliumModel.Agenda" Role="Agenda" Multiplicity="0..1" />
+          <End Type="ConsiliumModel.PuntoXAgenda" Role="PuntoXAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agenda">
+              <PropertyRef Name="idAgenda" />
+            </Principal>
+            <Dependent Role="PuntoXAgenda">
+              <PropertyRef Name="idAgenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sesion_Agenda">
+          <End Type="ConsiliumModel.Agenda" Role="Agenda" Multiplicity="1" />
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agenda">
+              <PropertyRef Name="idAgenda" />
+            </Principal>
+            <Dependent Role="Sesion">
+              <PropertyRef Name="idAgenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComisionXSesion_Comision">
+          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="0..1" />
+          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="ComisionXSesion">
+              <PropertyRef Name="idComision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComisionXSesion_Sesion">
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="0..1" />
+          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sesion">
+              <PropertyRef Name="idSesion" />
+            </Principal>
+            <Dependent Role="ComisionXSesion">
+              <PropertyRef Name="idSesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiembroXComision_ComisionXSesion">
+          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="1" />
+          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComisionXSesion">
+              <PropertyRef Name="idComisionXSesion" />
+            </Principal>
+            <Dependent Role="MiembroXComision">
+              <PropertyRef Name="idComisionXSesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Punto_EstadoPunto">
+          <End Type="ConsiliumModel.EstadoPunto" Role="EstadoPunto" Multiplicity="1" />
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPunto">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Punto">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Justificacion_Usuario">
           <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1220,6 +1162,42 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MiembroXSesion_Sesion">
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
+          <End Type="ConsiliumModel.MiembroXSesion" Role="MiembroXSesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sesion">
+              <PropertyRef Name="idSesion" />
+            </Principal>
+            <Dependent Role="MiembroXSesion">
+              <PropertyRef Name="idSesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mocion_Punto">
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1" />
+          <End Type="ConsiliumModel.Mocion" Role="Mocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
+            </Principal>
+            <Dependent Role="Mocion">
+              <PropertyRef Name="idPunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProponenteXMocion_Mocion">
+          <End Type="ConsiliumModel.Mocion" Role="Mocion" Multiplicity="1" />
+          <End Type="ConsiliumModel.ProponenteXMocion" Role="ProponenteXMocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mocion">
+              <PropertyRef Name="idMocion" />
+            </Principal>
+            <Dependent Role="ProponenteXMocion">
+              <PropertyRef Name="idMocion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProponenteXMocion_Usuario">
           <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="ConsiliumModel.ProponenteXMocion" Role="ProponenteXMocion" Multiplicity="*" />
@@ -1233,7 +1211,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Punto_Usuario">
-          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="0..1">
+          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="*" />
@@ -1243,6 +1221,58 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             </Principal>
             <Dependent Role="Punto">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PuntoXAgenda_Punto">
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ConsiliumModel.PuntoXAgenda" Role="PuntoXAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
+            </Principal>
+            <Dependent Role="PuntoXAgenda">
+              <PropertyRef Name="idPunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadoPunto_Punto">
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
+          <End Type="ConsiliumModel.ResultadoPunto" Role="ResultadoPunto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
+            </Principal>
+            <Dependent Role="ResultadoPunto">
+              <PropertyRef Name="idPunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Punto">
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ConsiliumModel.Solicitud" Role="Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="idPunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sesion_TipoSesion">
+          <End Type="ConsiliumModel.TipoSesion" Role="TipoSesion" Multiplicity="1" />
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSesion">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="Sesion">
+              <PropertyRef Name="idTipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1258,16 +1288,12 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="getReporteSesion_Result">
-          <Property Type="Int32" Name="idSesion" Nullable="false" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getSesionReporte_Result">
-          <Property Type="Int32" Name="idSesion" Nullable="false" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" />
-          <Property Type="Int32" Name="idPunto" Nullable="false" />
-          <Property Type="Int32" Name="votosFavor" Nullable="false" />
-          <Property Type="Int32" Name="votosContra" Nullable="false" />
+        <ComplexType Name="usuarioYPuntos_Result">
+          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoP" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1317,6 +1343,89 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="votePunto" FunctionName="ConsiliumModel.Store.votePunto" />
           <FunctionImportMapping FunctionImportName="updateResultadoPunto" FunctionName="ConsiliumModel.Store.updateResultadoPunto" />
+          <FunctionImportMapping FunctionImportName="getReporteSesion" FunctionName="ConsiliumModel.Store.getReporteSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getReporteSesion_Result">
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getSesionReporte" FunctionName="ConsiliumModel.Store.getSesionReporte">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getSesionReporte_Result">
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idPunto" ColumnName="idPunto" />
+                <ScalarProperty Name="votosFavor" ColumnName="votosFavor" />
+                <ScalarProperty Name="votosContra" ColumnName="votosContra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getReporteXSesion" FunctionName="ConsiliumModel.Store.getReporteXSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getReporteXSesion_Result">
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idPunto" ColumnName="idPunto" />
+                <ScalarProperty Name="votosFavor" ColumnName="votosFavor" />
+                <ScalarProperty Name="votosContra" ColumnName="votosContra" />
+                <ScalarProperty Name="votosNulo" ColumnName="votosNulo" />
+                <ScalarProperty Name="votosAbstencion" ColumnName="votosAbstencion" />
+                <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
+                <ScalarProperty Name="considerandos" ColumnName="considerandos" />
+                <ScalarProperty Name="resultandos" ColumnName="resultandos" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAsistencia" FunctionName="ConsiliumModel.Store.getAsistencia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getAsistencia_Result">
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="presente" ColumnName="presente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPuntosXUsuaio" FunctionName="ConsiliumModel.Store.getPuntosXUsuaio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getPuntosXUsuaio_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPuntosXUsuario" FunctionName="ConsiliumModel.Store.getPuntosXUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getPuntosXUsuario_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPuntosdeUsuario" FunctionName="ConsiliumModel.Store.getPuntosdeUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getPuntosdeUsuario_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="Agenda">
             <EntityTypeMapping TypeName="ConsiliumModel.Agenda">
               <MappingFragment StoreEntitySet="Agenda">
@@ -1454,6 +1563,16 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Sesion">
+            <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
+              <MappingFragment StoreEntitySet="Sesion">
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="ConsiliumModel.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
@@ -1463,17 +1582,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
                 <ScalarProperty Name="considerandos" ColumnName="considerandos" />
                 <ScalarProperty Name="idPunto" ColumnName="idPunto" />
                 <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ConsiliumModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1493,28 +1601,6 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Member">
-            <EntityTypeMapping TypeName="ConsiliumModel.Member">
-              <MappingFragment StoreEntitySet="Member">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Identification" ColumnName="Identification" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sesion">
-            <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
-              <MappingFragment StoreEntitySet="Sesion">
-                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="ConsiliumModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
@@ -1531,22 +1617,14 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="getReporteSesion" FunctionName="ConsiliumModel.Store.getReporteSesion">
+          <FunctionImportMapping FunctionImportName="usuarioYPuntos" FunctionName="ConsiliumModel.Store.usuarioYPuntos">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ConsiliumModel.getReporteSesion_Result">
-                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getSesionReporte" FunctionName="ConsiliumModel.Store.getSesionReporte">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ConsiliumModel.getSesionReporte_Result">
-                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="idPunto" ColumnName="idPunto" />
-                <ScalarProperty Name="votosFavor" ColumnName="votosFavor" />
-                <ScalarProperty Name="votosContra" ColumnName="votosContra" />
+              <ComplexTypeMapping TypeName="ConsiliumModel.usuarioYPuntos_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+                <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
