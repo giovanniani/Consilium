@@ -188,15 +188,15 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
       <PropertyRef Name="idUsuario" />
     </Key>
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="nombre" Type="nvarchar" MaxLength="30" />
-    <Property Name="apellidoP" Type="nvarchar" MaxLength="30" />
-    <Property Name="apellidoM" Type="nvarchar" MaxLength="30" />
-    <Property Name="tipo" Type="int" />
-    <Property Name="estado" Type="nvarchar" MaxLength="25" />
-    <Property Name="correo" Type="nvarchar" MaxLength="50" />
-    <Property Name="telefono" Type="nvarchar" MaxLength="20" />
-    <Property Name="fechaInicio" Type="date" />
-    <Property Name="fechaFin" Type="date" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="apellidoP" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="apellidoM" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="tipo" Type="int" Nullable="false" />
+    <Property Name="estado" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="correo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="fechaInicio" Type="date" Nullable="false" />
+    <Property Name="fechaFin" Type="date" Nullable="false" />
   </EntityType>
   <Association Name="FK_ComisionXSesion_Comision">
     <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
@@ -439,7 +439,7 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Usuario_TipoUsuario">
-    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TipoUsuario">
@@ -458,6 +458,12 @@ advertencia 6002: La tabla o vista 'Consilium.dbo.Member' no tiene definida ning
     <Parameter Name="idPunto" Type="int" Mode="In" />
   </Function>
   <Function Name="getPuntosSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getReporteSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idSesion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getSesionReporte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idSesion" Type="int" Mode="In" />
   </Function>
   <Function Name="updateMiembroXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

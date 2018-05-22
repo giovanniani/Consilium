@@ -340,3 +340,4 @@ C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\CrystalDecisions.ReportA
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\stdole.dll
+C:\Users\Giova\Documents\GitHub\Consilium\Consilium\bin\CrystalDecisions.Web.dll

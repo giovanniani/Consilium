@@ -13,24 +13,19 @@ namespace Consilium.Models
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class MiembroXSesion
+public partial class getSesionReporte_Result
 {
-
-    public int idMiembroXQuorum { get; set; }
-
-    public string idUsuario { get; set; }
 
     public int idSesion { get; set; }
 
-    public bool presente { get; set; }
+    public System.DateTime fecha { get; set; }
 
+    public int idPunto { get; set; }
 
+    public int votosFavor { get; set; }
 
-    public virtual Sesion Sesion { get; set; }
-
-    public virtual Usuario Usuario { get; set; }
+    public int votosContra { get; set; }
 
 }
 

@@ -16,14 +16,14 @@ namespace Consilium.CrystalReports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Reporte2 : ReportClass {
+    public class pruebaS2 : ReportClass {
         
-        public Reporte2() {
+        public pruebaS2() {
         }
         
         public override string ResourceName {
             get {
-                return "Reporte2.rpt";
+                return "pruebaS2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Consilium.CrystalReports {
         
         public override string FullResourceName {
             get {
-                return "Consilium.CrystalReports.Reporte2.rpt";
+                return "Consilium.CrystalReports.pruebaS2.rpt";
             }
             set {
                 // Do nothing
@@ -130,9 +130,9 @@ namespace Consilium.CrystalReports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReporte2 : Component, ICachedReport {
+    public class CachedpruebaS2 : Component, ICachedReport {
         
-        public CachedReporte2() {
+        public CachedpruebaS2() {
         }
         
         [Browsable(false)]
@@ -169,7 +169,7 @@ namespace Consilium.CrystalReports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Reporte2 rpt = new Reporte2();
+            pruebaS2 rpt = new pruebaS2();
             rpt.Site = this.Site;
             return rpt;
         }

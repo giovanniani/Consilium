@@ -69,11 +69,11 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
 
-    public virtual DbSet<Usuario> Usuario { get; set; }
-
     public virtual DbSet<Member> Member { get; set; }
 
     public virtual DbSet<Sesion> Sesion { get; set; }
+
+    public virtual DbSet<Usuario> Usuario { get; set; }
 
 
     public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)
@@ -195,6 +195,30 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateResultadoPunto", idPuntoParameter, votosFavorParameter, votosContraParameter, votosAbstencionParameter, votosNuloParameter, quorumParameter, resultadoParameter);
+    }
+
+
+    public virtual ObjectResult<getReporteSesion_Result> getReporteSesion(Nullable<int> idSesion)
+    {
+
+        var idSesionParameter = idSesion.HasValue ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getReporteSesion_Result>("getReporteSesion", idSesionParameter);
+    }
+
+
+    public virtual ObjectResult<getSesionReporte_Result> getSesionReporte(Nullable<int> idSesion)
+    {
+
+        var idSesionParameter = idSesion.HasValue ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getSesionReporte_Result>("getSesionReporte", idSesionParameter);
     }
 
 }

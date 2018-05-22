@@ -14,7 +14,6 @@ namespace Consilium.Models
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public partial class Usuario
     {
@@ -27,54 +26,34 @@ namespace Consilium.Models
 
             this.MiembroXComision = new HashSet<MiembroXComision>();
 
+            this.MiembroXSesion = new HashSet<MiembroXSesion>();
+
             this.ProponenteXMocion = new HashSet<ProponenteXMocion>();
 
             this.Punto = new HashSet<Punto>();
 
-            this.MiembroXSesion = new HashSet<MiembroXSesion>();
-
         }
 
 
-        [Display(Name = "Identificación")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Identificación vara requerida")]
         public string idUsuario { get; set; }
 
-        [Display(Name = "Nombre")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Nombre requerido")]
         public string nombre { get; set; }
 
-        [Display(Name = "Apellido Paterno")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido parterno requerido")]
         public string apellidoP { get; set; }
 
-        [Display(Name = "Apellido Materno")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido marterno requerido")]
         public string apellidoM { get; set; }
 
-        [Display(Name = "Tipo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Tipo requerido")]
-        public Nullable<int> tipo { get; set; }
+        public int tipo { get; set; }
 
-        [Display(Name = "Estado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerido")]
         public string estado { get; set; }
 
-        [Display(Name = "Correo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Correo requerido")]
         public string correo { get; set; }
 
-        [Display(Name = "Teléfono")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
         public string telefono { get; set; }
 
-        [Display(Name = "Fecha de inicio")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        public Nullable<System.DateTime> fechaInicio { get; set; }
+        public System.DateTime fechaInicio { get; set; }
 
-        [Display(Name = "Fecha de fin")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        public Nullable<System.DateTime> fechaFin { get; set; }
+        public System.DateTime fechaFin { get; set; }
 
 
 
@@ -90,6 +69,10 @@ namespace Consilium.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+        public virtual ICollection<MiembroXSesion> MiembroXSesion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<ProponenteXMocion> ProponenteXMocion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -97,10 +80,6 @@ namespace Consilium.Models
         public virtual ICollection<Punto> Punto { get; set; }
 
         public virtual TipoUsuario TipoUsuario { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-        public virtual ICollection<MiembroXSesion> MiembroXSesion { get; set; }
 
         public bool isSelected { get; set; }
 
