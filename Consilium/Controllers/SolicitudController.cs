@@ -120,7 +120,7 @@ namespace Consilium.Controllers
                 db.Punto.Add(punto);
                 db.SaveChanges();
                 ViewBag.Status = true;
-                return RedirectToAction("CreatePuntoMiembro");
+                return View();
             }
 
             ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre", punto.idEstado);

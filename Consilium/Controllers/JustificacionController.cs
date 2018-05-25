@@ -23,11 +23,12 @@ namespace Consilium.Controllers
 
             bool Status = false;
             string message = "";
+            string[] data = System.Web.HttpContext.Current.User.Identity.Name.Split('&');
 
             //Model validation
             if (ModelState.IsValid)
             {
-
+                justificacion.idUsuario = data[1];
                 #region Save to Data
                 using (ConsiliumEntities dc = new ConsiliumEntities())
                 {

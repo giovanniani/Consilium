@@ -17,7 +17,7 @@ namespace Consilium.Controllers
         // GET: PuntoXAgenda
         public ActionResult Index()
         {
-            var puntoXAgenda = db.PuntoXAgenda.Include(p => p.Agenda).Include(p => p.Punto);
+            var puntoXAgenda = db.PuntoXAgenda.Where(p => p.Punto.EstadoPunto.idEstado == 1).Include(p => p.Agenda).Include(p => p.Punto);
             return View(puntoXAgenda.ToList());
         }
 

@@ -49,8 +49,16 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario,considerandos,resultandos,acuerdos,adjunto")] Punto punto)
+        public ActionResult Create([Bind(Include = "idPunto,idEstado,fecha,titulo,idUsuario,considerandos,resultandos,acuerdos,adjunto")] Punto punto, string myFile)
         {
+            if(myFile != "")
+            {
+                punto.adjunto = myFile;
+            }
+            else
+            {
+                punto.adjunto = " ";
+            }
             punto.idEstado = 1;
             if (ModelState.IsValid)
             {
