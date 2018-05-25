@@ -84,6 +84,17 @@
           <Property Name="punto" Type="nvarchar(max)" />
           <Property Name="propuesta" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Motion">
+          <Key>
+            <PropertyRef Name="idMotion" />
+          </Key>
+          <Property Name="idMotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tittle" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="member" Type="varchar" MaxLength="50" />
+          <Property Name="Proponentes" Type="varchar" MaxLength="50" />
+          <Property Name="Propuesta" Type="varchar" MaxLength="350" />
+        </EntityType>
         <EntityType Name="ProponenteXMocion">
           <Key>
             <PropertyRef Name="idProponente" />
@@ -492,6 +503,7 @@
           <EntitySet Name="MiembroXComision" EntityType="Self.MiembroXComision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MiembroXSesion" EntityType="Self.MiembroXSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mocion" EntityType="Self.Mocion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProponenteXMocion" EntityType="Self.ProponenteXMocion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Punto" EntityType="Self.Punto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuntoXAgenda" EntityType="Self.PuntoXAgenda" Schema="dbo" store:Type="Tables" />
@@ -737,6 +749,7 @@
           <FunctionImport Name="usuarioYPuntos" ReturnType="Collection(ConsiliumModel.usuarioYPuntos_Result)">
           <Parameter Name="idUsuario" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Motion" EntityType="ConsiliumModel.Motion" />
           </EntityContainer>
         <ComplexType Name="getPuntosSesion_Result">
           <Property Type="Int32" Name="idPunto" Nullable="false" />
@@ -1295,6 +1308,17 @@
           <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Motion">
+          <Key>
+            <PropertyRef Name="idMotion" />
+          </Key>
+          <Property Name="idMotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="member" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Proponentes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Propuesta" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1628,6 +1652,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Motion">
+            <EntityTypeMapping TypeName="ConsiliumModel.Motion">
+              <MappingFragment StoreEntitySet="Motion">
+                <ScalarProperty Name="Propuesta" ColumnName="Propuesta" />
+                <ScalarProperty Name="Proponentes" ColumnName="Proponentes" />
+                <ScalarProperty Name="member" ColumnName="member" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+                <ScalarProperty Name="idMotion" ColumnName="idMotion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

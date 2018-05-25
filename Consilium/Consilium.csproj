@@ -108,6 +108,7 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\logo_consilium_extendido_beta.png" />
     <Content Include="Content\maquetacion.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -183,6 +184,7 @@
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
     <Compile Include="Controllers\MiembroXComisionController.cs" />
+    <Compile Include="Controllers\MocionController.cs" />
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
@@ -275,6 +277,9 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mocion.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Motion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyModel.Context.cs">
@@ -412,6 +417,11 @@
     <Content Include="Views\Puntos\Details.cshtml" />
     <Content Include="Views\Puntos\Edit.cshtml" />
     <Content Include="Views\Puntos\Index.cshtml" />
+    <Content Include="Views\Mocion\Create.cshtml" />
+    <Content Include="Views\Mocion\Delete.cshtml" />
+    <Content Include="Views\Mocion\Details.cshtml" />
+    <Content Include="Views\Mocion\Edit.cshtml" />
+    <Content Include="Views\Mocion\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

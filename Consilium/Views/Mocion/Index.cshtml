@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Consilium.Models.Mocion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.punto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.propuesta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Punto1.titulo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.punto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.propuesta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Punto1.titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idMocion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idMocion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idMocion })
+        </td>
+    </tr>
+}
+
+</table>

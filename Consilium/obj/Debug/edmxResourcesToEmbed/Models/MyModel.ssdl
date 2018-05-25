@@ -79,6 +79,17 @@
     <Property Name="punto" Type="nvarchar(max)" />
     <Property Name="propuesta" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="Motion">
+    <Key>
+      <PropertyRef Name="idMotion" />
+    </Key>
+    <Property Name="idMotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tittle" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="date" />
+    <Property Name="member" Type="varchar" MaxLength="50" />
+    <Property Name="Proponentes" Type="varchar" MaxLength="50" />
+    <Property Name="Propuesta" Type="varchar" MaxLength="350" />
+  </EntityType>
   <EntityType Name="ProponenteXMocion">
     <Key>
       <PropertyRef Name="idProponente" />
@@ -487,6 +498,7 @@
     <EntitySet Name="MiembroXComision" EntityType="Self.MiembroXComision" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiembroXSesion" EntityType="Self.MiembroXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mocion" EntityType="Self.Mocion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProponenteXMocion" EntityType="Self.ProponenteXMocion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Punto" EntityType="Self.Punto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PuntoXAgenda" EntityType="Self.PuntoXAgenda" Schema="dbo" store:Type="Tables" />

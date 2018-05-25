@@ -43,6 +43,7 @@
         <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" />
         <AssociationConnector Association="ConsiliumModel.FK_Usuario_TipoUsuario" />
+        <EntityTypeShape EntityType="ConsiliumModel.Motion" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -151,6 +151,7 @@
     <FunctionImport Name="usuarioYPuntos" ReturnType="Collection(ConsiliumModel.usuarioYPuntos_Result)">
       <Parameter Name="idUsuario" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Motion" EntityType="ConsiliumModel.Motion" />
   </EntityContainer>
   <ComplexType Name="getPuntosSesion_Result">
     <Property Type="Int32" Name="idPunto" Nullable="false" />
@@ -709,4 +710,15 @@
     <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
   </ComplexType>
+  <EntityType Name="Motion">
+    <Key>
+      <PropertyRef Name="idMotion" />
+    </Key>
+    <Property Name="idMotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="member" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Proponentes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Propuesta" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

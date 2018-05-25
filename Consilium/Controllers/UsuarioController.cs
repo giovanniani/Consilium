@@ -115,7 +115,7 @@ namespace Consilium.Controllers
                         Response.Cookies.Add(cookie);
                         if (u.tipo.ToString() == "2" || u.tipo.ToString() == "3")
                         {                          
-                            return RedirectToAction("Create", "Solicitud");
+                            return RedirectToAction("CreatePuntoMiembro", "Solicitud");
                         }
                         if (u.TipoUsuario.idTipo.ToString() == "1")
                         {

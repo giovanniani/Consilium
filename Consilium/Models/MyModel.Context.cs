@@ -71,6 +71,8 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
+    public virtual DbSet<Motion> Motion { get; set; }
+
 
     public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)
     {

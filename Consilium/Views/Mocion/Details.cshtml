@@ -1,0 +1,42 @@
+﻿@model Consilium.Models.Mocion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Mocion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.punto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.punto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.propuesta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.propuesta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punto1.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punto1.titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMocion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

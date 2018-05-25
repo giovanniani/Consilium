@@ -328,5 +328,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Motion">
+      <EntityTypeMapping TypeName="ConsiliumModel.Motion">
+        <MappingFragment StoreEntitySet="Motion">
+          <ScalarProperty Name="Propuesta" ColumnName="Propuesta" />
+          <ScalarProperty Name="Proponentes" ColumnName="Proponentes" />
+          <ScalarProperty Name="member" ColumnName="member" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+          <ScalarProperty Name="idMotion" ColumnName="idMotion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
