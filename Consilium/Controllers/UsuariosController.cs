@@ -49,11 +49,25 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idUsuario,nombre,apellidoP,apellidoM,tipo,estado,correo,telefono,fechaInicio,fechaFin")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "idUsuario,nombre,apellidoP,apellidoM,tipo,estado,correo,telefono,fechaInicio,fechaFin")] Usuario usuario, string contrasenna)
         {
+            usuario.estado = "1";
             if (ModelState.IsValid)
             {
+                var exists = existeId(usuario.idUsuario);
+                if (exists)
+                {
+                    ModelState.AddModelError("UserExists", "Usuario ya existe");
+                    return View(usuario);
+                }
                 db.Usuario.Add(usuario);
+                db.SaveChanges();
+                Logueo logueo = new Logueo();
+                logueo.contrasenna = contrasenna;
+                logueo.idUsuario = usuario.idUsuario;
+                logueo.nombreUsuario = usuario.nombre;
+                logueo.contrasenna = Crypto.Hash(logueo.contrasenna);
+                db.Logueo.Add(logueo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -131,6 +145,89 @@ namespace Consilium.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Usuario
+        public ActionResult Registro()
+        {
+            return View();
+        }
+
+        //registration post action
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registro([Bind(Exclude = "ExisteId")] Usuario usuario, string contrasenna)
+        {
+
+            bool Status = false;
+            string message = "";
+            Logueo logueo = new Logueo();
+
+            //Model validation
+            if (ModelState.IsValid)
+            {
+
+                #region //Email already exists
+                var exists = existeId(usuario.idUsuario);
+                if (exists)
+                {
+                    ModelState.AddModelError("UserExists", "Usuario ya existe");
+                    return View(usuario);
+                }
+                #endregion
+
+                #region Save to Data  
+                logueo.contrasenna = contrasenna;
+                logueo.idUsuario = usuario.idUsuario;
+                logueo.nombreUsuario = usuario.nombre;
+
+
+                using (ConsiliumEntities dc = new ConsiliumEntities())
+                {
+                    dc.Usuario.Add(usuario);
+                    dc.SaveChanges();
+
+
+                    Status = true;
+
+                }
+                #region Password hashing
+                logueo.contrasenna = Crypto.Hash(logueo.contrasenna);
+                #endregion
+                using (ConsiliumEntities dc = new ConsiliumEntities())
+                {
+                    dc.Logueo.Add(logueo);
+                    dc.SaveChanges();
+
+
+                    Status = true;
+
+                }
+
+
+                #endregion
+
+            }
+            else
+            {
+                message = "Solicitud inválida";
+            }
+
+            ViewBag.Message = message;
+            ViewBag.Status = Status;
+
+
+            return View(usuario);
+        }
+
+        public bool existeId(string usuarioId)
+        {
+            using (ConsiliumEntities dc = new ConsiliumEntities())
+            {
+                var v = dc.Usuario.Where(a => a.idUsuario == usuarioId).FirstOrDefault();
+                return v != null;
+            }
         }
     }
 }

@@ -45,24 +45,38 @@ public partial class Punto
         [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
         [DataType(DataType.Date)]
         public System.DateTime fecha { get; set; }
+
+
         [Display(Name = "Título")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Título requerido")]
         public string titulo { get; set; }
+
+
         [Display(Name = "ID Usuario")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "ID Usuario")]
         public string idUsuario { get; set; }
+
+
         [Display(Name = "Considerandos")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Considerandos")]
         public string considerandos { get; set; }
+
+
         [Display(Name = "Resultandos")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Resultandos requeridos.")]
         public string resultandos { get; set; }
+
+
         [Display(Name = "Acuerdos")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Acuerdos requeridos")]
         public string acuerdos { get; set; }
+
+
         [Display(Name = "Adjunto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Adjunto requerida")]
         public string adjunto { get; set; }
+
+
 
         [Display(Name = "Estado Punto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerido")]

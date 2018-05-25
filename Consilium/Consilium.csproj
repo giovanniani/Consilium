@@ -182,7 +182,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
-    <Compile Include="Controllers\ListaController.cs" />
     <Compile Include="Controllers\MiembroXComisionController.cs" />
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
@@ -193,7 +192,6 @@
     <Compile Include="Controllers\SesionActivaController.cs" />
     <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Crypto.cs" />
@@ -237,7 +235,7 @@
     <Compile Include="Models\Extended\SesionFinal.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
-    <Compile Include="Models\Extended\Usuario.cs" />
+    <Compile Include="Models\Extended\Usuario2.cs" />
     <Compile Include="Models\getAsistencia_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -340,16 +338,12 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\User\VerifyAccount.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\President\Index.cshtml" />
     <Content Include="Views\Request\RegistrationRequest.cshtml" />
     <Content Include="Views\Shared\_vistaLogin.cshtml" />
     <Content Include="Views\Shared\_estilo.cshtml" />
-    <Content Include="Views\User\ModuloMiembros.cshtml" />
     <Content Include="Views\Shared\_encabezado.cshtml" />
     <Content Include="Views\Shared\_menuSecretaria.cshtml" />
     <Content Include="Views\Shared\_menuMiembros.cshtml" />

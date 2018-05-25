@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Consilium.Models;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
-using System.Data;
-using System.Data.SqlClient;
+using System.Data.Entity;
 
 namespace Consilium.Controllers
 {
@@ -19,20 +15,21 @@ namespace Consilium.Controllers
         // GET: Customer  
         public ActionResult Index()
         {
-            return View();
+            var sesion = db.Sesion.Include(s => s.TipoSesion);
+            return View(sesion.ToList());
         }
 
 
-        public ActionResult ExportCustomers()
+        public ActionResult ExportActa(int? id)
         {
             ReportDocument rd = new ReportDocument();
 
-            var rs = db.getReporteXSesion(1).ToList();
+            var rs = db.getReporteXSesion(id).ToList();
 
             rd.Load(Path.Combine(Server.MapPath("~/CrystalReports"), "SesionReporte.rpt"));
 
             rd.SetDataSource(rs);
-            rd.SetParameterValue("idSesion", 1);
+            rd.SetParameterValue("idSesion", id);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -41,7 +38,7 @@ namespace Consilium.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
         
-            return File(stream, "application/pdf", "Acta.pdf");           
+            return File(stream, "application/pdf", "Acta" + id.ToString() + ".pdf");           
         }
 
         [HttpGet]
