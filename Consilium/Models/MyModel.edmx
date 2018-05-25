@@ -735,7 +735,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <FunctionImport Name="usuarioYPuntos" ReturnType="Collection(ConsiliumModel.usuarioYPuntos_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="String" />
+          <Parameter Name="idUsuario" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="getPuntosSesion_Result">

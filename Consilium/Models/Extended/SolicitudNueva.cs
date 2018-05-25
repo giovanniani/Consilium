@@ -18,17 +18,18 @@ namespace Consilium.Models.Extended
         [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesita el nombre")]
         public string Nombre { get; set; }
 
-        [Display(Name = "Identificación del solicitante")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesita la identificación del miembro")]
         public string idMiembro { get; set; }
 
         [Display(Name = "Considerandos")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesitan los considerandos")]
         public string Considerandos { get; set; }
 
         [Display(Name = "Resultandos")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesitan los resultandos")]
         public string Resultandos { get; set; }
 
         [Display(Name = "Acuerdos")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Se necesitan los acuerdos")]
         public string Acuerdos { get; set; }
     }
 }

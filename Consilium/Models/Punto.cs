@@ -8,11 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+
 namespace Consilium.Models
 {
 
@@ -36,75 +32,46 @@ public partial class Punto
 
     }
 
-        [Display(Name = "ID Punto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID requerido")]
-        public int idPunto { get; set; }
+
+    public int idPunto { get; set; }
 
     public int idEstado { get; set; }
-        [Display(Name = "Fecha")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        [DataType(DataType.Date)]
-        public System.DateTime fecha { get; set; }
 
+    public System.DateTime fecha { get; set; }
 
-        [Display(Name = "Título")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Título requerido")]
-        public string titulo { get; set; }
+    public string titulo { get; set; }
 
+    public string idUsuario { get; set; }
 
-        [Display(Name = "ID Usuario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID Usuario")]
-        public string idUsuario { get; set; }
+    public string considerandos { get; set; }
 
+    public string resultandos { get; set; }
 
-        [Display(Name = "Considerandos")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Considerandos")]
-        public string considerandos { get; set; }
+    public string acuerdos { get; set; }
 
-
-        [Display(Name = "Resultandos")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Resultandos requeridos.")]
-        public string resultandos { get; set; }
-
-
-        [Display(Name = "Acuerdos")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Acuerdos requeridos")]
-        public string acuerdos { get; set; }
-
-
-        [Display(Name = "Adjunto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Adjunto requerida")]
-        public string adjunto { get; set; }
+    public string adjunto { get; set; }
 
 
 
-        [Display(Name = "Estado Punto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerido")]
-
-        public virtual EstadoPunto EstadoPunto { get; set; }
+    public virtual EstadoPunto EstadoPunto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Moción")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Moción requerida")]
-        public virtual ICollection<Mocion> Mocion { get; set; }
-        [Display(Name = "Usuario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Usuario requerido")]
-        public virtual Usuario Usuario { get; set; }
+
+    public virtual ICollection<Mocion> Mocion { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Punto por Agenda")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Punto por agenda")]
-        public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
+
+    public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Resultando")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Resultando requerido")]
-        public virtual ICollection<ResultadoPunto> ResultadoPunto { get; set; }
+
+    public virtual ICollection<ResultadoPunto> ResultadoPunto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [Display(Name = "Solicitud")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Solicitud requerida")]
-        public virtual ICollection<Solicitud> Solicitud { get; set; }
+
+    public virtual ICollection<Solicitud> Solicitud { get; set; }
 
 }
 

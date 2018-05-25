@@ -14,7 +14,6 @@ namespace Consilium.Models
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public partial class Usuario
     {
@@ -36,48 +35,25 @@ namespace Consilium.Models
         }
 
 
-        [Display(Name = "ID Usuario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Identificación requerida")]
         public string idUsuario { get; set; }
 
-        [Display(Name = "Nombre")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Nombre requerido")]
         public string nombre { get; set; }
 
-
-        [Display(Name = "Apelido paterno")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido paterno requerido")]
         public string apellidoP { get; set; }
 
-        [Display(Name = "Apellido materno")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido materno requerido")]
         public string apellidoM { get; set; }
 
-        [Display(Name = "Tipo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Tipo requerido")]
         public int tipo { get; set; }
 
         public string estado { get; set; }
 
-
-        [Display(Name = "Correo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Correo requerido")]
         public string correo { get; set; }
 
-        [Display(Name = "Teléfono")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
         public string telefono { get; set; }
 
-        [Display(Name = "Fecha de inicio")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha de inicio requerida")]
-        [DataType(DataType.Date)]
         public System.DateTime fechaInicio { get; set; }
 
-        [Display(Name = "Fecha de inicio")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha de inicio requerida")]
-        [DataType(DataType.Date)]
         public System.DateTime fechaFin { get; set; }
-        
 
 
 

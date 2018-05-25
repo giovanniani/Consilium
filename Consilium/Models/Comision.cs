@@ -7,11 +7,6 @@
 //     Los cambios manuales en este archivo se sobrescribirán si se regenera el código.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace Consilium.Models
@@ -31,35 +26,22 @@ public partial class Comision
 
     }
 
-        [Display(Name = "ID Comisión")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Comisión requerida")]
 
-        public int idComision { get; set; }
-        [Display(Name = "Nombre")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Nombre requerido")]
+    public int idComision { get; set; }
 
-        public string nombre { get; set; }
-        [Display(Name = "Objetivo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Objetivo requerido")]
+    public string nombre { get; set; }
 
-        public string objetivo { get; set; }
-        [Display(Name = "Fec. Inicio")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        [DataType(DataType.Date)]
+    public string objetivo { get; set; }
 
-        public Nullable<System.DateTime> fechaFin { get; set; }
-        [Display(Name = "Fec. Fin")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        [DataType(DataType.Date)]
-        public Nullable<System.DateTime> fechaIni { get; set; }
-        [Display(Name = "Estado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerido")]
-        public Nullable<bool> estado { get; set; }
+    public Nullable<System.DateTime> fechaFin { get; set; }
 
-        [Display(Name = "Comisión por sesión")]
+    public Nullable<System.DateTime> fechaIni { get; set; }
+
+    public Nullable<bool> estado { get; set; }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ComisionXSesion> ComisionXSesion { get; set; }
 

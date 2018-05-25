@@ -8,11 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+
 namespace Consilium.Models
 {
 
@@ -21,23 +17,18 @@ using System;
     
 public partial class PuntoXAgenda
 {
-        [Display(Name = "ID Punto Por Agenda")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID requerido")]
-        public int idPuntoXAgenda { get; set; }
-        [Display(Name = "ID Agenda")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID requerido")]
-        public Nullable<int> idAgenda { get; set; }
-        [Display(Name = "ID Punto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID requerido")]
-        public Nullable<int> idPunto { get; set; }
 
-        [Display(Name = "ID Agenda")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "ID requerido")]
+    public int idPuntoXAgenda { get; set; }
 
-        public virtual Agenda Agenda { get; set; }
-        [Display(Name = "Punto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Punto requerido")]
-        public virtual Punto Punto { get; set; }
+    public Nullable<int> idAgenda { get; set; }
+
+    public Nullable<int> idPunto { get; set; }
+
+
+
+    public virtual Agenda Agenda { get; set; }
+
+    public virtual Punto Punto { get; set; }
 
 }
 

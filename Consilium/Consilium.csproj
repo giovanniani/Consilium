@@ -232,7 +232,6 @@
     <Compile Include="Models\Extended\PuntoNuevo.cs" />
     <Compile Include="Models\Extended\Request.cs" />
     <Compile Include="Models\Extended\SesionActiva.cs" />
-    <Compile Include="Models\Extended\SesionFinal.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario2.cs" />
@@ -353,7 +352,7 @@
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Justificacion\JustificacionRequest.cshtml" />
-    <Content Include="Views\Solicitud\SolicitudRequest.cshtml" />
+    <Content Include="Views\Solicitud\CreatePuntoMiembro.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />
@@ -375,11 +374,6 @@
     <Content Include="Views\PuntoXAgenda\Details.cshtml" />
     <Content Include="Views\PuntoXAgenda\Edit.cshtml" />
     <Content Include="Views\PuntoXAgenda\Index.cshtml" />
-    <Content Include="Views\Puntos\Create.cshtml" />
-    <Content Include="Views\Puntos\Delete.cshtml" />
-    <Content Include="Views\Puntos\Details.cshtml" />
-    <Content Include="Views\Puntos\Edit.cshtml" />
-    <Content Include="Views\Puntos\Index.cshtml" />
     <Content Include="Views\Sesion\Create.cshtml" />
     <Content Include="Views\Sesion\Delete.cshtml" />
     <Content Include="Views\Sesion\Details.cshtml" />
@@ -413,6 +407,11 @@
     <Content Include="Views\Sesion\Lista.cshtml" />
     <Content Include="Views\Reporte\ExportList.cshtml" />
     <Content Include="Views\Reporte\ExportPoints.cshtml" />
+    <Content Include="Views\Puntos\Create.cshtml" />
+    <Content Include="Views\Puntos\Delete.cshtml" />
+    <Content Include="Views\Puntos\Details.cshtml" />
+    <Content Include="Views\Puntos\Edit.cshtml" />
+    <Content Include="Views\Puntos\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

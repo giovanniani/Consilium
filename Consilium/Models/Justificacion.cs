@@ -8,11 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+
 namespace Consilium.Models
 {
 
@@ -21,33 +17,22 @@ using System;
     
 public partial class Justificacion
 {
-    [Display(Name = "ID Justificación")]
+
     public int idJustificacion { get; set; }
 
-        [Display(Name = "Fecha")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha requerida")]
-        [DataType(DataType.Date)]
-        public Nullable<System.DateTime> fecha { get; set; }
+    public Nullable<System.DateTime> fecha { get; set; }
 
-        [Display(Name = "ID Usuario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Usuario requerida")]
-        public string idUsuario { get; set; }
+    public string idUsuario { get; set; }
 
-        [Display(Name = "Asunto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Asunto requerida")]
-        public string asunto { get; set; }
+    public string asunto { get; set; }
 
-        [Display(Name = "Texto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Texto requerida")]
-        public string texto { get; set; }
-        [Display(Name = "Estado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerida")]
-        public string estado { get; set; }
+    public string texto { get; set; }
+
+    public string estado { get; set; }
 
 
-        [Display(Name = "Usuario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Usuario requerida")]
-        public virtual Usuario Usuario { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
 
 }
 
