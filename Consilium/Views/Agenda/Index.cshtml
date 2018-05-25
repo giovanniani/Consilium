@@ -49,92 +49,102 @@
 
 
 <body>
-    <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
-    <div id="content-container1">
-        <div id="content-container2">
-            <div id="content">
-                <div style="position: absolute; left: 70%; top: 50%; ">
-                    <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
-                </div>
-                <br /> <br />
-                <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Agendas</h2>
-
-
-                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-                {
-                    <div class="alert alert-success col-md-6">
-                        <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+    @if (HttpContext.Current.User.Identity.Name != "")
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
+        <div id="content-container1">
+            <div id="content-container2">
+                <div id="content">
+                    <div style="position: absolute; left: 70%; top: 50%; ">
+                        <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
-                }
-                else
-                {
-                    using (Html.BeginForm())
+                    <br /> <br />
+                           <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder; width:70% ">Agendas</h2>
+
+
+                    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
-                        @Html.AntiForgeryToken()
-                        <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
-                        <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
-                            <table class="table" id="formatoTabla">
+                        <div class="alert alert-success col-md-6">
+                            <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+                        </div>
+                    }
+                    else
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:23%; width:40%">
+                                <table class="table" id="formatoTabla"align="center">
 
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.fecha)
-                                    </th>
-                                    <th></th>
-                                </tr>
-
-                                @foreach (var item in Model)
-                                {
                                     <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.fecha)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.idAgenda }) |
-                                            @Html.ActionLink("Ver", "Details", new { id = item.idAgenda }) |
-                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idAgenda })
-                                        </td>
+                                        <th align="center" >
+                                            @Html.DisplayNameFor(model => model.fecha)
+                                        </th>
+                                        <th >Opciones</th>
                                     </tr>
 
-                                }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td width="50%">
+                                                @Html.DisplayFor(modelItem => item.fecha)
+                                            </td>
+                                            <td width="50%">
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.idAgenda }) |
+                                                @Html.ActionLink("Ver", "Details", new { id = item.idAgenda }) |
+                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idAgenda })
+                                            </td>
+                                        </tr>
 
-                            </table>
-                            <div class="form-group">
+                                    }
 
-                                <div>
-                                    @Html.ActionLink(">>>Crear nueva agenda<<<", "Create")
+                                </table>
+
+                                                    <div class="form-group">
+
+                                    <div>
+                                        @Html.ActionLink(" >>>Crear nueva agenda<<<", "Create")
+                                    </div>
+
                                 </div>
 
+
+
                             </div>
-
-
-
-                        </div>
-                        if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-danger col-md-6">
-                                <strong>¡Error!  </strong>@ViewBag.Message
-                            </div>
+                            if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger col-md-6">
+                                    <strong>¡Error!  </strong>@ViewBag.Message
+                                </div>
+                            }
                         }
-                    }
 
-                }
-                <br /> <br /><br />
+                    }
+                    <br /> <br /><br />
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="navigation-container">
-        <div id="navigation">
-            @if (ViewBag.param == 0)
-             {
-                @Html.Partial("_menuSecretaria")
-             }
-             else if(ViewBag.param==1) {
-                @Html.Partial("_menuPresidente") 
-             }
+        string[] data = HttpContext.Current.User.Identity.Name.Split('&');
+        <div id="navigation-container">
+            <div id="navigation">
+                @if (data[2] == "0")
+                {
+                    @Html.Partial("_menuSecretaria")
+                }
+                else if (data[2] == "1")
+                {
+                    @Html.Partial("_menuPresidente")
+                }
+            </div>
         </div>
-    </div>
-
+    }
+    else
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_noAutorizado")</div>
+    }
 
 
 

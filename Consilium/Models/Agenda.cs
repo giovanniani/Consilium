@@ -8,7 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
 namespace Consilium.Models
 {
 
@@ -28,19 +32,19 @@ public partial class Agenda
 
     }
 
-
+    [Display(Name = "ID Agenda")]
     public int idAgenda { get; set; }
-
+    [Display(Name = "Fecha")]
     public Nullable<System.DateTime> fecha { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
+    [Display(Name = "Punto por Agenda")]
     public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
+    [Display(Name = "Sesión")]
     public virtual ICollection<Sesion> Sesion { get; set; }
 
 }

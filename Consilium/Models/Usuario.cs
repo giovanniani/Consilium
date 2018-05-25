@@ -8,6 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Consilium.Models
 {
@@ -34,37 +39,63 @@ namespace Consilium.Models
 
         }
 
+        [Display(Name = "ID Usuario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Identificación requerida")]
 
         public string idUsuario { get; set; }
+        [Display(Name = "Nombre")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nombre requerida")]
 
         public string nombre { get; set; }
+        [Display(Name = "Apellido P.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido P. requerido")]
 
         public string apellidoP { get; set; }
+        [Display(Name = "Apellido M.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Apellido M. requerida")]
 
         public string apellidoM { get; set; }
+        [Display(Name = "Tipo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Tipo requerido")]
 
         public int tipo { get; set; }
+        [Display(Name = "Estado")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado requerido")]
 
         public string estado { get; set; }
+        [Display(Name = "Correo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Correo requerido")]
 
         public string correo { get; set; }
+        [Display(Name = "Teléfono")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
 
         public string telefono { get; set; }
+        [Display(Name = "Fec. Inicio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha de inicio requerida")]
+        [DataType(DataType.Date)]
 
         public System.DateTime fechaInicio { get; set; }
 
+        [Display(Name = "Fec. Fin")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha del fin requerida")]
+        [DataType(DataType.Date)]
         public System.DateTime fechaFin { get; set; }
 
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [Display(Name = "Justificación")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Justificación requerida")]
 
         public virtual ICollection<Justificacion> Justificacion { get; set; }
+        [Display(Name = "Logueo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Logueo requerido")]
 
         public virtual Logueo Logueo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
+        [Display(Name = "Miembro por Comisión")]
         public virtual ICollection<MiembroXComision> MiembroXComision { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,9 +107,10 @@ namespace Consilium.Models
         public virtual ICollection<ProponenteXMocion> ProponenteXMocion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
+        [Display(Name = "Punto")]
+       
         public virtual ICollection<Punto> Punto { get; set; }
-
+        [Display(Name = "Tipo")]
         public virtual TipoUsuario TipoUsuario { get; set; }
 
         public bool isSelected { get; set; }

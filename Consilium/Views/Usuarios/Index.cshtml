@@ -60,7 +60,7 @@
                         <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
                     <br /> <br />
-                    <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Miembros del Consejo</h2>
+                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Miembros del Consejo</h2>
 
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
@@ -73,8 +73,8 @@
                         using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            <hr style="height:2px;width: 50% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
+                            <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 450px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
@@ -107,7 +107,7 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
                                         </th>
-                                        <th></th>
+                                        <th width="200px">Opciones</th>
                                     </tr>
                                     @foreach (var item in Model)
                                     {
@@ -142,10 +142,8 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
                                             </td>
-                                            <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario }) |
-                                                @Html.ActionLink("Ver", "Details", new { id = item.idUsuario }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario })
+                                            <td >
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.idUsuario })|@Html.ActionLink("Ver", "Details", new { id = item.idUsuario })|@Html.ActionLink("Eliminar", "Delete", new { id = item.idUsuario })
                                             </td>
                                         </tr>
                                     }
@@ -157,12 +155,6 @@
 
 
 
-                                <div class="form-group">
-                                    <div>
-                                        @Html.ActionLink(">>>Crear nuevo miembro<<<", "Create")
-                                    </div>
-                                </div>
-
                             </div>
                             if (ViewBag.Message != null)
                             {
@@ -173,6 +165,13 @@
                         }
 
                     }
+                    
+
+                                <div class="form-group">
+                                    <div>
+                                        @Html.ActionLink(">>>Crear nuevo miembro<<<", "Create")
+                                    </div>
+                                </div>
                     <br /> <br /><br />
                 </div>
             </div>

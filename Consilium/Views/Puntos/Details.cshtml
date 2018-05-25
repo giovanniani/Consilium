@@ -18,132 +18,138 @@
 </head>
 
 <body>
-    <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
-    <div id="content-container1">
-        <div id="content-container2">
-            <div id="content">
-                <div style="position: absolute; left: 70%; top: 50%; ">
-                    <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
-                </div>
-                <br /> <br />
-                <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ingresar un nuevo punto</h2>
-                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-                {
-                    <div class="alert alert-success col-md-6">
-                        <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+    @if (HttpContext.Current.User.Identity.Name != "")
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
+        <div id="content-container1">
+            <div id="content-container2">
+                <div id="content">
+                    <div style="position: absolute; left: 70%; top: 50%; ">
+                        <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
-                }
-                else
-                {
-                    using (Html.BeginForm())
+                    <br /> <br />
+                    <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ingresar un nuevo punto</h2>
+                    @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
-                            <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
-
-
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.idUsuario, "idUsuario", htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.DropDownList("idUsuario", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.considerandos, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.considerandos, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.considerandos, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.resultandos, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.resultandos, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.resultandos, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.acuerdos, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.acuerdos, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.acuerdos, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.adjunto, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.adjunto, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.adjunto, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="form-group">
-                                <div class="col-md-offset-4 col-md-10">
-                                    <input type="submit" value="INSERTAR" class="w3-button w3-block w3-black" style="width:17% " />
-                                </div>
-                                <div>
-                                    @Html.ActionLink("Regresar", "Index")
-                                </div>
-
-                            </div>
-
-
-
+                        <div class="alert alert-success col-md-6">
+                            <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
                         </div>
-                        if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-danger col-md-6">
-                                <strong>¡Error!  </strong>@ViewBag.Message
-                            </div>
-                        }
                     }
+                    else
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
+                                <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
 
-                }
-                <br /> <br /><br />
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.idUsuario, "idUsuario", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.DropDownList("idUsuario", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.considerandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.considerandos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.considerandos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultandos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultandos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.acuerdos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.acuerdos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.acuerdos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.adjunto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.adjunto, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.adjunto, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-10">
+                                        <input type="submit" value="INSERTAR" class="w3-button w3-block w3-black" style="width:17% " />
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink("Regresar", "Index")
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                            if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger col-md-6">
+                                    <strong>¡Error!  </strong>@ViewBag.Message
+                                </div>
+                            }
+                        }
+
+                    }
+                    <br /> <br /><br />
+                </div>
             </div>
         </div>
-    </div>
-
-
-    <div id="navigation-container">
-        <div id="navigation">
-            @if (ViewBag.param == 0)
-            {
-                @Html.Partial("_menuSecretaria")
-            }
-            else if (ViewBag.param == 1)
-            {
-                @Html.Partial("_menuPresidente")
-            }
+        string[] data = HttpContext.Current.User.Identity.Name.Split('&');
+        <div id="navigation-container">
+            <div id="navigation">
+                @if (data[2] == "0")
+                {
+                    @Html.Partial("_menuSecretaria")
+                }
+                else if (data[2] == "1")
+                {
+                    @Html.Partial("_menuPresidente")
+                }
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_noAutorizado")</div>
+    }
 </body>

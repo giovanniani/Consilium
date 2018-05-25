@@ -50,7 +50,9 @@
 
 
 <body>
-    <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
+    @if (HttpContext.Current.User.Identity.Name != "")
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
 
         <div id="content-container1">
             <div id="content-container2">
@@ -59,7 +61,7 @@
                         <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
                     <br /> <br />
-                    <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Reporte de una sesión</h2>
+                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Reporte de una sesión</h2>
 
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
@@ -72,11 +74,11 @@
                         using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            <hr style="height:2px;width: 50% ;border:none;color:#333;background-color:#333;" />
+                            <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
 
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:25%">
                                 Sesión
-                                <input id="Text1" type="text" />
+                                <input id="Text1" type="text" /><br ><br>
                                 <a href="@Url.Action("ExportCustomers")"> >>> Descargar Reporte en PDF <<< </a>
 
                             </div>
@@ -94,11 +96,26 @@
                 </div>
             </div>
         </div>
+
+        string[] data = HttpContext.Current.User.Identity.Name.Split('&');
         <div id="navigation-container">
             <div id="navigation">
-                @Html.Partial("_menuSecretaria")
+                @if (data[2] == "0")
+                {
+                    @Html.Partial("_menuSecretaria")
+                }
+                else if (data[2] == "1")
+                {
+                    @Html.Partial("_menuPresidente")
+                }
             </div>
         </div>
+    }
+    else
+    {
+        <div id="contenedorVistaParcial">@Html.Partial("_noAutorizado")</div>
+    }
+
 
 
 
