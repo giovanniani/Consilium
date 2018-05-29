@@ -17,9 +17,8 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 
-<body>
-    string[] data = HttpContext.Current.User.Identity.Name.Split('&');
-    @if (HttpContext.Current.User.Identity.Name == "3")
+<body>    
+    @if (HttpContext.Current.User.Identity.Name != "")
     {
         <div id="contenedorVistaParcial">@Html.Partial("_encabezado")</div>
         <div id="content-container1">

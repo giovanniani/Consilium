@@ -158,10 +158,10 @@ namespace Consilium.Controllers
             ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
             var p = db.PuntoXAgenda.Where(a => a.idPunto == id).FirstOrDefault();
             var q = db.Sesion.Where(c => c.idAgenda == p.idAgenda).FirstOrDefault();         
-            var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
-            rs.quorum = quorum;
-            rs.idSesion = q.idSesion;
-            return View(rs);
+            //var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
+            //rs.quorum = quorum;
+            //rs.idSesion = q.idSesion;
+            return View();
         }
 
         // POST: ResultadoPuntoes/Create
