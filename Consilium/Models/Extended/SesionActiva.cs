@@ -7,8 +7,8 @@ namespace Consilium.Models.Extended
 {
     public class SesionActiva
     {
-        public int idSesion;
-        public List<PuntoXAgenda> Puntos { get; set; }
+        public string idSesion;
+        public List<PuntoXSesion> Puntos { get; set; }
 
         public int quorum;
     }

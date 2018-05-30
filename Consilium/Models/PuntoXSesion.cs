@@ -15,20 +15,18 @@ namespace Consilium.Models
 using System;
     using System.Collections.Generic;
     
-public partial class PuntoXAgenda
+public partial class PuntoXSesion
 {
 
-    public int idPuntoXAgenda { get; set; }
+    public int idPuntoXSesion { get; set; }
 
-    public Nullable<int> idAgenda { get; set; }
+    public string idSesion { get; set; }
 
-    public Nullable<int> idPunto { get; set; }
+    public int idPunto { get; set; }
 
 
 
-    public virtual Agenda Agenda { get; set; }
-
-    public virtual Punto Punto { get; set; }
+    public virtual Sesion Sesion { get; set; }
 
 }
 

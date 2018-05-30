@@ -126,14 +126,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="Agenda">
-      <EntityTypeMapping TypeName="ConsiliumModel.Agenda">
-        <MappingFragment StoreEntitySet="Agenda">
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usuarioYPuntos" FunctionName="ConsiliumModel.Store.usuarioYPuntos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ConsiliumModel.usuarioYPuntos_Result">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
+          <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="Comision">
       <EntityTypeMapping TypeName="ConsiliumModel.Comision">
         <MappingFragment StoreEntitySet="Comision">
@@ -238,15 +241,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PuntoXAgenda">
-      <EntityTypeMapping TypeName="ConsiliumModel.PuntoXAgenda">
-        <MappingFragment StoreEntitySet="PuntoXAgenda">
-          <ScalarProperty Name="idPunto" ColumnName="idPunto" />
-          <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
-          <ScalarProperty Name="idPuntoXAgenda" ColumnName="idPuntoXAgenda" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ResultadoPunto">
       <EntityTypeMapping TypeName="ConsiliumModel.ResultadoPunto">
         <MappingFragment StoreEntitySet="ResultadoPunto">
@@ -260,16 +254,6 @@
           <ScalarProperty Name="votosFavor" ColumnName="votosFavor" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idResultado" ColumnName="idResultado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Sesion">
-      <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
-        <MappingFragment StoreEntitySet="Sesion">
-          <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-          <ScalarProperty Name="idSesion" ColumnName="idSesion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -317,26 +301,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="usuarioYPuntos" FunctionName="ConsiliumModel.Store.usuarioYPuntos">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ConsiliumModel.usuarioYPuntos_Result">
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="apellidoP" ColumnName="apellidoP" />
-          <ScalarProperty Name="apellidoM" ColumnName="apellidoM" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <EntitySetMapping Name="Motion">
-      <EntityTypeMapping TypeName="ConsiliumModel.Motion">
-        <MappingFragment StoreEntitySet="Motion">
-          <ScalarProperty Name="Propuesta" ColumnName="Propuesta" />
-          <ScalarProperty Name="Proponentes" ColumnName="Proponentes" />
-          <ScalarProperty Name="member" ColumnName="member" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Tittle" ColumnName="Tittle" />
-          <ScalarProperty Name="idMotion" ColumnName="idMotion" />
+    <EntitySetMapping Name="PuntoXSesion">
+      <EntityTypeMapping TypeName="ConsiliumModel.PuntoXSesion">
+        <MappingFragment StoreEntitySet="PuntoXSesion">
+          <ScalarProperty Name="idPunto" ColumnName="idPunto" />
+          <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+          <ScalarProperty Name="idPuntoXSesion" ColumnName="idPuntoXSesion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sesion">
+      <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
+        <MappingFragment StoreEntitySet="Sesion">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+          <ScalarProperty Name="idSesion" ColumnName="idSesion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

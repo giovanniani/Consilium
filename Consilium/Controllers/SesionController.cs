@@ -64,7 +64,7 @@ namespace Consilium.Controllers
         }
 
         // GET: Sesion/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -131,7 +131,7 @@ namespace Consilium.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Active(int? id)
+        public ActionResult Active(string id)
         {
             if (id == null)
             {
@@ -146,18 +146,18 @@ namespace Consilium.Controllers
             SesionActiva sesionActiva = new SesionActiva();
             sesionActiva.idSesion = sesion.idSesion;
 
-            var u = db.PuntoXAgenda.Where(a => a.idAgenda == sesion.idAgenda);
+            var u = db.PuntoXSesion.Where(a => a.idSesion == sesion.idSesion);
             sesionActiva.Puntos = u.ToList();
             sesionActiva.quorum = 1;
 
             return View(sesionActiva);
         }
 
-        public ActionResult Vote(int? id, int quorum)
+        public ActionResult Vote(int id, int quorum)
         {
             ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
-            var p = db.PuntoXAgenda.Where(a => a.idPunto == id).FirstOrDefault();
-            var q = db.Sesion.Where(c => c.idAgenda == p.idAgenda).FirstOrDefault();         
+            var p = db.PuntoXSesion.Where(a => a.idPunto == id).FirstOrDefault();
+            //var q = db.Sesion.Where(c => c.idAgenda == p.idAgenda).FirstOrDefault();         
             //var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
             //rs.quorum = quorum;
             //rs.idSesion = q.idSesion;
@@ -194,13 +194,13 @@ namespace Consilium.Controllers
         }
 
 
-        public ActionResult Lista(int? id)
+        public ActionResult Lista(string id)
         {
             UsuariosModelo usuario = new UsuariosModelo();
             using (ConsiliumEntities db = new ConsiliumEntities())
             {
                 usuario.Usuarios = db.Usuario.Where(e => e.estado == "1" && (e.tipo == 2 || e.tipo == 3)).ToList();
-                usuario.sesion = id.GetValueOrDefault();
+                usuario.sesion = id;
             }
             var u = db.MiembroXSesion.Where(a => a.idSesion == id).ToList();
             for(int i = 0; i < u.Count; i++)
@@ -214,7 +214,6 @@ namespace Consilium.Controllers
                 }
             }
             ViewBag.idSesion = id;
-            sesionId = id.HasValue ? id : 1;
             return View(usuario);
         }
 

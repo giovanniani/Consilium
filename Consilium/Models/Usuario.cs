@@ -88,7 +88,7 @@ namespace Consilium.Models
     {
         public List<Usuario> Usuarios { get; set; }
 
-        public int sesion { get; set; }
+        public string sesion { get; set; }
     }
 
 }

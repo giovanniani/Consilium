@@ -35,8 +35,6 @@ public partial class ConsiliumEntities : DbContext
     }
 
 
-    public virtual DbSet<Agenda> Agenda { get; set; }
-
     public virtual DbSet<Comision> Comision { get; set; }
 
     public virtual DbSet<ComisionXSesion> ComisionXSesion { get; set; }
@@ -57,11 +55,7 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Punto> Punto { get; set; }
 
-    public virtual DbSet<PuntoXAgenda> PuntoXAgenda { get; set; }
-
     public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
-
-    public virtual DbSet<Sesion> Sesion { get; set; }
 
     public virtual DbSet<Solicitud> Solicitud { get; set; }
 
@@ -71,7 +65,9 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-    public virtual DbSet<Motion> Motion { get; set; }
+    public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
+
+    public virtual DbSet<Sesion> Sesion { get; set; }
 
 
     public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)

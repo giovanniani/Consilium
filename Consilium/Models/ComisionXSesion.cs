@@ -31,17 +31,17 @@ public partial class ComisionXSesion
 
     public Nullable<int> idComision { get; set; }
 
-    public Nullable<int> idSesion { get; set; }
+    public string idSesion { get; set; }
 
 
 
     public virtual Comision Comision { get; set; }
 
-    public virtual Sesion Sesion { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<MiembroXComision> MiembroXComision { get; set; }
+
+    public virtual Sesion Sesion { get; set; }
 
 }
 

@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ConsiliumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Agenda">
-    <Key>
-      <PropertyRef Name="idAgenda" />
-    </Key>
-    <Property Name="idAgenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="fecha" Type="date" />
-  </EntityType>
   <EntityType Name="Comision">
     <Key>
       <PropertyRef Name="idComision" />
@@ -24,7 +17,7 @@
     </Key>
     <Property Name="idComisionXSesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idComision" Type="int" />
-    <Property Name="idSesion" Type="int" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="EstadoPunto">
     <Key>
@@ -67,7 +60,7 @@
     </Key>
     <Property Name="idMiembroXQuorum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="idSesion" Type="int" Nullable="false" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="presente" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Mocion">
@@ -78,17 +71,6 @@
     <Property Name="idPunto" Type="int" />
     <Property Name="punto" Type="nvarchar(max)" />
     <Property Name="propuesta" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="Motion">
-    <Key>
-      <PropertyRef Name="idMotion" />
-    </Key>
-    <Property Name="idMotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Tittle" Type="varchar" MaxLength="50" />
-    <Property Name="Date" Type="date" />
-    <Property Name="member" Type="varchar" MaxLength="50" />
-    <Property Name="Proponentes" Type="varchar" MaxLength="50" />
-    <Property Name="Propuesta" Type="varchar" MaxLength="350" />
   </EntityType>
   <EntityType Name="ProponenteXMocion">
     <Key>
@@ -112,13 +94,13 @@
     <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="PuntoXAgenda">
+  <EntityType Name="PuntoXSesion">
     <Key>
-      <PropertyRef Name="idPuntoXAgenda" />
+      <PropertyRef Name="idPuntoXSesion" />
     </Key>
-    <Property Name="idPuntoXAgenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idAgenda" Type="int" />
-    <Property Name="idPunto" Type="int" />
+    <Property Name="idPuntoXSesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="idPunto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ResultadoPunto">
     <Key>
@@ -139,10 +121,9 @@
     <Key>
       <PropertyRef Name="idSesion" />
     </Key>
-    <Property Name="idSesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="idTipo" Type="int" Nullable="false" />
     <Property Name="fecha" Type="date" Nullable="false" />
-    <Property Name="idAgenda" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Solicitud">
     <Key>
@@ -348,29 +329,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PuntoXAgenda_Agenda">
-    <End Role="Agenda" Type="Self.Agenda" Multiplicity="0..1" />
-    <End Role="PuntoXAgenda" Type="Self.PuntoXAgenda" Multiplicity="*" />
+  <Association Name="FK_PuntoXSesion_Sesion">
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
+    <End Role="PuntoXSesion" Type="Self.PuntoXSesion" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Agenda">
-        <PropertyRef Name="idAgenda" />
+      <Principal Role="Sesion">
+        <PropertyRef Name="idSesion" />
       </Principal>
-      <Dependent Role="PuntoXAgenda">
-        <PropertyRef Name="idAgenda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PuntoXAgenda_Punto">
-    <End Role="Punto" Type="Self.Punto" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="PuntoXAgenda" Type="Self.PuntoXAgenda" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Punto">
-        <PropertyRef Name="idPunto" />
-      </Principal>
-      <Dependent Role="PuntoXAgenda">
-        <PropertyRef Name="idPunto" />
+      <Dependent Role="PuntoXSesion">
+        <PropertyRef Name="idSesion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -383,18 +350,6 @@
       </Principal>
       <Dependent Role="ResultadoPunto">
         <PropertyRef Name="idPunto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Sesion_Agenda">
-    <End Role="Agenda" Type="Self.Agenda" Multiplicity="1" />
-    <End Role="Sesion" Type="Self.Sesion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Agenda">
-        <PropertyRef Name="idAgenda" />
-      </Principal>
-      <Dependent Role="Sesion">
-        <PropertyRef Name="idAgenda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -489,7 +444,6 @@
     <Parameter Name="estadoPunto" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="ConsiliumModelStoreContainer">
-    <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComisionXSesion" EntityType="Self.ComisionXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoPunto" EntityType="Self.EstadoPunto" Schema="dbo" store:Type="Tables" />
@@ -498,10 +452,9 @@
     <EntitySet Name="MiembroXComision" EntityType="Self.MiembroXComision" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiembroXSesion" EntityType="Self.MiembroXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mocion" EntityType="Self.Mocion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Motion" EntityType="Self.Motion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProponenteXMocion" EntityType="Self.ProponenteXMocion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Punto" EntityType="Self.Punto" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PuntoXAgenda" EntityType="Self.PuntoXAgenda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PuntoXSesion" EntityType="Self.PuntoXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResultadoPunto" EntityType="Self.ResultadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
@@ -560,21 +513,13 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Punto" EntitySet="Punto" />
     </AssociationSet>
-    <AssociationSet Name="FK_PuntoXAgenda_Agenda" Association="Self.FK_PuntoXAgenda_Agenda">
-      <End Role="Agenda" EntitySet="Agenda" />
-      <End Role="PuntoXAgenda" EntitySet="PuntoXAgenda" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PuntoXAgenda_Punto" Association="Self.FK_PuntoXAgenda_Punto">
-      <End Role="Punto" EntitySet="Punto" />
-      <End Role="PuntoXAgenda" EntitySet="PuntoXAgenda" />
+    <AssociationSet Name="FK_PuntoXSesion_Sesion" Association="Self.FK_PuntoXSesion_Sesion">
+      <End Role="Sesion" EntitySet="Sesion" />
+      <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
     </AssociationSet>
     <AssociationSet Name="FK_ResultadoPunto_Punto" Association="Self.FK_ResultadoPunto_Punto">
       <End Role="Punto" EntitySet="Punto" />
       <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Sesion_Agenda" Association="Self.FK_Sesion_Agenda">
-      <End Role="Agenda" EntitySet="Agenda" />
-      <End Role="Sesion" EntitySet="Sesion" />
     </AssociationSet>
     <AssociationSet Name="FK_Sesion_TipoSesion" Association="Self.FK_Sesion_TipoSesion">
       <End Role="TipoSesion" EntitySet="TipoSesion" />

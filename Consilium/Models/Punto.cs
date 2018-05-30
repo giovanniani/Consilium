@@ -24,8 +24,6 @@ public partial class Punto
 
         this.Mocion = new HashSet<Mocion>();
 
-        this.PuntoXAgenda = new HashSet<PuntoXAgenda>();
-
         this.ResultadoPunto = new HashSet<ResultadoPunto>();
 
         this.Solicitud = new HashSet<Solicitud>();
@@ -60,10 +58,6 @@ public partial class Punto
     public virtual ICollection<Mocion> Mocion { get; set; }
 
     public virtual Usuario Usuario { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<PuntoXAgenda> PuntoXAgenda { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

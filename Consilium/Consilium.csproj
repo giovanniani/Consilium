@@ -167,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\ComisionesController.cs" />
     <Compile Include="Controllers\ComisionXSesionController.cs" />
     <Compile Include="App_Data\DataSet2.Designer.cs">
@@ -188,10 +187,8 @@
     <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
-    <Compile Include="Controllers\PuntoXAgendaController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\ResultadoPuntoesController.cs" />
-    <Compile Include="Controllers\SesionActivaController.cs" />
     <Compile Include="Controllers\SesionController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -217,9 +214,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Agenda.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comision.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -279,9 +273,6 @@
     <Compile Include="Models\Mocion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Motion.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -303,7 +294,7 @@
     <Compile Include="Models\Punto.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PuntoXAgenda.cs">
+    <Compile Include="Models\PuntoXSesion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ResultadoPunto.cs">
@@ -369,11 +360,6 @@
     <Content Include="Views\Justificaciones\Edit.cshtml" />
     <Content Include="Views\Justificaciones\Index.cshtml" />
     <Content Include="Views\Shared\_menuPresidente.cshtml" />
-    <Content Include="Views\Agenda\Create.cshtml" />
-    <Content Include="Views\Agenda\Delete.cshtml" />
-    <Content Include="Views\Agenda\Details.cshtml" />
-    <Content Include="Views\Agenda\Edit.cshtml" />
-    <Content Include="Views\Agenda\Index.cshtml" />
     <Content Include="Views\PuntoXAgenda\Create.cshtml" />
     <Content Include="Views\PuntoXAgenda\Delete.cshtml" />
     <Content Include="Views\PuntoXAgenda\Details.cshtml" />
@@ -382,7 +368,6 @@
     <Content Include="Views\Sesion\Create.cshtml" />
     <Content Include="Views\Sesion\Delete.cshtml" />
     <Content Include="Views\Sesion\Details.cshtml" />
-    <Content Include="Views\Sesion\Edit.cshtml" />
     <Content Include="Views\Sesion\Index.cshtml" />
     <Content Include="Views\ComisionXSesion\Create.cshtml" />
     <Content Include="Views\ComisionXSesion\Delete.cshtml" />
@@ -422,6 +407,7 @@
     <Content Include="Views\Mocion\Details.cshtml" />
     <Content Include="Views\Mocion\Edit.cshtml" />
     <Content Include="Views\Mocion\Index.cshtml" />
+    <Content Include="Views\Sesion\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

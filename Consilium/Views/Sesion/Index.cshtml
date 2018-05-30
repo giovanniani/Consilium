@@ -79,13 +79,13 @@
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
+                                            @Html.DisplayNameFor(model => model.idSesion)
+                                        </th>
+                                        <th>
                                             @Html.DisplayNameFor(model => model.fecha)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.idAgenda)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.TipoSesion.nombre)
+                                            Tipo de sesión
                                         </th>
                                         <th>Opciones</th>
                                     </tr>
@@ -94,17 +94,16 @@
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
+                                                @Html.DisplayFor(modelItem => item.idSesion)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.idAgenda)
+                                                @Html.DisplayFor(modelItem => item.fecha)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.TipoSesion.nombre)
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.idSesion }) |
-                                                @Html.ActionLink("Detalles", "Details", new { id = item.idSesion }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.idSesion }) |
                                                 @Html.ActionLink("Iniciar", "Active", new { id = item.idSesion })
                                             </td>

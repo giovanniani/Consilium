@@ -22,7 +22,7 @@ public partial class MiembroXSesion
 
     public string idUsuario { get; set; }
 
-    public int idSesion { get; set; }
+    public string idSesion { get; set; }
 
     public bool presente { get; set; }
 

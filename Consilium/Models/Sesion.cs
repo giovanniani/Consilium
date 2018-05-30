@@ -26,20 +26,18 @@ public partial class Sesion
 
         this.MiembroXSesion = new HashSet<MiembroXSesion>();
 
+        this.PuntoXSesion = new HashSet<PuntoXSesion>();
+
     }
 
 
-    public int idSesion { get; set; }
+    public string idSesion { get; set; }
 
     public int idTipo { get; set; }
 
     public System.DateTime fecha { get; set; }
 
-    public int idAgenda { get; set; }
 
-
-
-    public virtual Agenda Agenda { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -48,6 +46,10 @@ public partial class Sesion
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<MiembroXSesion> MiembroXSesion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
 
     public virtual TipoSesion TipoSesion { get; set; }
 
