@@ -21,22 +21,8 @@ namespace Consilium.Controllers
         {
             var sesion = db.Sesion.Include(s => s.TipoSesion);            
             return View(sesion.ToList());
-        }
-
-        // GET: Sesion/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sesion sesion = db.Sesion.Find(id);
-            if (sesion == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sesion);
-        }
+        }      
+      
 
         // GET: Sesion/Create
         public ActionResult Create()
@@ -248,6 +234,50 @@ namespace Consilium.Controllers
 
 
             return View(usuario);
+        }
+        [HttpGet]
+        public ActionResult Puntos(string id)
+        {
+
+            SesionPuntos sesionPuntos = new SesionPuntos();
+            var puntos = db.Punto.Where(a => a.idEstado == 1).ToList();
+            var puntosActuales = db.PuntoXSesion.Where(a => a.idSesion == id);
+            sesionPuntos.Puntos = puntos;
+            sesionPuntos.idSesion = id;
+            sesionPuntos.PuntosActuales = puntosActuales.ToList();
+            return View(sesionPuntos);
+        }
+
+        public ActionResult agregarPunto(int? idPunto, string idSesion)
+        {
+            if(idPunto != null)
+            {
+                Punto punto = db.Punto.Find(idPunto);
+                if(punto != null)
+                {
+                    PuntoXSesion puntoxSesion = db.PuntoXSesion.Find(idPunto);
+                    if(puntoxSesion == null)
+                    {
+                        PuntoXSesion puntoNuevo = new PuntoXSesion();
+                        puntoNuevo.idPunto = idPunto.GetValueOrDefault();
+                        puntoNuevo.idSesion = idSesion;
+                        db.PuntoXSesion.Add(puntoNuevo);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.updatePuntoXSesion(puntoxSesion.idPuntoXSesion, idPunto, idSesion);
+                    }
+                }
+
+            }
+            SesionPuntos sesionPuntos = new SesionPuntos();
+            var puntos = db.Punto.Where(a => a.idEstado == 1).ToList();
+            var puntosActuales = db.PuntoXSesion.Where(a => a.idSesion == idSesion);
+            sesionPuntos.Puntos = puntos;
+            sesionPuntos.idSesion = idSesion;
+            sesionPuntos.PuntosActuales = puntosActuales.ToList();
+            return RedirectToAction("Puntos","Sesion", new { id = idSesion});
         }
     }   
 }

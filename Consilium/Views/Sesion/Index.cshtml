@@ -104,8 +104,9 @@
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.idSesion }) |
+                                                @Html.ActionLink("Ver puntos", "Puntos", new { id = item.idSesion }) |
+                                                @Html.ActionLink("Iniciar", "Active", new { id = item.idSesion }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.idSesion }) |
-                                                @Html.ActionLink("Iniciar", "Active", new { id = item.idSesion })
                                             </td>
                                         </tr>
                                     }

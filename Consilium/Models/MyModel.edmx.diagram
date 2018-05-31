@@ -34,12 +34,13 @@
         <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_Usuario_TipoUsuario" />
-        <EntityTypeShape EntityType="ConsiliumModel.PuntoXSesion" Width="1.5" PointX="6" PointY="2.375" />
         <EntityTypeShape EntityType="ConsiliumModel.Sesion" Width="1.5" PointX="3.75" PointY="2.125" />
         <AssociationConnector Association="ConsiliumModel.FK_ComisionXSesion_Sesion" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXSesion_Sesion" />
-        <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Sesion" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" />
+        <EntityTypeShape EntityType="ConsiliumModel.PuntoXSesion" Width="1.5" PointX="10.5" PointY="6" />
+        <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Punto" />
+        <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Sesion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

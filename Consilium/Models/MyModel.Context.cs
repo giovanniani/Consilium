@@ -65,9 +65,9 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-    public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
-
     public virtual DbSet<Sesion> Sesion { get; set; }
+
+    public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
 
 
     public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)
@@ -106,18 +106,6 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateMiembroXSesion", idMiembroParameter, idSesionParameter, isSelectedParameter);
-    }
-
-
-    public virtual ObjectResult<getPuntosSesion_Result> getPuntosSesion(Nullable<int> idSesion)
-    {
-
-        var idSesionParameter = idSesion.HasValue ?
-            new ObjectParameter("idSesion", idSesion) :
-            new ObjectParameter("idSesion", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPuntosSesion_Result>("getPuntosSesion", idSesionParameter);
     }
 
 
@@ -285,6 +273,40 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usuarioYPuntos_Result>("usuarioYPuntos", idUsuarioParameter);
+    }
+
+
+    public virtual ObjectResult<getPuntosSesion_Result1> getPuntosSesion(string idSesion)
+    {
+
+        var idSesionParameter = idSesion != null ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPuntosSesion_Result1>("getPuntosSesion", idSesionParameter);
+    }
+
+
+    public virtual int updatePuntoXSesion(Nullable<int> idPuntoXSesion, Nullable<int> idPunto, string idSesion)
+    {
+
+        var idPuntoXSesionParameter = idPuntoXSesion.HasValue ?
+            new ObjectParameter("idPuntoXSesion", idPuntoXSesion) :
+            new ObjectParameter("idPuntoXSesion", typeof(int));
+
+
+        var idPuntoParameter = idPunto.HasValue ?
+            new ObjectParameter("idPunto", idPunto) :
+            new ObjectParameter("idPunto", typeof(int));
+
+
+        var idSesionParameter = idSesion != null ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updatePuntoXSesion", idPuntoXSesionParameter, idPuntoParameter, idSesionParameter);
     }
 
 }

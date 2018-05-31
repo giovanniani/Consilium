@@ -228,6 +228,7 @@
     <Compile Include="Models\Extended\PuntoNuevo.cs" />
     <Compile Include="Models\Extended\Request.cs" />
     <Compile Include="Models\Extended\SesionActiva.cs" />
+    <Compile Include="Models\Extended\SesionPuntos.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario2.cs" />
@@ -238,6 +239,9 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getPuntosSesion_Result.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\getPuntosSesion_Result1.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getPuntosXUsuaio_Result.cs">
@@ -367,7 +371,6 @@
     <Content Include="Views\PuntoXAgenda\Index.cshtml" />
     <Content Include="Views\Sesion\Create.cshtml" />
     <Content Include="Views\Sesion\Delete.cshtml" />
-    <Content Include="Views\Sesion\Details.cshtml" />
     <Content Include="Views\Sesion\Index.cshtml" />
     <Content Include="Views\ComisionXSesion\Create.cshtml" />
     <Content Include="Views\ComisionXSesion\Delete.cshtml" />
@@ -408,6 +411,7 @@
     <Content Include="Views\Mocion\Edit.cshtml" />
     <Content Include="Views\Mocion\Index.cshtml" />
     <Content Include="Views\Sesion\Edit.cshtml" />
+    <Content Include="Views\Sesion\Puntos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

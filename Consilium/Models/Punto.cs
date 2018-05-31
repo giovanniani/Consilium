@@ -28,6 +28,8 @@ public partial class Punto
 
         this.Solicitud = new HashSet<Solicitud>();
 
+        this.PuntoXSesion = new HashSet<PuntoXSesion>();
+
     }
 
 
@@ -66,6 +68,10 @@ public partial class Punto
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Solicitud> Solicitud { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
 
 }
 

@@ -73,7 +73,7 @@
                                                 @Html.DisplayFor(modelItem => item.Punto.EstadoPunto.nombre)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Votar", "Vote", new { id = item.Punto.idPunto, quorum = Model.quorum }, null)
+                                                @Html.ActionLink("Votar", "Vote", new { id = item.Punto.idPunto, quorum = Model.quorum })
                                             </td>
                                         </tr>
                                     }

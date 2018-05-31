@@ -329,6 +329,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PuntoXSesion_Punto">
+    <End Role="Punto" Type="Self.Punto" Multiplicity="1" />
+    <End Role="PuntoXSesion" Type="Self.PuntoXSesion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Punto">
+        <PropertyRef Name="idPunto" />
+      </Principal>
+      <Dependent Role="PuntoXSesion">
+        <PropertyRef Name="idPunto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PuntoXSesion_Sesion">
     <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
     <End Role="PuntoXSesion" Type="Self.PuntoXSesion" Multiplicity="*" />
@@ -405,7 +417,7 @@
     <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="getPuntosSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="idSesion" Type="int" Mode="In" />
+    <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="getPuntosXUsuaio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idUsuario" Type="nvarchar" Mode="In" />
@@ -426,6 +438,11 @@
     <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
     <Parameter Name="idSesion" Type="int" Mode="In" />
     <Parameter Name="isSelected" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="updatePuntoXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPuntoXSesion" Type="int" Mode="In" />
+    <Parameter Name="idPunto" Type="int" Mode="In" />
+    <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="updateResultadoPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPunto" Type="int" Mode="In" />
@@ -512,6 +529,10 @@
     <AssociationSet Name="FK_Punto_Usuario" Association="Self.FK_Punto_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Punto" EntitySet="Punto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PuntoXSesion_Punto" Association="Self.FK_PuntoXSesion_Punto">
+      <End Role="Punto" EntitySet="Punto" />
+      <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
     </AssociationSet>
     <AssociationSet Name="FK_PuntoXSesion_Sesion" Association="Self.FK_PuntoXSesion_Sesion">
       <End Role="Sesion" EntitySet="Sesion" />

@@ -47,11 +47,11 @@ public partial class Sesion
 
     public virtual ICollection<MiembroXSesion> MiembroXSesion { get; set; }
 
+    public virtual TipoSesion TipoSesion { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
-
-    public virtual TipoSesion TipoSesion { get; set; }
 
 }
 
