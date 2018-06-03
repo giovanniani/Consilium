@@ -74,38 +74,25 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 450px">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.nombre)
+                                           Nombre
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.apellidoP)
+                                            Apellido P.
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.apellidoM)
+                                           Apellido M.
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.estado)
+                                            Estado
                                         </th>
+                         
+                                  
                                         <th>
-                                            @Html.DisplayNameFor(model => model.correo)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.telefono)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.fechaInicio)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.fechaFin)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Logueo.nombreUsuario)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.TipoUsuario.nombre)
+                                            Tipo
                                         </th>
                                         <th width="200px">Opciones</th>
                                     </tr>
@@ -122,23 +109,17 @@
                                                 @Html.DisplayFor(modelItem => item.apellidoM)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.estado)
+
+                                                @if (item.estado == "1")
+                                                {
+                                                    <p>Activo</p>
+                                                }
+                                                else
+                                                {
+                                                   <p>No Activo</p>
+                                                }
                                             </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.correo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.telefono)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.fechaInicio)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.fechaFin)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Logueo.nombreUsuario)
-                                            </td>
+                                   
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.TipoUsuario.nombre)
                                             </td>

@@ -90,7 +90,7 @@
           <Property Name="resultandos" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="propuesta" Type="nvarchar" MaxLength="500" />
+          <Property Name="propuesta" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="tipoPunto" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="PuntoXSesion">
@@ -1165,7 +1165,7 @@
           <Property Name="resultandos" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="acuerdos" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="adjunto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="propuesta" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="propuesta" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_Comision_Punto" FromRole="Punto" ToRole="Comision" />
           <NavigationProperty Name="EstadoPunto" Relationship="ConsiliumModel.FK_Punto_EstadoPunto" FromRole="Punto" ToRole="EstadoPunto" />
           <NavigationProperty Name="Mocion" Relationship="ConsiliumModel.FK_Mocion_Punto" FromRole="Punto" ToRole="Mocion" />

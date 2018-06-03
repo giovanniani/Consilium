@@ -183,7 +183,6 @@
     <Compile Include="Controllers\JustificacionesController.cs" />
     <Compile Include="Controllers\MiembroXComisionController.cs" />
     <Compile Include="Controllers\MocionController.cs" />
-    <Compile Include="Controllers\MotionController.cs" />
     <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\PuntosController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -338,17 +337,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\President\Index.cshtml" />
-    <Content Include="Views\Request\RegistrationRequest.cshtml" />
     <Content Include="Views\Shared\_vistaLogin.cshtml" />
     <Content Include="Views\Shared\_estilo.cshtml" />
     <Content Include="Views\Shared\_encabezado.cshtml" />
     <Content Include="Views\Shared\_menuSecretaria.cshtml" />
     <Content Include="Views\Shared\_menuMiembros.cshtml" />
     <Content Include="Views\Justification\JustificationRequest.cshtml" />
-    <Content Include="Views\Motion\MotionRequest.cshtml" />
-    <Content Include="Views\Secretary\Index.cshtml" />
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Justificacion\JustificacionRequest.cshtml" />
@@ -377,7 +371,6 @@
     <Content Include="Views\MiembroXComision\Details.cshtml" />
     <Content Include="Views\MiembroXComision\Edit.cshtml" />
     <Content Include="Views\MiembroXComision\Index.cshtml" />
-    <Content Include="Views\Lista\Index.cshtml" />
     <Content Include="Views\Shared\_noAutorizado.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Sesion\Active.cshtml" />

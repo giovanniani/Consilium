@@ -5,10 +5,18 @@
     ViewBag.Title = "Agenda";
 }
 
+<style>
+
+    textarea {
+        font-family: inherit;
+        height: 65px;
+    }
+</style>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium - Registrar punto</title>
+    <title>Consilium - Registrar nuevo usuario</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
@@ -31,8 +39,11 @@
                     <h2 style="text-align: left; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ingresar un nuevo punto</h2>
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
-                        <div class="alert alert-success col-md-6">
-                            <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+                        <div class="alert alert-success col-md-6"style="position: absolute; left: 70%;">
+                            <strong> ¡La operación se realizó con éxito!</strong>
+                            <br/>
+
+                            @ViewBag.Message
                         </div>
                     }
                     else
@@ -43,22 +54,20 @@
                         <div class="form-horizontal " style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif">
                             <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
 
-
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.fecha, "Fecha", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
-                                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.TextBoxFor(model => model.fecha, new { @type = "date", @class = "form-control" })
+
                                     @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                @Html.LabelFor(model => model.titulo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.titulo, "Título", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
                                     @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
@@ -66,7 +75,7 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.idUsuario, "idUsuario", htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.idUsuario, "Solicitante", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
                                     @Html.DropDownList("idUsuario", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
@@ -74,30 +83,30 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.considerandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.considerandos, "Considerandos", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
-                                    @Html.EditorFor(model => model.considerandos, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.TextAreaFor(model => model.considerandos)
                                     @Html.ValidationMessageFor(model => model.considerandos, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.resultandos, "Resultandos", htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-3">
+                                    @Html.TextAreaFor(model => model.resultandos)
+                                    @Html.ValidationMessageFor(model => model.resultandos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.resultandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.acuerdos, "Acuerdos", htmlAttributes: new { @class = "control-label col-md-4 " })
                                 <div class="col-md-3">
-                                    @Html.EditorFor(model => model.resultandos, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.resultandos, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.acuerdos, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.acuerdos, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.TextAreaFor(model => model.acuerdos)
                                     @Html.ValidationMessageFor(model => model.acuerdos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.adjunto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.adjunto, "Adjunto", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-3">
                                     <input name="myFile" type="file">
                                 </div>
@@ -105,18 +114,15 @@
 
 
 
-
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
                                     <input type="submit" value="INSERTAR" class="w3-button w3-block w3-black" style="width:17% " />
-                                </div>
-                                <div>
+
+                                    <br />
                                     @Html.ActionLink("Regresar", "Index")
                                 </div>
 
                             </div>
-
-
 
                         </div>
                             if (ViewBag.Message != null)

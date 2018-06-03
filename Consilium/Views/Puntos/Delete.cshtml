@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium - Eliminar punto</title>
+    <title>Consilium - Registrar nuevo usuario</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
@@ -69,7 +69,7 @@
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 80% ;border:none;color:#333;background-color:#333;" />
                             <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:20%">
-                                <div class="alert alert-danger col-md-6" style="position:center">
+                                <div class="alert alert-danger col-md-4" style="position:center">
                                     <strong>¿Está seguro de que desea eliminar?</strong><br />
                                 </div>
                                 <br />
@@ -77,60 +77,61 @@
                                 <br />
 
                                 <dl class="dl-horizontal">
+                                    <br />
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.fecha)
+                                        Fecha
                                     </dt>
                                     <dd>
-                                        @Html.DisplayFor(model => model.fecha)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.titulo)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.titulo)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.considerandos)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.considerandos)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.resultandos)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.resultandos)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.acuerdos)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.acuerdos)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.adjunto)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.adjunto)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.EstadoPunto.nombre)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.EstadoPunto.nombre)
-                                    </dd>
-                                    <dt>
-                                        @Html.DisplayNameFor(model => model.Usuario.nombre)
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.Usuario.nombre)
-                                    </dd>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.tipoPunto)
-                                    </dd>
-                                    <dd>
-                                        @Html.DisplayFor(model => model.propuesta)
-                                    </dd>
+                                        @Convert.ToDateTime(Model.fecha).ToString("dd/MM/yyyy")
+                                </dd>
+                                <dt>
+                                    Título
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.titulo)
+                                </dd>
+                                <dt>
+                                    Considerandos
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.considerandos)
+                                </dd>
+                                <dt>
+                                    Resultandos
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.resultandos)
+                                </dd>
+                                <dt>
+                                    Acuerdos
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.acuerdos)
+                                </dd>
+                                <dt>
+                                    Adjunto
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.adjunto)
+                                </dd>
+                                <dt>
+                                    Estado
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.EstadoPunto.nombre)
+                                </dd>
+                                <dt>
+                                    Usuario
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Usuario.nombre)
+                                </dd>
+                                <dt>
+                                    Tipo de punto
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.tipoPunto)
+                                </dd>
                                 </dl>
 
                                 <div class="form-group">

@@ -12,7 +12,7 @@ namespace Consilium.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "Usuario");
         }
     }
 }

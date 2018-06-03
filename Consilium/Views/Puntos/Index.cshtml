@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium - Puntos</title>
+    <title>Consilium - Miembros del Consejo</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
@@ -59,8 +59,7 @@
                         <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
                     <br /> <br />
-                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Punto agenda</h2>
-
+                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos</h2>
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
                         <div class="alert alert-success col-md-6">
@@ -73,35 +72,24 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 450px">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.fecha)
+                                            Fecha
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.titulo)
+                                            Título
                                         </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.considerandos)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.resultandos)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.acuerdos)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.adjunto)
-                                        </th>
+
                                         <th>
                                             Estado
                                         </th>
                                         <th>
-                                            Usuario
+                                            Solicitante
                                         </th>
                                         <th>
-                                            Tipo
+                                            Tipo de Punto
                                         </th>
                                         <th width="100">Opciones</th>
                                     </tr>
@@ -109,23 +97,12 @@
                                     {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.fecha)
+                                            @Convert.ToDateTime(item.fecha).ToString("dd/MM/yyyy")
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.titulo)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.considerandos)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.resultandos)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.acuerdos)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.adjunto)
-                                        </td>
+
                                         <td>
                                             @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
                                         </td>
@@ -136,20 +113,14 @@
                                             @Html.DisplayFor(modelItem => item.tipoPunto)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.idPunto }) |
-                                            @Html.ActionLink("Ver", "Details", new { id = item.idPunto }) |
-                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idPunto })
+                                            @Html.ActionLink("Editar", "Edit", new { id = item.idPunto })|@Html.ActionLink("Ver", "Details", new { id = item.idPunto })|@Html.ActionLink("Eliminar", "Delete", new { id = item.idPunto })
                                         </td>
                                     </tr>
                                     }
                                 </table>
-                                <div class="form-group">
-                                    <div style="position: absolute; left:1%;  " >
-                                        @Html.ActionLink(">>>Crear nuevo punto<<<", "Create")
-                                    </div>
-                                </div>
 
                             </div>
+
                             if (ViewBag.Message != null)
                             {
                                 <div class="alert alert-danger col-md-6">
@@ -159,8 +130,14 @@
                         }
 
                     }
+                    <div class="form-group">
+                        <div>
+                            @Html.ActionLink(">>>Crear nuevo punto<<<", "Create")
+                        </div>
+                    </div>
                     <br /> <br /><br />
                 </div>
+
             </div>
         </div>
         string[] data = HttpContext.Current.User.Identity.Name.Split('&');

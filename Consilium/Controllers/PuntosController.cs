@@ -61,6 +61,7 @@ namespace Consilium.Controllers
             }
             punto.idEstado = 1;
             punto.tipoPunto = "Punto";
+            punto.propuesta = " ";
             if (ModelState.IsValid)
             {
                 db.Punto.Add(punto);

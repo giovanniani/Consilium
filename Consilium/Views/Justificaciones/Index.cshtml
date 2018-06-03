@@ -62,7 +62,6 @@
                     <br /> <br />
                     <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Justificaciones de ausencia</h2>
 
-
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
                         <div class="alert alert-success col-md-6">
@@ -75,38 +74,31 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.fecha)
+                                            Fecha
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.asunto)
+                                            Asunto
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.texto)
+                                            Estado
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.estado)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Usuario.nombre)
+                                            Solicitante
                                         </th>
                                         <th>Opciones</th>
                                     </tr>
-
                                     @foreach (var item in Model)
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
+                                                @Convert.ToDateTime(item.fecha).ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.asunto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.texto)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.estado)
@@ -115,13 +107,10 @@
                                                 @Html.DisplayFor(modelItem => item.Usuario.nombre)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.idJustificacion }) |
-                                                @Html.ActionLink("Ver", "Details", new { id = item.idJustificacion }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idJustificacion })
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.idJustificacion })|@Html.ActionLink("Ver", "Details", new { id = item.idJustificacion })|@Html.ActionLink("Eliminar", "Delete", new { id = item.idJustificacion })
                                             </td>
                                         </tr>
                                     }
-
                                 </table>
 
 
@@ -129,21 +118,6 @@
 
 
 
-
-
-
-
-
-
-
-
-                                <div class="form-group">
-
-                                    <div style="position: absolute; left:1%;  ">
-                                        @Html.ActionLink(">>>Crear Justificación<<<", "Create")
-                                    </div>
-
-                                </div>
 
 
 
@@ -157,6 +131,11 @@
                         }
 
                     }
+                    <div class="form-group">
+                        <div >
+                            @Html.ActionLink(">>>Crear Justificación<<<", "Create")
+                        </div>
+                    </div>
                     <br /> <br /><br />
                 </div>
             </div>

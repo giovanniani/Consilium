@@ -62,7 +62,6 @@
                     <br /> <br />
                     <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder; width:70% ">Sesiones</h2>
 
-
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
                         <div class="alert alert-success col-md-6">
@@ -75,21 +74,20 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.idSesion)
+                                            Nº Sesión
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.fecha)
+                                            Fecha
                                         </th>
                                         <th>
                                             Tipo de sesión
                                         </th>
                                         <th>Opciones</th>
                                     </tr>
-
                                     @foreach (var item in Model)
                                     {
                                         <tr>
@@ -97,7 +95,7 @@
                                                 @Html.DisplayFor(modelItem => item.idSesion)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
+                                                @Convert.ToDateTime(item.fecha).ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.TipoSesion.nombre)
@@ -111,13 +109,7 @@
                                         </tr>
                                     }
                                 </table>
-                                <div class="form-group">
 
-                                    <div>
-                                        @Html.ActionLink(">>>Crear Sesión<<<", "Create")
-                                    </div>
-
-                                </div>
                             </div>
                             if (ViewBag.Message != null)
                             {
@@ -128,6 +120,11 @@
                         }
 
                     }
+                    <div class="form-group">
+                        <div>
+                            @Html.ActionLink(">>>Crear Sesión<<<", "Create")
+                        </div>
+                    </div>
                     <br /> <br /><br />
                 </div>
             </div>

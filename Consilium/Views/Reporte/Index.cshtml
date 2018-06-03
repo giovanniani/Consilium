@@ -73,29 +73,28 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.fecha)
+                                            Fecha
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.TipoSesion.nombre)
+                                            Tipo
                                         </th>
                                         <th>Opciones</th>
                                     </tr>
-
                                     @foreach (var item in Model)
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
+                                                @Convert.ToDateTime(item.fecha).ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.TipoSesion.nombre)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Generar Acta", "ExportActa", new { id = item.idSesion }) 
+                                                @Html.ActionLink("Generar Acta", "ExportActa", new { id = item.idSesion })
                                             </td>
                                         </tr>
                                     }

@@ -73,46 +73,28 @@
                         {
                             @Html.AntiForgeryToken()
                             <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 450px">
+                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:90%; overflow-x:auto;overflow-y:scroll;height: 320px">
                                 <table class="table" id="formatoTabla">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.fecha)
+                                            Fecha
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.titulo)
+                                           Título
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.considerandos)
+                                            Proponente
                                         </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.resultandos)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.acuerdos)
-                                        </th>
-                                        <th>
-                                            Usuario
-                                        </th>
-                                        <th width="100">Opciones</th>
+                                        <th width="200">Opciones</th>
                                     </tr>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
+                                                @Convert.ToDateTime(item.fecha).ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.titulo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.considerandos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.resultandos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.acuerdos)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Usuario.nombre)

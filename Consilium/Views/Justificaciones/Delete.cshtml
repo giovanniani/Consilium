@@ -74,57 +74,43 @@
                                     <strong>¿Está seguro de que desea eliminar a este miembro del sistema?</strong><br />
                                 </div>
                                 <br />
-
-
+                                <br />
+                                <br />
+                                <br />
+                                <br />
 
                                 <dl class="dl-horizontal">
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.fecha)
+                                        Fecha
                                     </dt>
-
                                     <dd>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <br />
                                         @Html.DisplayFor(model => model.fecha)
                                     </dd>
-
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.asunto)
+                                        Asunto
                                     </dt>
-
                                     <dd>
                                         @Html.DisplayFor(model => model.asunto)
                                     </dd>
-
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.texto)
+                                        Contenido
                                     </dt>
-
                                     <dd>
                                         @Html.DisplayFor(model => model.texto)
                                     </dd>
-
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.estado)
+                                        Estado
                                     </dt>
-
                                     <dd>
                                         @Html.DisplayFor(model => model.estado)
                                     </dd>
-
                                     <dt>
-                                        @Html.DisplayNameFor(model => model.Usuario.nombre)
+                                        Nombre
                                     </dt>
-
                                     <dd>
                                         @Html.DisplayFor(model => model.Usuario.nombre)
                                     </dd>
-
                                 </dl>
-
-
 
                                 <div class="form-group">
                                     <div class="col-md-offset-1 col-md-10">
@@ -133,10 +119,7 @@
                                     <div>
                                         @Html.ActionLink("Regresar", "Index")
                                     </div>
-
                                 </div>
-
-
 
                             </div>
                             if (ViewBag.Message != null)
