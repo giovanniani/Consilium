@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Consilium.Models;
-
+using Consilium.Models.Extended;
 namespace Consilium.Controllers
 {
     public class ComisionesController : Controller
@@ -17,27 +17,28 @@ namespace Consilium.Controllers
         // GET: Comisiones
         public ActionResult Index()
         {
-            return View(db.Comision.ToList());
+            var comision = db.Comision.Include(c => c.Punto).Include(c => c.Sesion);
+            return View(comision.ToList());
         }
 
         // GET: Comisiones/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comision comision = db.Comision.Find(id);
-            if (comision == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comision);
+            VerComision comisionVista = new VerComision();
+            var usuarios = db.MiembroXComision.Where(a => a.idComision == id).ToList();
+            var comision = db.Comision.Find(id);
+            comisionVista.comision = comision;
+            comisionVista.miembros = usuarios;
+
+
+            return View(comisionVista);
         }
 
         // GET: Comisiones/Create
         public ActionResult Create()
         {
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
+            ViewBag.idSesion = new SelectList(db.Sesion, "idSesion", "idSesion");
             return View();
         }
 
@@ -46,7 +47,7 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idComision,nombre,objetivo,fechaFin,fechaIni,estado")] Comision comision)
+        public ActionResult Create([Bind(Include = "idComision,nombre,objetivo,fechaFin,fechaIni,idSesion,idPunto")] Comision comision)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +56,8 @@ namespace Consilium.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", comision.idPunto);
+            ViewBag.idSesion = new SelectList(db.Sesion, "idSesion", "idSesion", comision.idSesion);
             return View(comision);
         }
 
@@ -70,7 +73,9 @@ namespace Consilium.Controllers
             {
                 return HttpNotFound();
             }
-            return RedirectToAction("Create", "ComisionXSesion");
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", comision.idPunto);
+            ViewBag.idSesion = new SelectList(db.Sesion, "idSesion", "idSesion", comision.idSesion);
+            return View(comision);
         }
 
         // POST: Comisiones/Edit/5
@@ -78,7 +83,7 @@ namespace Consilium.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idComision,nombre,objetivo,fechaFin,fechaIni,estado")] Comision comision)
+        public ActionResult Edit([Bind(Include = "idComision,nombre,objetivo,fechaFin,fechaIni,idSesion,idPunto")] Comision comision)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +91,8 @@ namespace Consilium.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", comision.idPunto);
+            ViewBag.idSesion = new SelectList(db.Sesion, "idSesion", "idSesion", comision.idSesion);
             return View(comision);
         }
 

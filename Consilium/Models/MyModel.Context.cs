@@ -47,8 +47,6 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<ProponenteXMocion> ProponenteXMocion { get; set; }
 
-    public virtual DbSet<Punto> Punto { get; set; }
-
     public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
 
     public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
@@ -66,6 +64,8 @@ public partial class ConsiliumEntities : DbContext
     public virtual DbSet<MiembroXComision> MiembroXComision { get; set; }
 
     public virtual DbSet<Comision> Comision { get; set; }
+
+    public virtual DbSet<Punto> Punto { get; set; }
 
 
     public virtual ObjectResult<getPunto_Result> getPunto(Nullable<int> idPunto)

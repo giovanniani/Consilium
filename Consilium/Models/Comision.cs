@@ -43,13 +43,13 @@ public partial class Comision
 
 
 
-    public virtual Punto Punto { get; set; }
-
     public virtual Sesion Sesion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<MiembroXComision> MiembroXComision { get; set; }
+
+    public virtual Punto Punto { get; set; }
 
 }
 

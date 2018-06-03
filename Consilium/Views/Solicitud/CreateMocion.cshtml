@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilium - Puntos</title>
+    <title>Consilium - Moción de fondo</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/maquetacion.css" rel="stylesheet" type="text/css" />
@@ -59,7 +59,7 @@
                         <img src="~/Content/fondo_logo_ic_grande.png" class="pruebaLogo" />
                     </div>
                     <br /> <br />
-                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Punto agenda</h2>
+                    <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos existentes</h2>
 
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
                     {
@@ -92,15 +92,9 @@
                                             @Html.DisplayNameFor(model => model.acuerdos)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.adjunto)
-                                        </th>
-                                        <th>
-                                            Estado
-                                        </th>
-                                        <th>
                                             Usuario
                                         </th>
-                                        <th  width="100">Opciones</th>
+                                        <th width="100">Opciones</th>
                                     </tr>
                                     @foreach (var item in Model)
                                     {
@@ -121,27 +115,14 @@
                                                 @Html.DisplayFor(modelItem => item.acuerdos)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.adjunto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
-                                            </td>
-                                            <td>
                                                 @Html.DisplayFor(modelItem => item.Usuario.nombre)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.idPunto }) |
-                                                @Html.ActionLink("Ver", "Details", new { id = item.idPunto }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idPunto })
+                                                @Html.ActionLink("Solicitar Moción de fondo", "Proponente", new { idPunto = item.idPunto })
                                             </td>
                                         </tr>
                                     }
                                 </table>
-                                <div class="form-group">
-                                    <div style="position: absolute; left:1%;  " >
-                                        @Html.ActionLink(">>>Crear nuevo punto<<<", "Create")
-                                    </div>
-                                </div>
 
                             </div>
                             if (ViewBag.Message != null)
@@ -160,13 +141,9 @@
         string[] data = HttpContext.Current.User.Identity.Name.Split('&');
         <div id="navigation-container">
             <div id="navigation">
-                @if (data[2] == "0")
+                @if (data[2] == "3")
                 {
-                    @Html.Partial("_menuSecretaria")
-                }
-                else if (data[2] == "1")
-                {
-                    @Html.Partial("_menuPresidente")
+                    @Html.Partial("_menuMiembros")
                 }
             </div>
         </div>

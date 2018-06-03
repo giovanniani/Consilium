@@ -100,10 +100,11 @@ namespace Consilium.Controllers
             {
                 var v = dc.Logueo.Where(a => a.idUsuario == login.idUsuario).FirstOrDefault();
                 var u = dc.Usuario.Where(a => a.idUsuario == login.idUsuario).FirstOrDefault();
-                string texto = u.nombre + "&" + login.idUsuario + "&" + u.tipo;
+                
 
                 if (v != null)
                 {
+                    string texto = u.nombre + "&" + login.idUsuario + "&" + u.tipo;
                     if (string.Compare(Crypto.Hash(login.contrasenna), v.contrasenna) == 0)
                     {   
                         int timeout = login.RememberMe ? 525600 : 20; //525600 min = 1 year

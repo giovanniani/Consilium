@@ -8,11 +8,13 @@ using Consilium.Models;
 using Consilium.Models.Extended;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Data.Entity;
 
 namespace Consilium.Controllers
 {
     public class SolicitudController : Controller
     {
+        
         private ConsiliumEntities db = new ConsiliumEntities();
         // GET: Request
         [HttpGet]
@@ -126,6 +128,29 @@ namespace Consilium.Controllers
             ViewBag.idEstado = new SelectList(db.EstadoPunto, "idEstado", "nombre", punto.idEstado);
             ViewBag.idUsuario = new SelectList(db.Usuario, "idUsuario", "nombre", punto.idUsuario);
             return View(punto);
+        }
+
+        public ActionResult CreateMocion()
+        {
+            var punto = db.Punto.Include(p => p.EstadoPunto).Include(p => p.Usuario);
+            return View(punto.ToList());
+            
+        }
+
+        public ActionResult Proponente(int idPunto)
+        {
+            var punto = db.Punto.Find(idPunto);
+            return View(punto);
+
+        }
+
+        [HttpPost]
+        public ActionResult Proponente(Punto punto)
+        {
+            db.Punto.Add(punto);
+            db.SaveChanges();
+            return RedirectToAction("CreatePuntoMiembro");
+
         }
     }
 }

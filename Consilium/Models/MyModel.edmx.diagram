@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="ConsiliumModel.MiembroXSesion" Width="1.5" PointX="5.25" PointY="14.25" />
         <EntityTypeShape EntityType="ConsiliumModel.Mocion" Width="1.5" PointX="10.5" PointY="19.5" />
         <EntityTypeShape EntityType="ConsiliumModel.ProponenteXMocion" Width="1.5" PointX="5.25" PointY="11.25" />
-        <EntityTypeShape EntityType="ConsiliumModel.Punto" Width="1.5" PointX="8.25" PointY="13.375" />
         <EntityTypeShape EntityType="ConsiliumModel.PuntoXSesion" Width="1.5" PointX="10.5" PointY="14.25" />
         <EntityTypeShape EntityType="ConsiliumModel.ResultadoPunto" Width="1.5" PointX="13.5" PointY="13.625" />
         <EntityTypeShape EntityType="ConsiliumModel.Sesion" Width="1.5" PointX="3" PointY="8.875" />
@@ -19,18 +18,12 @@
         <EntityTypeShape EntityType="ConsiliumModel.TipoSesion" Width="1.5" PointX="0.75" PointY="9.5" />
         <EntityTypeShape EntityType="ConsiliumModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="14.5" />
         <EntityTypeShape EntityType="ConsiliumModel.Usuario" Width="1.5" PointX="3" PointY="13.125" />
-        <AssociationConnector Association="ConsiliumModel.FK_Punto_EstadoPunto" />
         <AssociationConnector Association="ConsiliumModel.FK_Justificacion_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_Logueo_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXQuorum_Usuario" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXSesion_Sesion" />
-        <AssociationConnector Association="ConsiliumModel.FK_Mocion_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Mocion" />
         <AssociationConnector Association="ConsiliumModel.FK_ProponenteXMocion_Usuario" />
-        <AssociationConnector Association="ConsiliumModel.FK_Punto_Usuario" />
-        <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Punto" />
-        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" />
-        <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Sesion" />
         <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Sesion" />
         <AssociationConnector Association="ConsiliumModel.FK_Sesion_TipoSesion" />
@@ -38,9 +31,16 @@
         <EntityTypeShape EntityType="ConsiliumModel.MiembroXComision" Width="1.5" PointX="5.25" PointY="17.75" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXComision_Usuario" />
         <EntityTypeShape EntityType="ConsiliumModel.Comision" Width="1.5" PointX="10.5" PointY="9.75" />
-        <AssociationConnector Association="ConsiliumModel.FK_Comision_Punto" />
         <AssociationConnector Association="ConsiliumModel.FK_Comision_Sesion" />
         <AssociationConnector Association="ConsiliumModel.FK_MiembroXComision_Comision" />
+        <EntityTypeShape EntityType="ConsiliumModel.Punto" Width="1.5" PointX="8.25" PointY="10.875" />
+        <AssociationConnector Association="ConsiliumModel.FK_Comision_Punto" />
+        <AssociationConnector Association="ConsiliumModel.FK_Punto_EstadoPunto" />
+        <AssociationConnector Association="ConsiliumModel.FK_Mocion_Punto" />
+        <AssociationConnector Association="ConsiliumModel.FK_Punto_Usuario" />
+        <AssociationConnector Association="ConsiliumModel.FK_PuntoXSesion_Punto" />
+        <AssociationConnector Association="ConsiliumModel.FK_ResultadoPunto_Punto" />
+        <AssociationConnector Association="ConsiliumModel.FK_Solicitud_Punto" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

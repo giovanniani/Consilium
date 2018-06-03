@@ -185,21 +185,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Punto">
-      <EntityTypeMapping TypeName="ConsiliumModel.Punto">
-        <MappingFragment StoreEntitySet="Punto">
-          <ScalarProperty Name="adjunto" ColumnName="adjunto" />
-          <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
-          <ScalarProperty Name="resultandos" ColumnName="resultandos" />
-          <ScalarProperty Name="considerandos" ColumnName="considerandos" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-          <ScalarProperty Name="titulo" ColumnName="titulo" />
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-          <ScalarProperty Name="idPunto" ColumnName="idPunto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PuntoXSesion">
       <EntityTypeMapping TypeName="ConsiliumModel.PuntoXSesion">
         <MappingFragment StoreEntitySet="PuntoXSesion">
@@ -300,6 +285,22 @@
           <ScalarProperty Name="objetivo" ColumnName="objetivo" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="idComision" ColumnName="idComision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Punto">
+      <EntityTypeMapping TypeName="ConsiliumModel.Punto">
+        <MappingFragment StoreEntitySet="Punto">
+          <ScalarProperty Name="propuesta" ColumnName="propuesta" />
+          <ScalarProperty Name="adjunto" ColumnName="adjunto" />
+          <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
+          <ScalarProperty Name="resultandos" ColumnName="resultandos" />
+          <ScalarProperty Name="considerandos" ColumnName="considerandos" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="idPunto" ColumnName="idPunto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

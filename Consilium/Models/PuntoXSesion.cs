@@ -26,9 +26,9 @@ public partial class PuntoXSesion
 
 
 
-    public virtual Punto Punto { get; set; }
-
     public virtual Sesion Sesion { get; set; }
+
+    public virtual Punto Punto { get; set; }
 
 }
 

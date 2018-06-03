@@ -167,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ComisionesController.cs" />
     <Compile Include="App_Data\DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,6 +177,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetLista.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ComisionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JustificacionController.cs" />
     <Compile Include="Controllers\JustificacionesController.cs" />
@@ -230,6 +230,7 @@
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario2.cs" />
+    <Compile Include="Models\Extended\VerComision.cs" />
     <Compile Include="Models\Extended\Votacion.cs" />
     <Compile Include="Models\getAsistencia_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
@@ -371,11 +372,6 @@
     <Content Include="Views\Sesion\Create.cshtml" />
     <Content Include="Views\Sesion\Delete.cshtml" />
     <Content Include="Views\Sesion\Index.cshtml" />
-    <Content Include="Views\Comisiones\Create.cshtml" />
-    <Content Include="Views\Comisiones\Delete.cshtml" />
-    <Content Include="Views\Comisiones\Details.cshtml" />
-    <Content Include="Views\Comisiones\Edit.cshtml" />
-    <Content Include="Views\Comisiones\Index.cshtml" />
     <Content Include="Views\MiembroXComision\Create.cshtml" />
     <Content Include="Views\MiembroXComision\Delete.cshtml" />
     <Content Include="Views\MiembroXComision\Details.cshtml" />
@@ -407,6 +403,11 @@
     <Content Include="Views\Sesion\Edit.cshtml" />
     <Content Include="Views\Sesion\Puntos.cshtml" />
     <Content Include="Views\Sesion\createComision.cshtml" />
+    <Content Include="Views\Comisiones\Delete.cshtml" />
+    <Content Include="Views\Comisiones\Details.cshtml" />
+    <Content Include="Views\Comisiones\Index.cshtml" />
+    <Content Include="Views\Solicitud\CreateMocion.cshtml" />
+    <Content Include="Views\Solicitud\Proponente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

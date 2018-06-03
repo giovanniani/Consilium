@@ -37,11 +37,11 @@ public partial class Mocion
 
 
 
-    public virtual Punto Punto1 { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ProponenteXMocion> ProponenteXMocion { get; set; }
+
+    public virtual Punto Punto1 { get; set; }
 
 }
 
