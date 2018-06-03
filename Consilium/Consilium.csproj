@@ -168,7 +168,6 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComisionesController.cs" />
-    <Compile Include="Controllers\ComisionXSesionController.cs" />
     <Compile Include="App_Data\DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -218,20 +217,20 @@
     <Compile Include="Models\Comision.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ComisionXSesion.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EstadoPunto.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\ComisionSesion.cs" />
     <Compile Include="Models\Extended\Justificacion.cs" />
     <Compile Include="Models\Extended\PuntoNuevo.cs" />
     <Compile Include="Models\Extended\Request.cs" />
     <Compile Include="Models\Extended\SesionActiva.cs" />
+    <Compile Include="Models\Extended\SesionCompleta.cs" />
     <Compile Include="Models\Extended\SesionPuntos.cs" />
     <Compile Include="Models\Extended\SolicitudNueva.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Extended\Usuario2.cs" />
+    <Compile Include="Models\Extended\Votacion.cs" />
     <Compile Include="Models\getAsistencia_Result.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -372,11 +371,6 @@
     <Content Include="Views\Sesion\Create.cshtml" />
     <Content Include="Views\Sesion\Delete.cshtml" />
     <Content Include="Views\Sesion\Index.cshtml" />
-    <Content Include="Views\ComisionXSesion\Create.cshtml" />
-    <Content Include="Views\ComisionXSesion\Delete.cshtml" />
-    <Content Include="Views\ComisionXSesion\Details.cshtml" />
-    <Content Include="Views\ComisionXSesion\Edit.cshtml" />
-    <Content Include="Views\ComisionXSesion\Index.cshtml" />
     <Content Include="Views\Comisiones\Create.cshtml" />
     <Content Include="Views\Comisiones\Delete.cshtml" />
     <Content Include="Views\Comisiones\Details.cshtml" />
@@ -412,6 +406,7 @@
     <Content Include="Views\Mocion\Index.cshtml" />
     <Content Include="Views\Sesion\Edit.cshtml" />
     <Content Include="Views\Sesion\Puntos.cshtml" />
+    <Content Include="Views\Sesion\createComision.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

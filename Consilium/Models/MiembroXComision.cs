@@ -22,15 +22,13 @@ public partial class MiembroXComision
 
     public string idUsuario { get; set; }
 
-    public int idComisionXSesion { get; set; }
-
-    public string tipoMiembro { get; set; }
+    public int idComision { get; set; }
 
 
-
-    public virtual ComisionXSesion ComisionXSesion { get; set; }
 
     public virtual Usuario Usuario { get; set; }
+
+    public virtual Comision Comision { get; set; }
 
 }
 

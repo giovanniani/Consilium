@@ -83,7 +83,7 @@ namespace Consilium.Controllers
         }
 
         // GET: Sesion/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -100,7 +100,7 @@ namespace Consilium.Controllers
         // POST: Sesion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             Sesion sesion = db.Sesion.Find(id);
             db.Sesion.Remove(sesion);
@@ -119,10 +119,12 @@ namespace Consilium.Controllers
 
         public ActionResult Active(string id)
         {
+            int quorum = 0;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            UsuariosModelo usuario = new UsuariosModelo();
             Sesion sesion = db.Sesion.Find(id);
 
             if (sesion == null)
@@ -135,52 +137,142 @@ namespace Consilium.Controllers
             var u = db.PuntoXSesion.Where(a => a.idSesion == sesion.idSesion);
             sesionActiva.Puntos = u.ToList();
             sesionActiva.quorum = 1;
+            using (ConsiliumEntities db = new ConsiliumEntities())
+            {
+                usuario.Usuarios = db.Usuario.Where(e => e.estado == "1" && (e.tipo == 2 || e.tipo == 3)).ToList();
+                usuario.sesion = id;
+            }
+            var v = db.MiembroXSesion.Where(a => a.idSesion == id).ToList();
+            quorum = 0;
+            for (int i = 0; i < v.Count; i++)
+            {
+                for (int j = 0; j < usuario.Usuarios.Count; j++)
+                {
+                    if (v[i].idUsuario == usuario.Usuarios[j].idUsuario)
+                    {
+                        usuario.Usuarios[j].isSelected = v[i].presente;                        
+                        if(usuario.Usuarios[j].isSelected)
+                        {
+                            quorum += 1;
+                        }
+                    }
+                }
+            }
+            sesionActiva.quorum = quorum;
+            sesionActiva.usuario = usuario;
+            ViewBag.idSesion = id;
 
             return View(sesionActiva);
+        }
+
+
+        [HttpPost]
+        public ActionResult Active(UsuariosModelo usuario)
+        {
+            MiembroXSesion miembroTemp = new MiembroXSesion();
+            List<MiembroXSesion> miembro = new List<MiembroXSesion>();
+
+            for (int i = 0; i < usuario.Usuarios.Count; i++)
+            {
+                var m = db.getMiembrosXSesion(usuario.Usuarios[i].idUsuario, usuario.sesion).First();
+
+                if (m == "false")
+                {
+                    miembroTemp.idUsuario = usuario.Usuarios[i].idUsuario;
+                    miembroTemp.idSesion = usuario.sesion;
+                    miembroTemp.presente = usuario.Usuarios[i].isSelected;
+                    db.MiembroXSesion.Add(miembroTemp);
+                    db.SaveChanges();
+                    miembroTemp = new MiembroXSesion();
+                    System.Diagnostics.Debug.WriteLine("miembro " + usuario.Usuarios[i].idUsuario + "agregado");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("miembro " + usuario.Usuarios[i].idUsuario + "ya existia");
+                    db.updateMiembroXSesion(usuario.Usuarios[i].idUsuario, usuario.sesion, usuario.Usuarios[i].isSelected);
+                    m = null;
+                }
+
+
+            }
+
+
+            return RedirectToAction("Active", "Sesion", new { id = usuario.sesion });
         }
 
         public ActionResult Vote(int id, int quorum)
         {
             ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo");
+            Votacion votacion = new Votacion();
             var p = db.PuntoXSesion.Where(a => a.idPunto == id).FirstOrDefault();
-            //var q = db.Sesion.Where(c => c.idAgenda == p.idAgenda).FirstOrDefault();         
-            //var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
-            //rs.quorum = quorum;
-            //rs.idSesion = q.idSesion;
-            return View();
+            var q = db.Sesion.Where(c => c.idSesion == p.idSesion).FirstOrDefault();         
+            var rs = db.ResultadoPunto.Where(d => d.idPunto == id).FirstOrDefault();
+            Punto pt = db.Punto.Find(id);
+            votacion.punto = pt;
+            if (rs == null)
+            {
+                ResultadoPunto resul = new ResultadoPunto();
+                resul.quorum = quorum;
+                resul.idSesion = q.idSesion;
+                resul.idPunto = pt.idPunto;
+                votacion.resultado = resul;
+                return View(votacion);
+            }
+            else
+            {
+                rs.quorum = quorum;
+                rs.idSesion = q.idSesion;
+                votacion.resultado = rs;
+                return View(votacion);
+            }
+            
         }
 
         // POST: ResultadoPuntoes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Vote([Bind(Include = "idResultado,fecha,votosFavor,votosContra,votosNulo,votosAbstencion,resultado,idSesion,idPunto,quorum")] ResultadoPunto resultadoPunto)
+        public ActionResult Vote(Votacion votacion)
         {
             if (ModelState.IsValid)
             {
-                var m = db.Punto.Where(r => r.idPunto == resultadoPunto.idPunto).FirstOrDefault();
-                resultadoPunto.quorum = resultadoPunto.votosContra + resultadoPunto.votosFavor + resultadoPunto.votosNulo + resultadoPunto.votosAbstencion;
+                var m = db.Punto.Find(votacion.punto.idPunto);
+                votacion.resultado.quorum = votacion.resultado.votosContra + votacion.resultado.votosFavor + votacion.resultado.votosNulo + votacion.resultado.votosAbstencion;
                 if (m.idEstado == 2)
                 {
-                    db.updateResultadoPunto(resultadoPunto.idPunto, resultadoPunto.votosFavor,
-                        resultadoPunto.votosContra, resultadoPunto.votosAbstencion, resultadoPunto.votosNulo,
-                        resultadoPunto.quorum, resultadoPunto.resultado);                
+                    db.updateResultadoPunto(votacion.resultado.idPunto, votacion.resultado.votosFavor,
+                        votacion.resultado.votosContra, votacion.resultado.votosAbstencion, votacion.resultado.votosNulo,
+                        votacion.resultado.quorum, votacion.resultado.resultado);                
                 }
                 else
                 {
-                    db.ResultadoPunto.Add(resultadoPunto);
+                    db.ResultadoPunto.Add(votacion.resultado);
                     db.SaveChanges();
-                    db.votePunto(resultadoPunto.idPunto, 2);
+                    db.votePunto(votacion.resultado.idPunto, 2);
                 }
-                return RedirectToAction("ACTIVE", new { id = resultadoPunto.idSesion });
+                if(votacion.punto.considerandos == null)
+                {
+                    votacion.punto.considerandos = "";
+                }
+                if (votacion.punto.resultandos == null)
+                {
+                    votacion.punto.resultandos = "";
+                }
+                if (votacion.punto.acuerdos == null)
+                {
+                    votacion.punto.acuerdos = "";
+                }
+                db.updatePunto(votacion.punto.idPunto, votacion.punto.considerandos, votacion.punto.resultandos,
+                    votacion.punto.acuerdos);
+                return RedirectToAction("Active", new { id = votacion.resultado.idSesion });
             }
 
-            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo", resultadoPunto.idPunto);
-            return View(resultadoPunto);
+            ViewBag.idPunto = new SelectList(db.Punto, "idPunto", "titulo",votacion.resultado.idPunto);
+            return View(votacion);
         }
 
 
-        public ActionResult Lista(string id)
+        /*public ActionResult Lista(string id)
         {
             UsuariosModelo usuario = new UsuariosModelo();
             using (ConsiliumEntities db = new ConsiliumEntities())
@@ -211,7 +303,7 @@ namespace Consilium.Controllers
 
             for (int i = 0; i < usuario.Usuarios.Count; i++)
             {
-                var m = db.getMiembrosXSesion(usuario.Usuarios[i].idUsuario, 1);
+                var m = db.getMiembrosXSesion(usuario.Usuarios[i].idUsuario, usuario.sesion);
 
                 if (m.Count() == 0)
                 {
@@ -225,7 +317,7 @@ namespace Consilium.Controllers
                 else
                 {
                     System.Diagnostics.Debug.WriteLine("miembro " + usuario.Usuarios[i].idUsuario + "ya existia");
-                    db.updateMiembroXSesion(usuario.Usuarios[i].idUsuario, 1, usuario.Usuarios[i].isSelected);
+                    db.updateMiembroXSesion(usuario.Usuarios[i].idUsuario, usuario.sesion, usuario.Usuarios[i].isSelected);
                     m = null;
                 }
 
@@ -235,6 +327,7 @@ namespace Consilium.Controllers
 
             return View(usuario);
         }
+        */
         [HttpGet]
         public ActionResult Puntos(string id)
         {
@@ -255,7 +348,7 @@ namespace Consilium.Controllers
                 Punto punto = db.Punto.Find(idPunto);
                 if(punto != null)
                 {
-                    PuntoXSesion puntoxSesion = db.PuntoXSesion.Find(idPunto);
+                    PuntoXSesion puntoxSesion = db.PuntoXSesion.Where(a => a.idPunto == idPunto).FirstOrDefault();
                     if(puntoxSesion == null)
                     {
                         PuntoXSesion puntoNuevo = new PuntoXSesion();
@@ -278,6 +371,51 @@ namespace Consilium.Controllers
             sesionPuntos.idSesion = idSesion;
             sesionPuntos.PuntosActuales = puntosActuales.ToList();
             return RedirectToAction("Puntos","Sesion", new { id = idSesion});
+        }
+
+
+        public ActionResult createComision(string id, int punto, int quorum)
+        {
+            ComisionSesion comisionActiva = new ComisionSesion();
+            UsuariosModelo usuario = new UsuariosModelo();
+            Comision comision = new Comision();
+            using (ConsiliumEntities db = new ConsiliumEntities())
+            {
+                usuario.Usuarios = db.Usuario.Where(e => e.estado == "1" && (e.tipo == 2 || e.tipo == 3)).ToList();
+                usuario.sesion = id;
+            }
+            comision.idSesion = id;
+            comision.idPunto = punto;
+            comision.objetivo = "nada";
+            comisionActiva.comision = comision;
+            comisionActiva.usuarios = usuario;
+
+            return View(comisionActiva);
+        }
+
+        [HttpPost]
+        public ActionResult createComision(ComisionSesion comisionSesion)
+        {
+            ComisionSesion comisionActiva = new ComisionSesion();
+            UsuariosModelo usuario = new UsuariosModelo();
+            MiembroXComision miembroTemp = new MiembroXComision();
+            Comision comision = new Comision();
+            comision = comisionSesion.comision;
+            db.Comision.Add(comision);
+            db.SaveChanges();
+            var nuevaComision = db.Comision.Where(a => a.idPunto == comision.idPunto && a.idSesion == comision.idSesion).FirstOrDefault();
+            miembroTemp.idComision = nuevaComision.idComision;
+            for (int i = 0; i < comisionSesion.usuarios.Usuarios.Count; i++)
+            {
+                if(comisionSesion.usuarios.Usuarios[i].isSelected)
+                {
+                    miembroTemp.idUsuario = comisionSesion.usuarios.Usuarios[i].idUsuario;
+                    db.MiembroXComision.Add(miembroTemp);
+                    db.SaveChanges();
+                }
+                
+            }
+            return RedirectToAction("Vote", "Sesion", new { id = comision.idPunto, quorum = comisionSesion.quorum });
         }
     }   
 }

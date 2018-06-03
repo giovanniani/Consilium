@@ -24,11 +24,13 @@ public partial class Punto
 
         this.Mocion = new HashSet<Mocion>();
 
+        this.PuntoXSesion = new HashSet<PuntoXSesion>();
+
         this.ResultadoPunto = new HashSet<ResultadoPunto>();
 
         this.Solicitud = new HashSet<Solicitud>();
 
-        this.PuntoXSesion = new HashSet<PuntoXSesion>();
+        this.Comision = new HashSet<Comision>();
 
     }
 
@@ -63,6 +65,10 @@ public partial class Punto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<ResultadoPunto> ResultadoPunto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -71,7 +77,7 @@ public partial class Punto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
+    public virtual ICollection<Comision> Comision { get; set; }
 
 }
 

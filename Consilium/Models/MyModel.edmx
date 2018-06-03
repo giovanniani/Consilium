@@ -10,19 +10,12 @@
             <PropertyRef Name="idComision" />
           </Key>
           <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="25" />
-          <Property Name="objetivo" Type="nvarchar" MaxLength="500" />
-          <Property Name="fechaFin" Type="date" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="objetivo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="fechaFin" Type="date" Nullable="false" />
           <Property Name="fechaIni" Type="date" />
-          <Property Name="estado" Type="bit" />
-        </EntityType>
-        <EntityType Name="ComisionXSesion">
-          <Key>
-            <PropertyRef Name="idComisionXSesion" />
-          </Key>
-          <Property Name="idComisionXSesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idComision" Type="int" />
-          <Property Name="idSesion" Type="nvarchar" MaxLength="20" />
+          <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="idPunto" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadoPunto">
           <Key>
@@ -56,8 +49,7 @@
           </Key>
           <Property Name="idMiembroXComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="idComisionXSesion" Type="int" Nullable="false" />
-          <Property Name="tipoMiembro" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="idComision" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MiembroXSesion">
           <Key>
@@ -118,9 +110,10 @@
           <Property Name="votosNulo" Type="int" Nullable="false" />
           <Property Name="votosAbstencion" Type="int" Nullable="false" />
           <Property Name="resultado" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="idSesion" Type="int" Nullable="false" />
+          <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="idPunto" Type="int" Nullable="false" />
           <Property Name="quorum" Type="int" Nullable="false" />
+          <Property Name="anotaciones" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Sesion">
           <Key>
@@ -129,6 +122,7 @@
           <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="idTipo" Type="int" Nullable="false" />
           <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="estado" Type="int" />
         </EntityType>
         <EntityType Name="Solicitud">
           <Key>
@@ -170,26 +164,26 @@
           <Property Name="fechaInicio" Type="date" Nullable="false" />
           <Property Name="fechaFin" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ComisionXSesion_Comision">
-          <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
-          <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="*" />
+        <Association Name="FK_Comision_Punto">
+          <End Role="Punto" Type="Self.Punto" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Comision">
-              <PropertyRef Name="idComision" />
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
             </Principal>
-            <Dependent Role="ComisionXSesion">
-              <PropertyRef Name="idComision" />
+            <Dependent Role="Comision">
+              <PropertyRef Name="idPunto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ComisionXSesion_Sesion">
-          <End Role="Sesion" Type="Self.Sesion" Multiplicity="0..1" />
-          <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="*" />
+        <Association Name="FK_Comision_Sesion">
+          <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sesion">
               <PropertyRef Name="idSesion" />
             </Principal>
-            <Dependent Role="ComisionXSesion">
+            <Dependent Role="Comision">
               <PropertyRef Name="idSesion" />
             </Dependent>
           </ReferentialConstraint>
@@ -222,15 +216,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MiembroXComision_ComisionXSesion">
-          <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="1" />
+        <Association Name="FK_MiembroXComision_Comision">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="1" />
           <End Role="MiembroXComision" Type="Self.MiembroXComision" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ComisionXSesion">
-              <PropertyRef Name="idComisionXSesion" />
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
             </Principal>
             <Dependent Role="MiembroXComision">
-              <PropertyRef Name="idComisionXSesion" />
+              <PropertyRef Name="idComision" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,18 +251,6 @@
             </Principal>
             <Dependent Role="MiembroXSesion">
               <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MiembroXSesion_Sesion">
-          <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
-          <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sesion">
-              <PropertyRef Name="idSesion" />
-            </Principal>
-            <Dependent Role="MiembroXSesion">
-              <PropertyRef Name="idSesion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -347,7 +329,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PuntoXSesion_Sesion">
-          <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
+          <End Role="Sesion" Type="Self.Sesion" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PuntoXSesion" Type="Self.PuntoXSesion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sesion">
@@ -413,7 +397,7 @@
         </Function>
         <Function Name="getMiembrosXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
-          <Parameter Name="idSesion" Type="int" Mode="In" />
+          <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="getPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPunto" Type="int" Mode="In" />
@@ -441,8 +425,14 @@
         </Function>
         <Function Name="updateMiembroXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
-          <Parameter Name="idSesion" Type="int" Mode="In" />
+          <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
           <Parameter Name="isSelected" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="updatePunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idPunto" Type="int" Mode="In" />
+          <Parameter Name="considerandos" Type="nvarchar" Mode="In" />
+          <Parameter Name="resultandos" Type="nvarchar" Mode="In" />
+          <Parameter Name="acuerdos" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="updatePuntoXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idPuntoXSesion" Type="int" Mode="In" />
@@ -467,7 +457,6 @@
         </Function>
         <EntityContainer Name="ConsiliumModelStoreContainer">
           <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ComisionXSesion" EntityType="Self.ComisionXSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoPunto" EntityType="Self.EstadoPunto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Justificacion" EntityType="Self.Justificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logueo" EntityType="Self.Logueo" Schema="dbo" store:Type="Tables" />
@@ -483,13 +472,13 @@
           <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
+          <AssociationSet Name="FK_Comision_Punto" Association="Self.FK_Comision_Punto">
+            <End Role="Punto" EntitySet="Punto" />
             <End Role="Comision" EntitySet="Comision" />
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
           </AssociationSet>
-          <AssociationSet Name="FK_ComisionXSesion_Sesion" Association="Self.FK_ComisionXSesion_Sesion">
+          <AssociationSet Name="FK_Comision_Sesion" Association="Self.FK_Comision_Sesion">
             <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_Justificacion_Usuario" Association="Self.FK_Justificacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -499,8 +488,8 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Logueo" EntitySet="Logueo" />
           </AssociationSet>
-          <AssociationSet Name="FK_MiembroXComision_ComisionXSesion" Association="Self.FK_MiembroXComision_ComisionXSesion">
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+          <AssociationSet Name="FK_MiembroXComision_Comision" Association="Self.FK_MiembroXComision_Comision">
+            <End Role="Comision" EntitySet="Comision" />
             <End Role="MiembroXComision" EntitySet="MiembroXComision" />
           </AssociationSet>
           <AssociationSet Name="FK_MiembroXComision_Usuario" Association="Self.FK_MiembroXComision_Usuario">
@@ -509,10 +498,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_MiembroXQuorum_Usuario" Association="Self.FK_MiembroXQuorum_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="Self.FK_MiembroXSesion_Sesion">
-            <End Role="Sesion" EntitySet="Sesion" />
             <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
           </AssociationSet>
           <AssociationSet Name="FK_Mocion_Punto" Association="Self.FK_Mocion_Punto">
@@ -565,15 +550,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ConsiliumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ConsiliumEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="getMiembrosXSesion" ReturnType="Collection(Int32)">
-            <Parameter Name="idMiembro" Mode="In" Type="String" />
-            <Parameter Name="idSesion" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="updateMiembroXSesion">
-            <Parameter Name="idMiembro" Mode="In" Type="String" />
-            <Parameter Name="idSesion" Mode="In" Type="Int32" />
-            <Parameter Name="isSelected" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="getPunto" ReturnType="Collection(ConsiliumModel.getPunto_Result)">
           <Parameter Name="idPunto" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -614,29 +590,37 @@
           <FunctionImport Name="usuarioYPuntos" ReturnType="Collection(ConsiliumModel.usuarioYPuntos_Result)">
           <Parameter Name="idUsuario" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Comision" EntityType="ConsiliumModel.Comision" />
-          <EntitySet Name="ComisionXSesion" EntityType="ConsiliumModel.ComisionXSesion" />
+          <FunctionImport Name="getPuntosSesion" ReturnType="Collection(ConsiliumModel.getPuntosSesion_Result1)">
+          <Parameter Name="idSesion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updatePuntoXSesion">
+            <Parameter Name="idPuntoXSesion" Mode="In" Type="Int32" />
+            <Parameter Name="idPunto" Mode="In" Type="Int32" />
+            <Parameter Name="idSesion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getMiembrosXSesion" ReturnType="Collection(String)">
+            <Parameter Name="idMiembro" Mode="In" Type="String" />
+            <Parameter Name="idSesion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateMiembroXSesion">
+            <Parameter Name="idMiembro" Mode="In" Type="String" />
+            <Parameter Name="idSesion" Mode="In" Type="String" />
+            <Parameter Name="isSelected" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <EntitySet Name="EstadoPunto" EntityType="ConsiliumModel.EstadoPunto" />
           <EntitySet Name="Justificacion" EntityType="ConsiliumModel.Justificacion" />
           <EntitySet Name="Logueo" EntityType="ConsiliumModel.Logueo" />
-          <EntitySet Name="MiembroXComision" EntityType="ConsiliumModel.MiembroXComision" />
           <EntitySet Name="MiembroXSesion" EntityType="ConsiliumModel.MiembroXSesion" />
           <EntitySet Name="Mocion" EntityType="ConsiliumModel.Mocion" />
           <EntitySet Name="ProponenteXMocion" EntityType="ConsiliumModel.ProponenteXMocion" />
           <EntitySet Name="Punto" EntityType="ConsiliumModel.Punto" />
+          <EntitySet Name="PuntoXSesion" EntityType="ConsiliumModel.PuntoXSesion" />
           <EntitySet Name="ResultadoPunto" EntityType="ConsiliumModel.ResultadoPunto" />
+          <EntitySet Name="Sesion" EntityType="ConsiliumModel.Sesion" />
           <EntitySet Name="Solicitud" EntityType="ConsiliumModel.Solicitud" />
           <EntitySet Name="TipoSesion" EntityType="ConsiliumModel.TipoSesion" />
           <EntitySet Name="TipoUsuario" EntityType="ConsiliumModel.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="ConsiliumModel.Usuario" />
-          <AssociationSet Name="FK_ComisionXSesion_Comision" Association="ConsiliumModel.FK_ComisionXSesion_Comision">
-            <End Role="Comision" EntitySet="Comision" />
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MiembroXComision_ComisionXSesion" Association="ConsiliumModel.FK_MiembroXComision_ComisionXSesion">
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
-            <End Role="MiembroXComision" EntitySet="MiembroXComision" />
-          </AssociationSet>
           <AssociationSet Name="FK_Punto_EstadoPunto" Association="ConsiliumModel.FK_Punto_EstadoPunto">
             <End Role="EstadoPunto" EntitySet="EstadoPunto" />
             <End Role="Punto" EntitySet="Punto" />
@@ -649,12 +633,12 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Logueo" EntitySet="Logueo" />
           </AssociationSet>
-          <AssociationSet Name="FK_MiembroXComision_Usuario" Association="ConsiliumModel.FK_MiembroXComision_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="MiembroXComision" EntitySet="MiembroXComision" />
-          </AssociationSet>
           <AssociationSet Name="FK_MiembroXQuorum_Usuario" Association="ConsiliumModel.FK_MiembroXQuorum_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="ConsiliumModel.FK_MiembroXSesion_Sesion">
+            <End Role="Sesion" EntitySet="Sesion" />
             <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
           </AssociationSet>
           <AssociationSet Name="FK_Mocion_Punto" Association="ConsiliumModel.FK_Mocion_Punto">
@@ -673,6 +657,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Punto" EntitySet="Punto" />
           </AssociationSet>
+          <AssociationSet Name="FK_PuntoXSesion_Punto" Association="ConsiliumModel.FK_PuntoXSesion_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ResultadoPunto_Punto" Association="ConsiliumModel.FK_ResultadoPunto_Punto">
             <End Role="Punto" EntitySet="Punto" />
             <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
@@ -681,40 +669,46 @@
             <End Role="Punto" EntitySet="Punto" />
             <End Role="Solicitud" EntitySet="Solicitud" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="ConsiliumModel.FK_Usuario_TipoUsuario">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <EntitySet Name="Sesion" EntityType="ConsiliumModel.Sesion" />
-          <AssociationSet Name="FK_ComisionXSesion_Sesion" Association="ConsiliumModel.FK_ComisionXSesion_Sesion">
+          <AssociationSet Name="FK_PuntoXSesion_Sesion" Association="ConsiliumModel.FK_PuntoXSesion_Sesion">
             <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+            <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
           </AssociationSet>
-          <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="ConsiliumModel.FK_MiembroXSesion_Sesion">
+          <AssociationSet Name="FK_ResultadoPunto_Sesion" Association="ConsiliumModel.FK_ResultadoPunto_Sesion">
             <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
+            <End Role="ResultadoPunto" EntitySet="ResultadoPunto" />
           </AssociationSet>
           <AssociationSet Name="FK_Sesion_TipoSesion" Association="ConsiliumModel.FK_Sesion_TipoSesion">
             <End Role="TipoSesion" EntitySet="TipoSesion" />
             <End Role="Sesion" EntitySet="Sesion" />
           </AssociationSet>
-          <FunctionImport Name="getPuntosSesion" ReturnType="Collection(ConsiliumModel.getPuntosSesion_Result1)">
-          <Parameter Name="idSesion" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="PuntoXSesion" EntityType="ConsiliumModel.PuntoXSesion" />
-          <AssociationSet Name="FK_PuntoXSesion_Punto" Association="ConsiliumModel.FK_PuntoXSesion_Punto">
-            <End Role="Punto" EntitySet="Punto" />
-            <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="ConsiliumModel.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_PuntoXSesion_Sesion" Association="ConsiliumModel.FK_PuntoXSesion_Sesion">
-            <End Role="Sesion" EntitySet="Sesion" />
-            <End Role="PuntoXSesion" EntitySet="PuntoXSesion" />
-          </AssociationSet>
-          <FunctionImport Name="updatePuntoXSesion">
-            <Parameter Name="idPuntoXSesion" Mode="In" Type="Int32" />
+          <FunctionImport Name="updatePunto">
             <Parameter Name="idPunto" Mode="In" Type="Int32" />
-            <Parameter Name="idSesion" Mode="In" Type="String" />
+            <Parameter Name="considerandos" Mode="In" Type="String" />
+            <Parameter Name="resultandos" Mode="In" Type="String" />
+            <Parameter Name="acuerdos" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="MiembroXComision" EntityType="ConsiliumModel.MiembroXComision" />
+          <AssociationSet Name="FK_MiembroXComision_Usuario" Association="ConsiliumModel.FK_MiembroXComision_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="MiembroXComision" EntitySet="MiembroXComision" />
+          </AssociationSet>
+          <EntitySet Name="Comision" EntityType="ConsiliumModel.Comision" />
+          <AssociationSet Name="FK_Comision_Punto" Association="ConsiliumModel.FK_Comision_Punto">
+            <End Role="Punto" EntitySet="Punto" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comision_Sesion" Association="ConsiliumModel.FK_Comision_Sesion">
+            <End Role="Sesion" EntitySet="Sesion" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MiembroXComision_Comision" Association="ConsiliumModel.FK_MiembroXComision_Comision">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="MiembroXComision" EntitySet="MiembroXComision" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="getPuntosSesion_Result">
           <Property Type="Int32" Name="idPunto" Nullable="false" />
@@ -808,29 +802,14 @@
           <Property Type="String" Name="apellidoM" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Comision">
-          <Key>
-            <PropertyRef Name="idComision" />
-          </Key>
-          <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="objetivo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="fechaFin" Type="DateTime" Precision="0" />
-          <Property Name="fechaIni" Type="DateTime" Precision="0" />
-          <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="ComisionXSesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Comision" FromRole="Comision" ToRole="ComisionXSesion" />
-        </EntityType>
-        <EntityType Name="ComisionXSesion">
-          <Key>
-            <PropertyRef Name="idComisionXSesion" />
-          </Key>
-          <Property Name="idComisionXSesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idComision" Type="Int32" />
-          <Property Name="idSesion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_ComisionXSesion_Comision" FromRole="ComisionXSesion" ToRole="Comision" />
-          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_ComisionXSesion" FromRole="ComisionXSesion" ToRole="MiembroXComision" />
-          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Sesion" FromRole="ComisionXSesion" ToRole="Sesion" />
-        </EntityType>
+        <ComplexType Name="getPuntosSesion_Result1">
+          <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="acuerdos" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="considerandos" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="resultandos" Nullable="false" MaxLength="500" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+        </ComplexType>
         <EntityType Name="EstadoPunto">
           <Key>
             <PropertyRef Name="idEstado" />
@@ -859,17 +838,6 @@
           <Property Name="nombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="contrasenna" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Logueo_Usuario" FromRole="Logueo" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="MiembroXComision">
-          <Key>
-            <PropertyRef Name="idMiembroXComision" />
-          </Key>
-          <Property Name="idMiembroXComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="idComisionXSesion" Type="Int32" Nullable="false" />
-          <Property Name="tipoMiembro" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ComisionXSesion" Relationship="ConsiliumModel.FK_MiembroXComision_ComisionXSesion" FromRole="MiembroXComision" ToRole="ComisionXSesion" />
-          <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_MiembroXComision_Usuario" FromRole="MiembroXComision" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="MiembroXSesion">
           <Key>
@@ -919,9 +887,20 @@
           <NavigationProperty Name="EstadoPunto" Relationship="ConsiliumModel.FK_Punto_EstadoPunto" FromRole="Punto" ToRole="EstadoPunto" />
           <NavigationProperty Name="Mocion" Relationship="ConsiliumModel.FK_Mocion_Punto" FromRole="Punto" ToRole="Mocion" />
           <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Punto" ToRole="Usuario" />
+          <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="Punto" ToRole="PuntoXSesion" />
           <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="Punto" ToRole="ResultadoPunto" />
           <NavigationProperty Name="Solicitud" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Punto" ToRole="Solicitud" />
-          <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="Punto" ToRole="PuntoXSesion" />
+          <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_Comision_Punto" FromRole="Punto" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="PuntoXSesion">
+          <Key>
+            <PropertyRef Name="idPuntoXSesion" />
+          </Key>
+          <Property Name="idPuntoXSesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSesion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="idPunto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="PuntoXSesion" ToRole="Punto" />
+          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Sesion" FromRole="PuntoXSesion" ToRole="Sesion" />
         </EntityType>
         <EntityType Name="ResultadoPunto">
           <Key>
@@ -934,10 +913,26 @@
           <Property Name="votosNulo" Type="Int32" Nullable="false" />
           <Property Name="votosAbstencion" Type="Int32" Nullable="false" />
           <Property Name="resultado" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="idSesion" Type="Int32" Nullable="false" />
+          <Property Name="idSesion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="idPunto" Type="Int32" Nullable="false" />
           <Property Name="quorum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="ResultadoPunto" ToRole="Punto" />
+          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_ResultadoPunto_Sesion" FromRole="ResultadoPunto" ToRole="Sesion" />
+          <Property Name="anotaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sesion">
+          <Key>
+            <PropertyRef Name="idSesion" />
+          </Key>
+          <Property Name="idSesion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="MiembroXSesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="Sesion" ToRole="MiembroXSesion" />
+          <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Sesion" FromRole="Sesion" ToRole="PuntoXSesion" />
+          <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Sesion" FromRole="Sesion" ToRole="ResultadoPunto" />
+          <NavigationProperty Name="TipoSesion" Relationship="ConsiliumModel.FK_Sesion_TipoSesion" FromRole="Sesion" ToRole="TipoSesion" />
+          <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_Comision_Sesion" FromRole="Sesion" ToRole="Comision" />
         </EntityType>
         <EntityType Name="Solicitud">
           <Key>
@@ -983,36 +978,12 @@
           <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Justificacion" Relationship="ConsiliumModel.FK_Justificacion_Usuario" FromRole="Usuario" ToRole="Justificacion" />
           <NavigationProperty Name="Logueo" Relationship="ConsiliumModel.FK_Logueo_Usuario" FromRole="Usuario" ToRole="Logueo" />
-          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_Usuario" FromRole="Usuario" ToRole="MiembroXComision" />
           <NavigationProperty Name="MiembroXSesion" Relationship="ConsiliumModel.FK_MiembroXQuorum_Usuario" FromRole="Usuario" ToRole="MiembroXSesion" />
           <NavigationProperty Name="ProponenteXMocion" Relationship="ConsiliumModel.FK_ProponenteXMocion_Usuario" FromRole="Usuario" ToRole="ProponenteXMocion" />
           <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_Punto_Usuario" FromRole="Usuario" ToRole="Punto" />
           <NavigationProperty Name="TipoUsuario" Relationship="ConsiliumModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_Usuario" FromRole="Usuario" ToRole="MiembroXComision" />
         </EntityType>
-        <Association Name="FK_ComisionXSesion_Comision">
-          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comision">
-              <PropertyRef Name="idComision" />
-            </Principal>
-            <Dependent Role="ComisionXSesion">
-              <PropertyRef Name="idComision" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MiembroXComision_ComisionXSesion">
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ComisionXSesion">
-              <PropertyRef Name="idComisionXSesion" />
-            </Principal>
-            <Dependent Role="MiembroXComision">
-              <PropertyRef Name="idComisionXSesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Punto_EstadoPunto">
           <End Type="ConsiliumModel.EstadoPunto" Role="EstadoPunto" Multiplicity="1" />
           <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="*" />
@@ -1053,20 +1024,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MiembroXComision_Usuario">
-          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="MiembroXComision">
-              <PropertyRef Name="idUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MiembroXQuorum_Usuario">
           <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="ConsiliumModel.MiembroXSesion" Role="MiembroXSesion" Multiplicity="*" />
@@ -1076,6 +1033,18 @@
             </Principal>
             <Dependent Role="MiembroXSesion">
               <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiembroXSesion_Sesion">
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
+          <End Type="ConsiliumModel.MiembroXSesion" Role="MiembroXSesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sesion">
+              <PropertyRef Name="idSesion" />
+            </Principal>
+            <Dependent Role="MiembroXSesion">
+              <PropertyRef Name="idSesion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1129,6 +1098,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PuntoXSesion_Punto">
+          <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
+          <End Type="ConsiliumModel.PuntoXSesion" Role="PuntoXSesion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punto">
+              <PropertyRef Name="idPunto" />
+            </Principal>
+            <Dependent Role="PuntoXSesion">
+              <PropertyRef Name="idPunto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ResultadoPunto_Punto">
           <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
           <End Type="ConsiliumModel.ResultadoPunto" Role="ResultadoPunto" Multiplicity="*" />
@@ -1155,50 +1136,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_TipoUsuario">
-          <End Type="ConsiliumModel.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
-          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoUsuario">
-              <PropertyRef Name="idTipo" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Sesion">
-          <Key>
-            <PropertyRef Name="idSesion" />
-          </Key>
-          <Property Name="idSesion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="idTipo" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="ComisionXSesion" Relationship="ConsiliumModel.FK_ComisionXSesion_Sesion" FromRole="Sesion" ToRole="ComisionXSesion" />
-          <NavigationProperty Name="MiembroXSesion" Relationship="ConsiliumModel.FK_MiembroXSesion_Sesion" FromRole="Sesion" ToRole="MiembroXSesion" />
-          <NavigationProperty Name="TipoSesion" Relationship="ConsiliumModel.FK_Sesion_TipoSesion" FromRole="Sesion" ToRole="TipoSesion" />
-          <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Sesion" FromRole="Sesion" ToRole="PuntoXSesion" />
-        </EntityType>
-        <Association Name="FK_ComisionXSesion_Sesion">
-          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="0..1" />
-          <End Type="ConsiliumModel.ComisionXSesion" Role="ComisionXSesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sesion">
-              <PropertyRef Name="idSesion" />
-            </Principal>
-            <Dependent Role="ComisionXSesion">
-              <PropertyRef Name="idSesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MiembroXSesion_Sesion">
+        <Association Name="FK_PuntoXSesion_Sesion">
           <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.MiembroXSesion" Role="MiembroXSesion" Multiplicity="*" />
+          <End Type="ConsiliumModel.PuntoXSesion" Role="PuntoXSesion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sesion">
               <PropertyRef Name="idSesion" />
             </Principal>
-            <Dependent Role="MiembroXSesion">
+            <Dependent Role="PuntoXSesion">
+              <PropertyRef Name="idSesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadoPunto_Sesion">
+          <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
+          <End Type="ConsiliumModel.ResultadoPunto" Role="ResultadoPunto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sesion">
+              <PropertyRef Name="idSesion" />
+            </Principal>
+            <Dependent Role="ResultadoPunto">
               <PropertyRef Name="idSesion" />
             </Dependent>
           </ReferentialConstraint>
@@ -1215,45 +1172,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="getPuntosSesion_Result1">
-          <Property Type="String" Name="titulo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="acuerdos" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="considerandos" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="idUsuario" Nullable="false" MaxLength="30" />
-          <Property Type="String" Name="resultandos" Nullable="false" MaxLength="500" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" />
-        </ComplexType>
-        <EntityType Name="PuntoXSesion">
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Type="ConsiliumModel.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="idTipo" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MiembroXComision">
           <Key>
-            <PropertyRef Name="idPuntoXSesion" />
+            <PropertyRef Name="idMiembroXComision" />
           </Key>
-          <Property Name="idPuntoXSesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMiembroXComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuario" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="idComision" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="ConsiliumModel.FK_MiembroXComision_Usuario" FromRole="MiembroXComision" ToRole="Usuario" />
+          <NavigationProperty Name="Comision" Relationship="ConsiliumModel.FK_MiembroXComision_Comision" FromRole="MiembroXComision" ToRole="Comision" />
+        </EntityType>
+        <Association Name="FK_MiembroXComision_Usuario">
+          <End Type="ConsiliumModel.Usuario" Role="Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="MiembroXComision">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comision">
+          <Key>
+            <PropertyRef Name="idComision" />
+          </Key>
+          <Property Name="idComision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="objetivo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaIni" Type="DateTime" Precision="0" />
           <Property Name="idSesion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="idPunto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="PuntoXSesion" ToRole="Punto" />
-          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Sesion" FromRole="PuntoXSesion" ToRole="Sesion" />
+          <NavigationProperty Name="Punto" Relationship="ConsiliumModel.FK_Comision_Punto" FromRole="Comision" ToRole="Punto" />
+          <NavigationProperty Name="Sesion" Relationship="ConsiliumModel.FK_Comision_Sesion" FromRole="Comision" ToRole="Sesion" />
+          <NavigationProperty Name="MiembroXComision" Relationship="ConsiliumModel.FK_MiembroXComision_Comision" FromRole="Comision" ToRole="MiembroXComision" />
         </EntityType>
-        <Association Name="FK_PuntoXSesion_Punto">
+        <Association Name="FK_Comision_Punto">
           <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
-          <End Type="ConsiliumModel.PuntoXSesion" Role="PuntoXSesion" Multiplicity="*" />
+          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Punto">
               <PropertyRef Name="idPunto" />
             </Principal>
-            <Dependent Role="PuntoXSesion">
+            <Dependent Role="Comision">
               <PropertyRef Name="idPunto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PuntoXSesion_Sesion">
+        <Association Name="FK_Comision_Sesion">
           <End Type="ConsiliumModel.Sesion" Role="Sesion" Multiplicity="1" />
-          <End Type="ConsiliumModel.PuntoXSesion" Role="PuntoXSesion" Multiplicity="*" />
+          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sesion">
               <PropertyRef Name="idSesion" />
             </Principal>
-            <Dependent Role="PuntoXSesion">
+            <Dependent Role="Comision">
               <PropertyRef Name="idSesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MiembroXComision_Comision">
+          <End Type="ConsiliumModel.Comision" Role="Comision" Multiplicity="1" />
+          <End Type="ConsiliumModel.MiembroXComision" Role="MiembroXComision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="idComision" />
+            </Principal>
+            <Dependent Role="MiembroXComision">
+              <PropertyRef Name="idComision" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1263,8 +1265,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ConsiliumModelStoreContainer" CdmEntityContainer="ConsiliumEntities">
-          <FunctionImportMapping FunctionImportName="getMiembrosXSesion" FunctionName="ConsiliumModel.Store.getMiembrosXSesion" />
-          <FunctionImportMapping FunctionImportName="updateMiembroXSesion" FunctionName="ConsiliumModel.Store.updateMiembroXSesion" />          
           <FunctionImportMapping FunctionImportName="getPunto" FunctionName="ConsiliumModel.Store.getPunto">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ConsiliumModel.getPunto_Result">
@@ -1376,27 +1376,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Comision">
-            <EntityTypeMapping TypeName="ConsiliumModel.Comision">
-              <MappingFragment StoreEntitySet="Comision">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="fechaIni" ColumnName="fechaIni" />
-                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
-                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="idComision" ColumnName="idComision" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ComisionXSesion">
-            <EntityTypeMapping TypeName="ConsiliumModel.ComisionXSesion">
-              <MappingFragment StoreEntitySet="ComisionXSesion">
-                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
-                <ScalarProperty Name="idComision" ColumnName="idComision" />
-                <ScalarProperty Name="idComisionXSesion" ColumnName="idComisionXSesion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getPuntosSesion" FunctionName="ConsiliumModel.Store.getPuntosSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConsiliumModel.getPuntosSesion_Result1">
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
+                <ScalarProperty Name="considerandos" ColumnName="considerandos" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="resultandos" ColumnName="resultandos" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="updatePuntoXSesion" FunctionName="ConsiliumModel.Store.updatePuntoXSesion" />
+          <FunctionImportMapping FunctionImportName="getMiembrosXSesion" FunctionName="ConsiliumModel.Store.getMiembrosXSesion" />
+          <FunctionImportMapping FunctionImportName="updateMiembroXSesion" FunctionName="ConsiliumModel.Store.updateMiembroXSesion" />
           <EntitySetMapping Name="EstadoPunto">
             <EntityTypeMapping TypeName="ConsiliumModel.EstadoPunto">
               <MappingFragment StoreEntitySet="EstadoPunto">
@@ -1423,16 +1417,6 @@
                 <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
                 <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MiembroXComision">
-            <EntityTypeMapping TypeName="ConsiliumModel.MiembroXComision">
-              <MappingFragment StoreEntitySet="MiembroXComision">
-                <ScalarProperty Name="tipoMiembro" ColumnName="tipoMiembro" />
-                <ScalarProperty Name="idComisionXSesion" ColumnName="idComisionXSesion" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idMiembroXComision" ColumnName="idMiembroXComision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1480,9 +1464,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PuntoXSesion">
+            <EntityTypeMapping TypeName="ConsiliumModel.PuntoXSesion">
+              <MappingFragment StoreEntitySet="PuntoXSesion">
+                <ScalarProperty Name="idPunto" ColumnName="idPunto" />
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+                <ScalarProperty Name="idPuntoXSesion" ColumnName="idPuntoXSesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ResultadoPunto">
             <EntityTypeMapping TypeName="ConsiliumModel.ResultadoPunto">
               <MappingFragment StoreEntitySet="ResultadoPunto">
+                <ScalarProperty Name="anotaciones" ColumnName="anotaciones" />
                 <ScalarProperty Name="quorum" ColumnName="quorum" />
                 <ScalarProperty Name="idPunto" ColumnName="idPunto" />
                 <ScalarProperty Name="idSesion" ColumnName="idSesion" />
@@ -1493,6 +1487,16 @@
                 <ScalarProperty Name="votosFavor" ColumnName="votosFavor" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idResultado" ColumnName="idResultado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sesion">
+            <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
+              <MappingFragment StoreEntitySet="Sesion">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1540,37 +1544,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sesion">
-            <EntityTypeMapping TypeName="ConsiliumModel.Sesion">
-              <MappingFragment StoreEntitySet="Sesion">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
-                <ScalarProperty Name="idSesion" ColumnName="idSesion" />
+          <FunctionImportMapping FunctionImportName="updatePunto" FunctionName="ConsiliumModel.Store.updatePunto" />
+          <EntitySetMapping Name="MiembroXComision">
+            <EntityTypeMapping TypeName="ConsiliumModel.MiembroXComision">
+              <MappingFragment StoreEntitySet="MiembroXComision">
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idMiembroXComision" ColumnName="idMiembroXComision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="getPuntosSesion" FunctionName="ConsiliumModel.Store.getPuntosSesion">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ConsiliumModel.getPuntosSesion_Result1">
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
-                <ScalarProperty Name="considerandos" ColumnName="considerandos" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="resultandos" ColumnName="resultandos" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="PuntoXSesion">
-            <EntityTypeMapping TypeName="ConsiliumModel.PuntoXSesion">
-              <MappingFragment StoreEntitySet="PuntoXSesion">
+          <EntitySetMapping Name="Comision">
+            <EntityTypeMapping TypeName="ConsiliumModel.Comision">
+              <MappingFragment StoreEntitySet="Comision">
                 <ScalarProperty Name="idPunto" ColumnName="idPunto" />
                 <ScalarProperty Name="idSesion" ColumnName="idSesion" />
-                <ScalarProperty Name="idPuntoXSesion" ColumnName="idPuntoXSesion" />
+                <ScalarProperty Name="fechaIni" ColumnName="fechaIni" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idComision" ColumnName="idComision" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="updatePuntoXSesion" FunctionName="ConsiliumModel.Store.updatePuntoXSesion" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

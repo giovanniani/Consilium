@@ -5,19 +5,12 @@
       <PropertyRef Name="idComision" />
     </Key>
     <Property Name="idComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="nombre" Type="nvarchar" MaxLength="25" />
-    <Property Name="objetivo" Type="nvarchar" MaxLength="500" />
-    <Property Name="fechaFin" Type="date" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="objetivo" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="fechaFin" Type="date" Nullable="false" />
     <Property Name="fechaIni" Type="date" />
-    <Property Name="estado" Type="bit" />
-  </EntityType>
-  <EntityType Name="ComisionXSesion">
-    <Key>
-      <PropertyRef Name="idComisionXSesion" />
-    </Key>
-    <Property Name="idComisionXSesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idComision" Type="int" />
-    <Property Name="idSesion" Type="nvarchar" MaxLength="20" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="idPunto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EstadoPunto">
     <Key>
@@ -51,8 +44,7 @@
     </Key>
     <Property Name="idMiembroXComision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUsuario" Type="nvarchar" MaxLength="30" Nullable="false" />
-    <Property Name="idComisionXSesion" Type="int" Nullable="false" />
-    <Property Name="tipoMiembro" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="idComision" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MiembroXSesion">
     <Key>
@@ -113,9 +105,10 @@
     <Property Name="votosNulo" Type="int" Nullable="false" />
     <Property Name="votosAbstencion" Type="int" Nullable="false" />
     <Property Name="resultado" Type="nvarchar" MaxLength="25" Nullable="false" />
-    <Property Name="idSesion" Type="int" Nullable="false" />
+    <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="idPunto" Type="int" Nullable="false" />
     <Property Name="quorum" Type="int" Nullable="false" />
+    <Property Name="anotaciones" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Sesion">
     <Key>
@@ -124,6 +117,7 @@
     <Property Name="idSesion" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="idTipo" Type="int" Nullable="false" />
     <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="estado" Type="int" />
   </EntityType>
   <EntityType Name="Solicitud">
     <Key>
@@ -165,26 +159,26 @@
     <Property Name="fechaInicio" Type="date" Nullable="false" />
     <Property Name="fechaFin" Type="date" Nullable="false" />
   </EntityType>
-  <Association Name="FK_ComisionXSesion_Comision">
-    <End Role="Comision" Type="Self.Comision" Multiplicity="0..1" />
-    <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="*" />
+  <Association Name="FK_Comision_Punto">
+    <End Role="Punto" Type="Self.Punto" Multiplicity="1" />
+    <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Comision">
-        <PropertyRef Name="idComision" />
+      <Principal Role="Punto">
+        <PropertyRef Name="idPunto" />
       </Principal>
-      <Dependent Role="ComisionXSesion">
-        <PropertyRef Name="idComision" />
+      <Dependent Role="Comision">
+        <PropertyRef Name="idPunto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ComisionXSesion_Sesion">
-    <End Role="Sesion" Type="Self.Sesion" Multiplicity="0..1" />
-    <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="*" />
+  <Association Name="FK_Comision_Sesion">
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
+    <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sesion">
         <PropertyRef Name="idSesion" />
       </Principal>
-      <Dependent Role="ComisionXSesion">
+      <Dependent Role="Comision">
         <PropertyRef Name="idSesion" />
       </Dependent>
     </ReferentialConstraint>
@@ -217,15 +211,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MiembroXComision_ComisionXSesion">
-    <End Role="ComisionXSesion" Type="Self.ComisionXSesion" Multiplicity="1" />
+  <Association Name="FK_MiembroXComision_Comision">
+    <End Role="Comision" Type="Self.Comision" Multiplicity="1" />
     <End Role="MiembroXComision" Type="Self.MiembroXComision" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ComisionXSesion">
-        <PropertyRef Name="idComisionXSesion" />
+      <Principal Role="Comision">
+        <PropertyRef Name="idComision" />
       </Principal>
       <Dependent Role="MiembroXComision">
-        <PropertyRef Name="idComisionXSesion" />
+        <PropertyRef Name="idComision" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -252,18 +246,6 @@
       </Principal>
       <Dependent Role="MiembroXSesion">
         <PropertyRef Name="idUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_MiembroXSesion_Sesion">
-    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
-    <End Role="MiembroXSesion" Type="Self.MiembroXSesion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sesion">
-        <PropertyRef Name="idSesion" />
-      </Principal>
-      <Dependent Role="MiembroXSesion">
-        <PropertyRef Name="idSesion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -342,7 +324,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PuntoXSesion_Sesion">
-    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1" />
+    <End Role="Sesion" Type="Self.Sesion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="PuntoXSesion" Type="Self.PuntoXSesion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sesion">
@@ -408,7 +392,7 @@
   </Function>
   <Function Name="getMiembrosXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
-    <Parameter Name="idSesion" Type="int" Mode="In" />
+    <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="getPunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPunto" Type="int" Mode="In" />
@@ -436,8 +420,14 @@
   </Function>
   <Function Name="updateMiembroXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idMiembro" Type="nvarchar" Mode="In" />
-    <Parameter Name="idSesion" Type="int" Mode="In" />
+    <Parameter Name="idSesion" Type="nvarchar" Mode="In" />
     <Parameter Name="isSelected" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="updatePunto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idPunto" Type="int" Mode="In" />
+    <Parameter Name="considerandos" Type="nvarchar" Mode="In" />
+    <Parameter Name="resultandos" Type="nvarchar" Mode="In" />
+    <Parameter Name="acuerdos" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="updatePuntoXSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idPuntoXSesion" Type="int" Mode="In" />
@@ -462,7 +452,6 @@
   </Function>
   <EntityContainer Name="ConsiliumModelStoreContainer">
     <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ComisionXSesion" EntityType="Self.ComisionXSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoPunto" EntityType="Self.EstadoPunto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Justificacion" EntityType="Self.Justificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Logueo" EntityType="Self.Logueo" Schema="dbo" store:Type="Tables" />
@@ -478,13 +467,13 @@
     <EntitySet Name="TipoSesion" EntityType="Self.TipoSesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_ComisionXSesion_Comision" Association="Self.FK_ComisionXSesion_Comision">
+    <AssociationSet Name="FK_Comision_Punto" Association="Self.FK_Comision_Punto">
+      <End Role="Punto" EntitySet="Punto" />
       <End Role="Comision" EntitySet="Comision" />
-      <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
     </AssociationSet>
-    <AssociationSet Name="FK_ComisionXSesion_Sesion" Association="Self.FK_ComisionXSesion_Sesion">
+    <AssociationSet Name="FK_Comision_Sesion" Association="Self.FK_Comision_Sesion">
       <End Role="Sesion" EntitySet="Sesion" />
-      <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+      <End Role="Comision" EntitySet="Comision" />
     </AssociationSet>
     <AssociationSet Name="FK_Justificacion_Usuario" Association="Self.FK_Justificacion_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
@@ -494,8 +483,8 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Logueo" EntitySet="Logueo" />
     </AssociationSet>
-    <AssociationSet Name="FK_MiembroXComision_ComisionXSesion" Association="Self.FK_MiembroXComision_ComisionXSesion">
-      <End Role="ComisionXSesion" EntitySet="ComisionXSesion" />
+    <AssociationSet Name="FK_MiembroXComision_Comision" Association="Self.FK_MiembroXComision_Comision">
+      <End Role="Comision" EntitySet="Comision" />
       <End Role="MiembroXComision" EntitySet="MiembroXComision" />
     </AssociationSet>
     <AssociationSet Name="FK_MiembroXComision_Usuario" Association="Self.FK_MiembroXComision_Usuario">
@@ -504,10 +493,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_MiembroXQuorum_Usuario" Association="Self.FK_MiembroXQuorum_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MiembroXSesion_Sesion" Association="Self.FK_MiembroXSesion_Sesion">
-      <End Role="Sesion" EntitySet="Sesion" />
       <End Role="MiembroXSesion" EntitySet="MiembroXSesion" />
     </AssociationSet>
     <AssociationSet Name="FK_Mocion_Punto" Association="Self.FK_Mocion_Punto">

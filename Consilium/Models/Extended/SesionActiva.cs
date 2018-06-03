@@ -11,5 +11,7 @@ namespace Consilium.Models.Extended
         public List<PuntoXSesion> Puntos { get; set; }
 
         public int quorum;
+        
+        public UsuariosModelo usuario { get; set; }
     }
 }

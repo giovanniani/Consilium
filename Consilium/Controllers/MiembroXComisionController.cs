@@ -11,7 +11,7 @@ using Consilium.Models;
 namespace Consilium.Controllers
 {
     public class MiembroXComisionController : Controller
-    {
+    {/*
         private ConsiliumEntities db = new ConsiliumEntities();
 
         // GET: MiembroXComision
@@ -131,6 +131,6 @@ namespace Consilium.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

@@ -22,11 +22,13 @@ public partial class Sesion
     public Sesion()
     {
 
-        this.ComisionXSesion = new HashSet<ComisionXSesion>();
-
         this.MiembroXSesion = new HashSet<MiembroXSesion>();
 
         this.PuntoXSesion = new HashSet<PuntoXSesion>();
+
+        this.ResultadoPunto = new HashSet<ResultadoPunto>();
+
+        this.Comision = new HashSet<Comision>();
 
     }
 
@@ -37,21 +39,27 @@ public partial class Sesion
 
     public System.DateTime fecha { get; set; }
 
+    public Nullable<int> estado { get; set; }
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ComisionXSesion> ComisionXSesion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<MiembroXSesion> MiembroXSesion { get; set; }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ResultadoPunto> ResultadoPunto { get; set; }
+
     public virtual TipoSesion TipoSesion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<PuntoXSesion> PuntoXSesion { get; set; }
+    public virtual ICollection<Comision> Comision { get; set; }
 
 }
 

@@ -1,4 +1,4 @@
-﻿@model Consilium.Models.ResultadoPunto
+﻿@model Consilium.Models.Extended.Votacion
 
 @{
 
@@ -44,73 +44,106 @@
                                 @Html.AntiForgeryToken()
 
 
-                                <div class="form-horizontal">
+                            <div class="form-horizontal">
 
-                                    <hr />
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                                        </div>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.fecha, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.fecha, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.fecha, "", new { @class = "text-danger" })
                                     </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.votosFavor, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.votosFavor, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.votosFavor, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.votosContra, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.votosContra, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.votosContra, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.votosNulo, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.votosNulo, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.votosNulo, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.votosAbstencion, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.votosAbstencion, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.votosAbstencion, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.resultado, htmlAttributes: new { @class = "control-label col-md-4" })
-                                        <div class="col-md-3">
-                                            @Html.EditorFor(model => model.resultado, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.resultado, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-                                    @Html.HiddenFor(model => model.idSesion)
-                                    @Html.HiddenFor(model => model.idPunto)
-                                    @Html.HiddenFor(model => model.quorum)
-
-
-                                    <div class="form-group">
-                                        <div class="col-md-offset-4 col-md-10">
-                                            <input type="submit" value="Votar" class="w3-button w3-block w3-black" style="width:17% " />
-                                        </div>
-                                        <div>
-                                            @Html.ActionLink("Regresar", "Active", new { id = Model.idSesion })
-                                        </div>
-                                    </div>
-
                                 </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.votosFavor, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.votosFavor, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.votosFavor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.votosContra, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.votosContra, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.votosContra, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.votosNulo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.votosNulo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.votosNulo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.votosAbstencion, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.votosAbstencion, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.votosAbstencion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.anotaciones, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.anotaciones, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.anotaciones, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.resultado.resultado, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.resultado.resultado, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.resultado.resultado, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.punto.acuerdos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.punto.acuerdos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.punto.acuerdos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.punto.considerandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.punto.considerandos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.punto.considerandos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.punto.resultandos, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.punto.resultandos, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.punto.resultandos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                @Html.HiddenFor(model => model.resultado.idSesion)
+                                @Html.HiddenFor(model => model.resultado.idPunto)
+                                @Html.HiddenFor(model => model.punto.idPunto)
+                                @Html.HiddenFor(model => model.resultado.quorum)
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-10">
+                                        <input type="submit" value="Votar" class="w3-button w3-block w3-black" style="width:17% " />
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink("Crear comisión", "createComision", new { id = Model.resultado.idSesion, punto = Model.punto.idPunto, quorum = Model.resultado.quorum })
+                                    </div>
+                                    <div>
+                                        @Html.ActionLink("Regresar", "Active", new { id = Model.resultado.idSesion })
+                                    </div>
+                                </div>
+
+                            </div>
                                 if (ViewBag.Message != null)
                                 {
                                     <div class="alert alert-danger col-md-6">

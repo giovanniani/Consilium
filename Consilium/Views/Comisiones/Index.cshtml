@@ -90,9 +90,6 @@
 										<th>
 											@Html.DisplayNameFor(model => model.fechaIni)
 										</th>
-										<th>
-											@Html.DisplayNameFor(model => model.estado)
-										</th>
 										<th>Opciones</th>
 									</tr>
 
@@ -110,9 +107,6 @@
 											</td>
 											<td>
 												@Html.DisplayFor(modelItem => item.fechaIni)
-											</td>
-											<td>
-												@Html.DisplayFor(modelItem => item.estado)
 											</td>
 											<td>
 												@Html.ActionLink("Agregar puntos", "Edit", new { id = item.idComision }) |

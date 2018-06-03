@@ -32,15 +32,19 @@ public partial class ResultadoPunto
 
     public string resultado { get; set; }
 
-    public int idSesion { get; set; }
+    public string idSesion { get; set; }
 
     public int idPunto { get; set; }
 
     public int quorum { get; set; }
 
+    public string anotaciones { get; set; }
+
 
 
     public virtual Punto Punto { get; set; }
+
+    public virtual Sesion Sesion { get; set; }
 
 }
 

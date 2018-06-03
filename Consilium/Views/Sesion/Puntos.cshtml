@@ -62,129 +62,131 @@
                     <h2 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos Sesión: @Model.idSesion</h2>
 
                     @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-                    {
-                        <div class="alert alert-success col-md-6">
-                            <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
-                        </div>
-                    }
-                    else
-                    {
-                        using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                            <h3 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos agregados</h3>
-                            <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:95%; overflow-x:auto;overflow-y:scroll;height: 30%">
-                                <table class="table" id="formatoTabla">
-                                    <tr>
-                                        <th>
-                                            Título
-                                        </th>
-                                        <th>
-                                            Fecha
-                                        </th>
-                                        <th>
-                                            Estado
-                                        </th>
-                                        <th>
-                                            Usuario
-                                        </th>
-                                        <th width="100">Opciones</th>
-                                    </tr>
-                                    @foreach (var item in Model.PuntosActuales)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Punto.titulo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Punto.fecha)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Punto.EstadoPunto.nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Punto.Usuario.nombre)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Quitar", "Edit", new { id = item.Punto.idPunto })
-                                            </td>
-                                        </tr>
-                                    }
-                                </table>
-                                </div>
-                                <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
-                                <h3 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos pendientes</h3>
-                                <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:95%; overflow-x:auto;overflow-y:scroll;height: 30%">
-                                    <table class="table" id="formatoTabla">
-                                        <tr>
-                                            <th>
-                                                Tíyulo
-                                            </th>
-                                            <th>
-                                                Fecha
-                                            </th>
-                                            <th>
-                                                Estado
-                                            </th>
-                                            <th>
-                                                Usuario
-                                            </th>
-                                            <th width="100">Opciones</th>
-                                        </tr>
-                                        @foreach (var item in Model.Puntos.Where(a => a.EstadoPunto.idEstado == 1))
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.titulo)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.fecha)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Usuario.nombre)
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Agregar", "agregarPunto", new { idPunto = item.idPunto, idSesion = Model.idSesion })
-                                                </td>
-                                            </tr>
-                                        }
-                                    </table>
-                                    </div>
-
-                                if (ViewBag.Message != null)
-                                {
-                                <div class="alert alert-danger col-md-6">
-                                    <strong>¡Error!  </strong>@ViewBag.Message
-                                </div>
-                                }
-                                }
-
-                                }
-                                <br /> <br /><br />
-                            </div>
-                        </div>
-                    </div>
-                    string[] data = HttpContext.Current.User.Identity.Name.Split('&');
-                    <div id="navigation-container">
-                        <div id="navigation">
-                            @if (data[2] == "0")
-                            {
-                                @Html.Partial("_menuSecretaria")
-                            }
-                            else if (data[2] == "1")
-                            {
-                                @Html.Partial("_menuPresidente")
-                            }
-                        </div>
-                    </div>
-                }
+    {
+                <div class="alert alert-success col-md-6">
+                    <strong> ¡La operación se realizó con éxito!</strong>@ViewBag.Message
+                </div>
+}
 else
 {
-    < div id = "contenedorVistaParcial" > @Html.Partial("_noAutorizado") </ div >
+using (Html.BeginForm())
+{
+                @Html.AntiForgeryToken()
+                <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
+                <h3 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos agregados</h3>
+                <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:95%; overflow-x:auto;overflow-y:scroll;height: 30%">
+                    <table class="table" id="formatoTabla">
+                        <tr>
+                            <th>
+                                Título
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Usuario
+                            </th>
+                            <th width="100">Opciones</th>
+                        </tr>
+                        @foreach (var item in Model.PuntosActuales)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Punto.titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Punto.fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Punto.EstadoPunto.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Punto.Usuario.nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Quitar", "Edit", new { id = item.Punto.idPunto })
+                    </td>
+                </tr>
+}
+                    </table>
+                </div>
+                <hr style="height:2px;width: 90% ;border:none;color:#333;background-color:#333;" />
+                <h3 style="text-align: center; color:#222222; padding-left:4em; font-family:Arial;font-weight:bolder ; width:70% ">Puntos pendientes</h3>
+                <div class="form-horizontal" style="color:#222222; font-size: 14px; font-weight:lighter;font-family:Verdana, Geneva, Tahoma, sans-serif;  position:relative; left:0; width:95%; overflow-x:auto;overflow-y:scroll;height: 30%">
+                    <table class="table" id="formatoTabla">
+                        <tr>
+                            <th>
+                                Tíyulo
+                            </th>
+                            <th>
+                                Fecha
+                            </th>
+                            <th>
+                                Estado
+                            </th>
+                            <th>
+                                Usuario
+                            </th>
+                            <th width="100">Opciones</th>
+                        </tr>
+                        @foreach (var item in Model.Puntos.Where(a => a.EstadoPunto.idEstado == 1))
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Agregar", "agregarPunto", new { idPunto = item.idPunto, idSesion = Model.idSesion })
+                    </td>
+                </tr>
+}
+                    </table>
+
+                </div>
+                @Html.ActionLink("Regresar", "Index", new { id = Model.idSesion })
+if (ViewBag.Message != null)
+{
+                <div class="alert alert-danger col-md-6">
+                    <strong>¡Error!  </strong>@ViewBag.Message
+                </div>
+}
 }
 
-        </body>
+}
+                    <br /> <br /><br />
+                </div>
+            </div>
+            
+        </div>        
+        string[] data = HttpContext.Current.User.Identity.Name.Split('&');
+        <div id="navigation-container">
+            <div id="navigation">
+                @if (data[2] == "0")
+                {
+                    @Html.Partial("_menuSecretaria")
+                }
+                else if (data[2] == "1")
+                {
+                    @Html.Partial("_menuPresidente")
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        < div id = "contenedorVistaParcial" > @Html.Partial("_noAutorizado") </ div >
+    }
+
+</body>

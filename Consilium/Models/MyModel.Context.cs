@@ -35,17 +35,11 @@ public partial class ConsiliumEntities : DbContext
     }
 
 
-    public virtual DbSet<Comision> Comision { get; set; }
-
-    public virtual DbSet<ComisionXSesion> ComisionXSesion { get; set; }
-
     public virtual DbSet<EstadoPunto> EstadoPunto { get; set; }
 
     public virtual DbSet<Justificacion> Justificacion { get; set; }
 
     public virtual DbSet<Logueo> Logueo { get; set; }
-
-    public virtual DbSet<MiembroXComision> MiembroXComision { get; set; }
 
     public virtual DbSet<MiembroXSesion> MiembroXSesion { get; set; }
 
@@ -55,7 +49,11 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Punto> Punto { get; set; }
 
+    public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
+
     public virtual DbSet<ResultadoPunto> ResultadoPunto { get; set; }
+
+    public virtual DbSet<Sesion> Sesion { get; set; }
 
     public virtual DbSet<Solicitud> Solicitud { get; set; }
 
@@ -65,48 +63,9 @@ public partial class ConsiliumEntities : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-    public virtual DbSet<Sesion> Sesion { get; set; }
+    public virtual DbSet<MiembroXComision> MiembroXComision { get; set; }
 
-    public virtual DbSet<PuntoXSesion> PuntoXSesion { get; set; }
-
-
-    public virtual ObjectResult<Nullable<int>> getMiembrosXSesion(string idMiembro, Nullable<int> idSesion)
-    {
-
-        var idMiembroParameter = idMiembro != null ?
-            new ObjectParameter("idMiembro", idMiembro) :
-            new ObjectParameter("idMiembro", typeof(string));
-
-
-        var idSesionParameter = idSesion.HasValue ?
-            new ObjectParameter("idSesion", idSesion) :
-            new ObjectParameter("idSesion", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getMiembrosXSesion", idMiembroParameter, idSesionParameter);
-    }
-
-
-    public virtual int updateMiembroXSesion(string idMiembro, Nullable<int> idSesion, Nullable<bool> isSelected)
-    {
-
-        var idMiembroParameter = idMiembro != null ?
-            new ObjectParameter("idMiembro", idMiembro) :
-            new ObjectParameter("idMiembro", typeof(string));
-
-
-        var idSesionParameter = idSesion.HasValue ?
-            new ObjectParameter("idSesion", idSesion) :
-            new ObjectParameter("idSesion", typeof(int));
-
-
-        var isSelectedParameter = isSelected.HasValue ?
-            new ObjectParameter("isSelected", isSelected) :
-            new ObjectParameter("isSelected", typeof(bool));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateMiembroXSesion", idMiembroParameter, idSesionParameter, isSelectedParameter);
-    }
+    public virtual DbSet<Comision> Comision { get; set; }
 
 
     public virtual ObjectResult<getPunto_Result> getPunto(Nullable<int> idPunto)
@@ -307,6 +266,72 @@ public partial class ConsiliumEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updatePuntoXSesion", idPuntoXSesionParameter, idPuntoParameter, idSesionParameter);
+    }
+
+
+    public virtual ObjectResult<string> getMiembrosXSesion(string idMiembro, string idSesion)
+    {
+
+        var idMiembroParameter = idMiembro != null ?
+            new ObjectParameter("idMiembro", idMiembro) :
+            new ObjectParameter("idMiembro", typeof(string));
+
+
+        var idSesionParameter = idSesion != null ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getMiembrosXSesion", idMiembroParameter, idSesionParameter);
+    }
+
+
+    public virtual int updateMiembroXSesion(string idMiembro, string idSesion, Nullable<bool> isSelected)
+    {
+
+        var idMiembroParameter = idMiembro != null ?
+            new ObjectParameter("idMiembro", idMiembro) :
+            new ObjectParameter("idMiembro", typeof(string));
+
+
+        var idSesionParameter = idSesion != null ?
+            new ObjectParameter("idSesion", idSesion) :
+            new ObjectParameter("idSesion", typeof(string));
+
+
+        var isSelectedParameter = isSelected.HasValue ?
+            new ObjectParameter("isSelected", isSelected) :
+            new ObjectParameter("isSelected", typeof(bool));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateMiembroXSesion", idMiembroParameter, idSesionParameter, isSelectedParameter);
+    }
+
+
+    public virtual int updatePunto(Nullable<int> idPunto, string considerandos, string resultandos, string acuerdos)
+    {
+
+        var idPuntoParameter = idPunto.HasValue ?
+            new ObjectParameter("idPunto", idPunto) :
+            new ObjectParameter("idPunto", typeof(int));
+
+
+        var considerandosParameter = considerandos != null ?
+            new ObjectParameter("considerandos", considerandos) :
+            new ObjectParameter("considerandos", typeof(string));
+
+
+        var resultandosParameter = resultandos != null ?
+            new ObjectParameter("resultandos", resultandos) :
+            new ObjectParameter("resultandos", typeof(string));
+
+
+        var acuerdosParameter = acuerdos != null ?
+            new ObjectParameter("acuerdos", acuerdos) :
+            new ObjectParameter("acuerdos", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updatePunto", idPuntoParameter, considerandosParameter, resultandosParameter, acuerdosParameter);
     }
 
 }

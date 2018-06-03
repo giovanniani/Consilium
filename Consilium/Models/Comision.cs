@@ -22,7 +22,7 @@ public partial class Comision
     public Comision()
     {
 
-        this.ComisionXSesion = new HashSet<ComisionXSesion>();
+        this.MiembroXComision = new HashSet<MiembroXComision>();
 
     }
 
@@ -33,17 +33,23 @@ public partial class Comision
 
     public string objetivo { get; set; }
 
-    public Nullable<System.DateTime> fechaFin { get; set; }
+    public System.DateTime fechaFin { get; set; }
 
     public Nullable<System.DateTime> fechaIni { get; set; }
 
-    public Nullable<bool> estado { get; set; }
+    public string idSesion { get; set; }
+
+    public int idPunto { get; set; }
 
 
+
+    public virtual Punto Punto { get; set; }
+
+    public virtual Sesion Sesion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ComisionXSesion> ComisionXSesion { get; set; }
+    public virtual ICollection<MiembroXComision> MiembroXComision { get; set; }
 
 }
 
