@@ -86,6 +86,7 @@
     <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
     <Property Name="propuesta" Type="nvarchar" MaxLength="500" />
+    <Property Name="tipoPunto" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="PuntoXSesion">
     <Key>

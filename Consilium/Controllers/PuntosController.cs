@@ -60,6 +60,7 @@ namespace Consilium.Controllers
                 punto.adjunto = " ";
             }
             punto.idEstado = 1;
+            punto.tipoPunto = "Punto";
             if (ModelState.IsValid)
             {
                 db.Punto.Add(punto);

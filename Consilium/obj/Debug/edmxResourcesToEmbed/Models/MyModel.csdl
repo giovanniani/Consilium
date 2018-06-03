@@ -622,6 +622,7 @@
     <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="Punto" ToRole="PuntoXSesion" />
     <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="Punto" ToRole="ResultadoPunto" />
     <NavigationProperty Name="Solicitud" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Punto" ToRole="Solicitud" />
+    <Property Name="tipoPunto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Comision_Punto">
     <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />

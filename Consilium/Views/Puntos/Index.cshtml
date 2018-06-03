@@ -100,41 +100,47 @@
                                         <th>
                                             Usuario
                                         </th>
-                                        <th  width="100">Opciones</th>
+                                        <th>
+                                            Tipo
+                                        </th>
+                                        <th width="100">Opciones</th>
                                     </tr>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.fecha)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.titulo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.considerandos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.resultandos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.acuerdos)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.adjunto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Usuario.nombre)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.idPunto }) |
-                                                @Html.ActionLink("Ver", "Details", new { id = item.idPunto }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idPunto })
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.fecha)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.titulo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.considerandos)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.resultandos)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.acuerdos)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.adjunto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EstadoPunto.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tipoPunto)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "Edit", new { id = item.idPunto }) |
+                                            @Html.ActionLink("Ver", "Details", new { id = item.idPunto }) |
+                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.idPunto })
+                                        </td>
+                                    </tr>
                                     }
                                 </table>
                                 <div class="form-group">

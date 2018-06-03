@@ -291,6 +291,7 @@
     <EntitySetMapping Name="Punto">
       <EntityTypeMapping TypeName="ConsiliumModel.Punto">
         <MappingFragment StoreEntitySet="Punto">
+          <ScalarProperty Name="tipoPunto" ColumnName="tipoPunto" />
           <ScalarProperty Name="propuesta" ColumnName="propuesta" />
           <ScalarProperty Name="adjunto" ColumnName="adjunto" />
           <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />

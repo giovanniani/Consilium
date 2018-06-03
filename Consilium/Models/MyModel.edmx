@@ -91,6 +91,7 @@
           <Property Name="acuerdos" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="adjunto" Type="nvarchar(max)" Nullable="false" />
           <Property Name="propuesta" Type="nvarchar" MaxLength="500" />
+          <Property Name="tipoPunto" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="PuntoXSesion">
           <Key>
@@ -1172,6 +1173,7 @@
           <NavigationProperty Name="PuntoXSesion" Relationship="ConsiliumModel.FK_PuntoXSesion_Punto" FromRole="Punto" ToRole="PuntoXSesion" />
           <NavigationProperty Name="ResultadoPunto" Relationship="ConsiliumModel.FK_ResultadoPunto_Punto" FromRole="Punto" ToRole="ResultadoPunto" />
           <NavigationProperty Name="Solicitud" Relationship="ConsiliumModel.FK_Solicitud_Punto" FromRole="Punto" ToRole="Solicitud" />
+          <Property Name="tipoPunto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comision_Punto">
           <End Type="ConsiliumModel.Punto" Role="Punto" Multiplicity="1" />
@@ -1557,6 +1559,7 @@
           <EntitySetMapping Name="Punto">
             <EntityTypeMapping TypeName="ConsiliumModel.Punto">
               <MappingFragment StoreEntitySet="Punto">
+                <ScalarProperty Name="tipoPunto" ColumnName="tipoPunto" />
                 <ScalarProperty Name="propuesta" ColumnName="propuesta" />
                 <ScalarProperty Name="adjunto" ColumnName="adjunto" />
                 <ScalarProperty Name="acuerdos" ColumnName="acuerdos" />
